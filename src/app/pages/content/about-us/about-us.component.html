@@ -1,0 +1,222 @@
+
+
+    <ngx-skeleton-loader
+    *ngIf="loading"
+    count="15"
+    appearance="line"
+    style="
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    background-color: #ccc;"
+    [theme]="{
+      height: '50px'
+    }"
+  ></ngx-skeleton-loader>
+  <!-- page title area start -->
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+    <div class="container">
+       <div class="row">
+          <div class="col-xxl-12">
+             <div class="page__title-wrapper mt-110">
+                <h3 class="page__title">About</h3>
+                <nav aria-label="breadcrumb">
+                   <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">About</li>
+                   </ol>
+                </nav>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- page title area end -->
+
+ <!-- about area start -->
+ <section class="about__area pt-120 pb-150">
+    <div class="container">
+       <div class="row">
+          <div class="col-xxl-5 offset-xxl-1 col-xl-6 col-lg-6">
+             <div class="about__thumb-wrapper">
+
+                <div class="about__review">
+                   <h5> <span>8,200+</span> five ster reviews</h5>
+                </div>
+                <div class="about__thumb">
+                   <img src="assets/theme/img/about/about.jpg" alt="">
+                </div>
+                <div class="about__banner mt--210">
+                   <img src="assets/theme/img/about/about-banner.jpg" alt="">
+                </div>
+
+             </div>
+          </div>
+          <div class="col-xxl-6 col-xl-6 col-lg-6">
+             <div class="about__content pl-70 pr-60 pt-25">
+                <div class="section__title-wrapper mb-25">
+                   <h2 class="section__title">{{"our_story_title" | translate }} </h2>
+                   <p *ngIf="currentLanguage === 'ar'">
+                    {{aboutUs?.ar_story}}
+                   </p>
+                   <p *ngIf="currentLanguage === 'en'">
+                    {{aboutUs?.en_story}}
+                   </p>
+                </div>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- about area end -->
+
+ <!-- brand area start -->
+ <!-- brand area start -->
+ <section class="brand__area pb-110">
+  <div class="container">
+    <div class="row justify-content-center ">
+      <div class="col-xl-6 ">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'brand_area_title' | translate}}</h2>
+          <p class="">{{'brand_area_text' | translate}}</p>
+
+        </div>
+      </div>
+    </div>
+     <div class="row">
+        <div class="col-xxl-12">
+           <div class="brand__slider swiper-container">
+              <swiper [config]="clientsSlider" [dir]="'ltr'" class="swiper-wrapper">
+                <ng-container *ngFor="let client of clients">
+
+
+                  <ng-template swiperSlide class="swiper-slide">
+                    <div class="brand__item text-center">
+                      <img [src]="clientImage+client.logo" alt="">
+                    </div>
+                  </ng-template>
+                </ng-container>
+
+              </swiper>
+              </div>
+        </div>
+     </div>
+
+  </div>
+</section>
+<!-- brand area end -->
+ <!-- brand area end -->
+
+ <!-- banner area start -->
+ <section class="about__page banner__area pb-110">
+  <div class="container-fluid">
+     <div class="row">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+           <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-1.jpg')">
+              <div class="banner__content">
+                <span class="orange">{{ "mission" | translate}}</span>
+                <h3 class="banner__title">
+                    <a href="course-details.html">Germany Foundation <br> Document</a>
+                 </h3>
+                 <a href="course-grid.html" class="e-btn e-btn-2">View Courses</a>
+              </div>
+              <div class="about__page--banner banner__thumb d-none d-sm-block d-md-none d-lg-block">
+                 <img src="assets/theme/img/banner/banner-img-1.png" alt="">
+              </div>
+           </div>
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+           <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-2.jpg')">
+              <div class="banner__content">
+                 <span class="orange">{{ "vision" | translate}}</span>
+                 <h3 class="banner__title">
+                    <a href="course-details.html">Online Courses <br>From Eduka University</a>
+                 </h3>
+                 <a href="course-grid.html" class="e-btn e-btn-2">Find Out More</a>
+              </div>
+              <div class="about__page--banner banner__thumb banner__thumb-2 d-none d-sm-block d-md-none d-lg-block">
+                 <img src="assets/theme/img/banner/banner-img-2.png" alt="">
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</section>
+<!-- banner area end -->
+
+<!-- counter area start -->
+<section class="counter__area ">
+  <img class="counter__area--img-1" src="assets/theme/img/icon/circle.png" alt="">
+  <img class="counter__area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
+
+  <div class="container pt-145 pb-100 position-relative">
+    <div class="row justify-content-center ">
+      <div class="col-xl-6 ">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'counter_area_title' | translate}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row position-relative">
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInRight">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover user mb-15">
+            <img src="assets/theme/img/icon/universityCopy.png" alt="">
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="2485" [options]="{ duration: 20 }"></span></h4>
+            <p class="">{{'counter__area--text1' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInRight">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover book mb-15">
+            <img src="assets/theme/img/icon/student.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="345421" [options]="{ duration: 20 }"></span></h4>
+            <p class="">{{'counter__area--text2' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInLeft">
+        <div class="counter__item counter__pl-34 mb-30">
+          <div class="counter__icon card-hover graduate mb-15">
+            <img src="assets/theme/img/icon/hokomeya.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="24085" [options]="{ duration: 20 }"></span></h4>
+            <p class="">{{'counter__area--text3' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInLeft">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover globe mb-15">
+
+            <img src="assets/theme/img/icon/Emplyee.png"  alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="1000"></span></h4>
+            <p class="">{{'counter__area--text4' | translate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="counter__area--img-3" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-4" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-5" src="assets/theme/img/icon/circle.png" alt="">
+    <img class="counter__area--img-6" src="assets/theme/img/icon/shadow.png" alt="">
+
+  </div>
+</section>
+<!-- counter area end -->
+
+
+
+

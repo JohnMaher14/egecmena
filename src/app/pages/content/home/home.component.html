@@ -1,0 +1,703 @@
+
+
+    <ngx-skeleton-loader
+    *ngIf="loading"
+    count="15"
+    appearance="line"
+    style="
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    background-color: #ccc;"
+    [theme]="{
+      height: '50px'
+    }"
+  ></ngx-skeleton-loader>
+
+<!-- hero area start -->
+<section class="hero__area hero__height hero__height-2 d-flex align-items-center white-bg-3 fix">
+
+  <div class="container">
+    <div class="hero__content-wrapper mt-90">
+      <div class="row align-items-center">
+        <div class="col-lg-7 col-md-6 wow animate__slideInRight ">
+          <div class="hero__thumb-wrapper position-relative mb--120">
+            <div class="hero__thumb-2 scene">
+              <img class="hero-big" src="assets/theme/img/main_images/image_in_cover.png" alt="">
+              <!-- <img class="hero-shape-purple" src="assets/theme/img/hero/hero-2/hero-shape-purple.png" alt=""> -->
+
+              <div class="hero__promotion d-flex white-bg layer" data-depth="0.1">
+
+                <div class="hero__promotion-text">
+                  <h5>{{"cover_shape_1" | translate}}</h5>
+                </div>
+              </div>
+              <div class="hero__promotion education d-none d-lg-flex white-bg layer" data-depth="0.2">
+
+                <div class="hero__promotion-text">
+                  <h5>{{"cover_shape_2" | translate}}</h5>
+
+                </div>
+              </div>
+              <div class="hero__class d-none d-lg-flex layer" data-depth="0.3">
+
+                <div class="hero__class-text">
+                  <h5>{{"cover_shape_3" | translate}}</h5>
+                </div>
+              </div>
+              <div class="hero__mic">
+                  <img src="assets/theme/img/icon/x.png" alt="">
+              </div>
+              <div class="hero__mic-2">
+                  <img src="assets/theme/img/icon/spinner.png" alt="">
+              </div>
+              <div class="hero__mic-3">
+                  <img src="assets/theme/img/icon/circle.png" alt="">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-6 wow animate__animated animate__slideInLeft p-relative ">
+          <div class="hero__content hero__content-2 z-index-1">
+            <h3 class="hero__title hero__title-2">
+              حقق أحلامك الدراسية الآن!
+
+            </h3>
+            <h4>التحق بالجامعة والكلية التي تريد في أي مكان بالعالم
+            </h4>
+            <p>نقدم لك كافة الخدمات التعليمية ابتداءًا من الالتحاق والمتابعة خلال فترة الدراسة وحتى حصولك على الشهادة.
+            </p>
+
+          </div>
+          <div class="hero__shape">
+            <img class="hero-1-circle" src="assets/theme/img/icon/book.png" alt="">
+            <img class="hero-1-circle-2" src="assets/theme/img/icon/pencil.png" alt="">
+            <img class="hero-1-dot-2" src="assets/theme/img/icon/cap.png" alt="">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- hero area end -->
+
+<!-- start section steps -->
+<section class="steps">
+
+  <div class="title">
+    <h5>خطوات الالتحاق:
+    </h5>
+
+  </div>
+  <div class="d-flex wow animate__animated animate__slideInUp">
+
+      <div class="card fix" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission1.png)'">
+          <h5 class="card-title">{{'caption_steps_1' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission2.png)'">
+          <h5 class="card-title">{{'caption_steps_2' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission3.png)'">
+          <h5 class="card-title">{{'caption_steps_3' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission4.png)'">
+          <h5 class="card-title">{{'caption_steps_4' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission5.png)'">
+          <h5 class="card-title">{{'caption_steps_5' | translate}}
+          </h5>
+        </div>
+      </div>
+  </div>
+</section>
+
+<section class="about_section pt-115 pb-115" style="background-image: url('assets/theme/img/main_images/about_cover.png');">
+  <div class="container about_section-animated-shape">
+    <div class="row g-3 align-items-center">
+      <div class="col-xl-6 col-lg-6 offset-xl-1  wow animate__slideInRight animate__animated">
+        <div class="about_section__inner mt_md--40 mt_sm--20 ">
+          <div class="section-title">
+            <span class="pre-title">{{'about_us_span' | translate}}</span>
+            <h3 class="title">{{'about_us_title' | translate}}</h3>
+          </div>
+          <p class="description line-before mt--40 mb--40" >{{'about_us_text' | translate}}</p>
+          <div class="feature-list-wrapper sal-animate row">
+            <div class="feature-list col-md-6 mt-3"><i class="fas fa-check-circle"></i>استشارات تعليمية وتحديد
+              التخصصات الدراسية </div>
+            <div class="feature-list col-md-6 mt-3"><i class="fas fa-check-circle"></i>إنهاء إجراءات التسجيل والقبول
+            </div>
+            <div class="feature-list col-md-6 mt-3"><i class="fas fa-check-circle"></i> خدمات ما بعد قبول الطلاب
+            </div>
+            <div class="feature-list col-md-6 mt-3"><i class="fas fa-check-circle"></i> خدمات الـ VIP</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-xl-5 col-lg-6 p-relative">
+
+          <div class="about-image-gallery  wow animate__fadeInLeft animate__animated">
+            <img class="image-1 w-100 "
+            src="assets/theme/img/main_images/image_in_about.png"
+            alt="About Images">
+
+          </div>
+          <img src="assets/theme/img/icon/plus.png" class="about_section_icon" alt="">
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- search area start -->
+
+
+<section class="search__area pt-90 pb-90">
+  <img class="search__area--img-1" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+  <img class="search__area--img-2" src="assets/theme/img/icon/striped_circle.png" alt="">
+  <div class="container">
+    <div class="section__title-wrapper text-center mb-25">
+      <h2 class="section__title">{{ 'search_area_title' | translate }}</h2>
+      <p>{{'search_area_text' | translate}}</p>
+      <img class="search__area--img-3" src="assets/theme/img/icon/circle_group_vertical.png" alt="">
+    </div>
+    <form action="">
+      <div class="row wow animate__slideInRight animate__animated justify-content-between align-items-end">
+        <div class="col-lg-2 col-md-3">
+          <div class="form-group">
+            <label for="">بلد</label>
+            <select id="my-select"  (change)="onChangeDestination($event)"  class="form-control" name="">
+              <option>اختر بلد</option>
+              <option value="{{destination.id}}" *ngFor="let destination of destinations">{{destination.ar_name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <div class="form-group">
+            <label for="">الجامعة</label>
+            <select id="my-select" placeholder="اختر الجامعة" class="form-control" name="">
+              <option>اختر الجامعة</option>
+              <option value="{{university.id}}" *ngFor="let university of changeUniversities">{{university.ar_name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <div class="form-group">
+            <label for="">الكلية</label>
+            <select id="my-select" placeholder="اختر الكلية" class="form-control" name="">
+              <option>اختر الكلية</option>
+              <option value="مصر">مصر</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <div class="form-group">
+            <label for="">التخصص</label>
+            <select id="my-select" placeholder="اختر التخصص" class="form-control" name="">
+              <option>اختر التخصص</option>
+              <option value="مصر">مصر</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <div class="form-group">
+            <label for="">القسم</label>
+            <select id="my-select" placeholder="اختر القسم" class="form-control" name="">
+              <option>اختر القسم</option>
+              <option value="مصر">مصر</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="e-btn border_radius_100" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        </div>
+      </div>
+      <!-- <div class="row mt-3">
+        <div class="col-12 text-center">
+          <button class="e-btn" type="submit">{{'search_area_button' | translate}}</button>
+        </div>
+      </div> -->
+    </form>
+  </div>
+</section>
+<!-- search area end -->
+
+<!-- specialization area start -->
+<section class="specialization_area pt-90 pb-90">
+  <img class="specialization_area--img-1" src="assets/theme/img/icon/circle.png" alt="">
+  <img class="specialization_area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
+  <img class="specialization_area--img-3" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+  <img class="specialization_area--img-4" src="assets/theme/img/icon/full_circle.png" alt="">
+  <img class="specialization_area--img-5" src="assets/theme/img/icon/shadow.png" alt="">
+  <img class="specialization_area--img-6" src="assets/theme/img/icon/shadow.png" alt="">
+  <img class="specialization_area--img-7" src="assets/theme/img/icon/circle.png" alt="">
+
+  <div class="container">
+    <div class="section__title-wrapper text-center mb-25">
+      <h2 class="section__title">{{ 'specialization_area_title' | translate }}</h2>
+    </div>
+    <div class="row justify-content-between">
+      <div class="col-lg-2 col-md-3 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Computer_Science.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" href="#" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">علوم الحاسب الآلي </h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/human_science.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" href="#" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">علوم آنسانية </h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Engineering.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" href="#" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">الهندسة</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Medical.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" href="#" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">الطب</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Law.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" href="#" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">الحقوق</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Business.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" href="#" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">ادارة الاعمال</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- specialization area end -->
+
+<!-- about area start -->
+<section class="study_area pt-90 pb-90">
+  <img class="study_area--img-1" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+  <img class="study_area--img-2" src="assets/theme/img/icon/striped_circle.png" alt="">
+  <img class="study_area--img-3" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+
+  <div class="container">
+    <div class="section__title-wrapper text-center mb-25">
+      <h2 class="section__title">{{ 'study_area_title' | translate }}</h2>
+
+      <p>{{'study_area_text' | translate}}</p>
+    </div>
+    <div class="row justify-content-center position-relative">
+      <img class="study_area--img-4" src="assets/theme/img/icon/circle_group_vertical.png" alt="">
+
+      <div class="col-md-7">
+        <div class="row no-gutters">
+          <div class="col-md-6 study_grid wow animate__animated animate__slideInRight">
+            <div class="card card-hover">
+              <div class="card-body">
+                <img src="assets/theme/img/main_images/USA.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 study_grid wow animate__animated animate__slideInLeft">
+            <div class="card card-hover">
+              <div class="card-body">
+                <img src="assets/theme/img/main_images/Egypt.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 study_grid wow animate__animated animate__slideInRight">
+            <div class="card card-hover">
+              <div class="card-body">
+                <img src="assets/theme/img/main_images/Emirates.png" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 study_grid wow animate__animated animate__slideInLeft">
+            <div class="card card-hover">
+              <div class="card-body">
+                <img src="assets/theme/img/main_images/Russia.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img class="study_area--img-5" src="assets/theme/img/icon/circle_group_vertical.png" alt="">
+
+    </div>
+  </div>
+</section>
+<!-- about area end -->
+
+
+
+<!-- counter area start -->
+<section class="counter__area ">
+  <img class="counter__area--img-1" src="assets/theme/img/icon/circle.png" alt="">
+  <img class="counter__area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
+
+  <div class="container pt-145 pb-100 position-relative">
+    <div class="row justify-content-center ">
+      <div class="col-xl-6 ">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'counter_area_title' | translate}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row position-relative">
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInRight">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover user mb-15">
+            <img src="assets/theme/img/icon/universityCopy.png" alt="">
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="2485" [options]="{ duration: 20 }"></span></h4>
+            <p class="">{{'counter__area--text1' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInRight">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover book mb-15">
+            <img src="assets/theme/img/icon/student.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="345421" [options]="{ duration: 20 }"></span></h4>
+            <p class="">{{'counter__area--text2' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInLeft">
+        <div class="counter__item counter__pl-34 mb-30">
+          <div class="counter__icon card-hover graduate mb-15">
+            <img src="assets/theme/img/icon/hokomeya.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="24085" [options]="{ duration: 20 }"></span></h4>
+            <p class="">{{'counter__area--text3' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInLeft">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover globe mb-15">
+
+            <img src="assets/theme/img/icon/Emplyee.png"  alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4><span class="counter" [countUp]="1000"></span></h4>
+            <p class="">{{'counter__area--text4' | translate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="counter__area--img-3" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-4" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-5" src="assets/theme/img/icon/circle.png" alt="">
+    <img class="counter__area--img-6" src="assets/theme/img/icon/shadow.png" alt="">
+
+  </div>
+</section>
+<!-- counter area end -->
+
+<!-- testimonial area start -->
+<section class="testimonial__area pt-90 pb-90"
+  style="background-image: url(' assets/theme/img/main_images/testominals_cover.png');">
+  <div class="container">
+    <div class="col-xxl-12">
+      <ng-container *ngIf="currentLanguage === 'en'">
+        <owl-carousel-o [options]="testimonials" class="testimonial-box" dir="ltr">
+          <ng-container *ngFor="let review of userReviews">
+            <ng-template carouselSlide>
+
+              <div class="testimonial__area--item">
+                <div class="testimonial__area--img">
+                  <img [src]="reviewImage+review.review_image" alt="Jhon Smith">
+                </div>
+                <div class="testimonial__area--desc">
+                  <h4 class="testimonial__area--name">{{review.title}}</h4>
+                  <p class="testimonial__area--p">
+                    {{review.text}}
+                  </p>
+                </div>
+              </div>
+            </ng-template>
+
+          </ng-container>
+
+        </owl-carousel-o>
+      </ng-container>
+
+      <ng-container *ngIf="currentLanguage === 'ar'">
+        <owl-carousel-o [options]="testimonialsAr" class="testimonial-box" dir="rtl">
+          <ng-container *ngFor="let review of userReviews">
+            <ng-template carouselSlide>
+
+              <div class="testimonial__area--item">
+                <div class="testimonial__area--img">
+                  <img [src]="reviewImage+review.review_image" alt="Jhon Smith">
+                </div>
+                <div class="testimonial__area--desc">
+                  <h4 class="testimonial__area--name">{{review.title}}</h4>
+                  <p class="testimonial__area--p">
+                    {{review.text}}
+                  </p>
+                </div>
+              </div>
+            </ng-template>
+
+          </ng-container>
+        </owl-carousel-o>
+
+      </ng-container>
+
+    </div>
+  </div>
+</section>
+<!-- testimonial area end -->
+
+<!-- blog area start -->
+<section class="blog__area pt-115 pb-130 mb--120" style="background-image: url(' assets/theme/img/main_images/blogs_cover.png');">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'آخر المقالات التعليمية'}}
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 wow animate__fadeInRight animate__animated" *ngFor="let blog of blogs|slice:-1">
+        <div class="blog__item blog__large white-bg mb-30 transition-3 fix">
+          <div class="blog__thumb w-img fix">
+            <a href="blog-details.html">
+              <img src="assets/theme/img/main_images/main_blog.png" class="w-100" alt="">
+              <div class="blog__thumb--layer"></div>
+            </a>
+          </div>
+          <div class="blog__content blog__large--content">
+
+            <h3 class="blog__title"><a href="blog-details.html">
+              {{blog.title}}
+            </a></h3>
+
+            <div class="blog__meta d-flex align-items-center">
+              <div class="blog__author mr-3 d-flex align-items-center">
+
+                <div class="blog__author-info">
+                  <i class="fas fa-eye"></i>
+                  <span> 10 مشاهدات</span>
+                </div>
+              </div>
+              <div class="blog__date d-flex align-items-center">
+                <i class="fal ml-2 fa-clock"></i>
+                <span *ngIf="currentLanguage === 'ar'">{{blog.created_at| date:'EEEE  d MMMM  y, h:mm a':undefined:'ar'}}</span>
+                <span *ngIf="currentLanguage === 'en'">{{blog.created_at| date:'EEEE  d MMMM  y, h:mm a':undefined:'en'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 wow animate__fadeInLeft animate__animated" >
+        <div class="row">
+          <div class="col-md-6">
+            <div class="blog__item white-bg mb-30 transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a href="blog-details.html">
+                  <img src="assets/theme/img/main_images/blog1.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"><a href="blog-details.html">
+                  4 أسباب تجعلك تبدأ رحلتك الدراسية بالخارج
+                </a>
+                </h3>
+
+                <div class="blog__meta d-flex align-items-center">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas ml-2 fa-eye"></i>
+                      <span> 10 مشاهدات</span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span>April 02, 2022</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="blog__item white-bg mb-30 transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a href="blog-details.html">
+                  <img src="assets/theme/img/main_images/blog2.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"><a href="blog-details.html">
+                  كيف تحصل على شهادة جامعة بإجراءات بسيطة
+                </a>
+                </h3>
+
+                <div class="blog__meta d-flex align-items-center">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas ml-2 fa-eye"></i>
+                      <span> 10 مشاهدات</span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span>April 02, 2022</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="blog__item white-bg mb-30 transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a href="blog-details.html">
+                  <img src="assets/theme/img/main_images/blog3.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"><a href="blog-details.html">
+                  تعرف على أحدث تصنيف الجامعات عالميًا
+
+                </a>
+                </h3>
+
+                <div class="blog__meta d-flex align-items-center">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas ml-2 fa-eye"></i>
+                      <span> 10 مشاهدات</span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span>April 02, 2022</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="blog__item white-bg mb-30 transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a href="blog-details.html">
+                  <img src="assets/theme/img/main_images/blog4.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"><a href="blog-details.html">
+                  إجراءات الالتحاق بالجامعات في السودان تشهد تسهيلات غير مسبوقة
+
+                </a>
+                </h3>
+
+                <div class="blog__meta d-flex align-items-center">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas ml-2 fa-eye"></i>
+                      <span> 10 مشاهدات</span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span>April 02, 2022</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- blog area end -->
+
+
+
