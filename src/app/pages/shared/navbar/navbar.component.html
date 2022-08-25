@@ -20,9 +20,9 @@
 
             <div class="right-side">
               <ul>
-                <li><a href="#" class="tran3s round-border icon"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                    <li><a href="#" class="tran3s round-border icon"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="tran3s round-border icon"><i class="fab fa-instagram"></i></a></li>
+                <li><a target="_blank" href="https://www.facebook.com/EGEC.EDU/" class="tran3s round-border icon"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                    <li><a target="_blank" href="https://twitter.com/Egy_Gulf" class="tran3s round-border icon"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a target="_blank" href="https://www.instagram.com/egygulf2015" class="tran3s round-border icon"><i class="fab fa-instagram"></i></a></li>
               </ul>
             </div>
           </div>
@@ -38,7 +38,7 @@
           </div> -->
           <div class="header__left d-flex">
             <div class="logo">
-              <a href="index.html">
+              <a routerLink="/">
                 <img src="assets/theme/img/logo/logo.png" alt="logo">
               </a>
             </div>
@@ -58,10 +58,10 @@
                   <li class="has-dropdown">
                     <a href="course-grid.html">الدراسة بالخارج </a>
                     <ul class="submenu">
-                      <li><a href="course-grid.html">مصر</a></li>
-                      <li><a href="course-list.html">الأمارات</a></li>
-                      <li><a href="course-sidebar.html">روسيا</a></li>
-                      <li><a href="course-details.html">الوليات المتحدة</a></li>
+                      <li *ngFor="let destination of destinations"><a routerLink="" *ngIf="currentLanguage === 'ar'">{{destination.ar_name}}</a>
+                        <a routerLink="" *ngIf="currentLanguage === 'en'">{{destination.en_name}}</a>
+                      </li>
+
                     </ul>
                   </li>
 
@@ -78,7 +78,19 @@
           </div>
           <div class="header__right">
             <div class="header__btn header__btn-2 d-none d-sm-block">
-              <a href="sign-up.html" class="e-btn button_login">{{"navbar-button" | translate}} <i class="fas fa-chevron-right"></i></a>
+              <a routerLink="/login" class="e-btn button_login" *ngIf="!isLogined">{{"navbar-button" | translate}} <i class="fas fa-chevron-right"></i></a>
+              <div class="main-menu main-menu-2" *ngIf="isLogined">
+                <nav id="mobile-menu">
+                  <ul>
+              <li class="has-dropdown">
+                <a >{{currentUsername.name}}</a>
+                <ul class="submenu">
+                  <li><a (click)="logout()">خروج</a></li>
+                </ul>
+              </li>
+              </ul>
+              </nav>
+              </div>
             </div>
             <div class="sidebar__menu d-xl-none">
               <div class="sidebar-toggle-btn ml-30" (click)="openNavbar()" id="sidebar-toggle">

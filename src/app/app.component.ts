@@ -20,10 +20,15 @@ export class AppComponent implements OnInit {
   ){}
   ngOnInit(): void {
 
-    this.currentLang =  localStorage.getItem('currentLanguage') || 'ar';
-    this._TranslateService.use(this.currentLang);
-    console.log(this.currentLang);
-    if(this.currentLang === 'ar'){
+    this.currentLanguage =  localStorage.getItem('currentLanguage') || 'ar';
+    this._TranslateService.use(this.currentLanguage);
+
+    if(localStorage.getItem('currentLanguage') === ''){
+      localStorage.setItem('currentLanguage' , 'ar')
+      this._render.addClass(document.body, 'rtl')
+      console.log("test");
+    }
+    else if(this.currentLanguage === 'ar'){
       localStorage.setItem('currentLanguage' , 'ar')
       this._render.addClass(document.body, 'rtl')
     }else{

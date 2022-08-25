@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     public _TranslateService: TranslateService,
     private _Title: Title,
     private _HomeService: HomeService  ) {
-      
+
      }
   showcurrentLanguage(language:any){
     this._TranslateService.use(language);
@@ -35,8 +35,8 @@ export class HomeComponent implements OnInit {
     this.showHomeData();
     this.showReviews();
     this.showBlogs();
-    this.currentLang = localStorage.getItem("currentLanguage") || 'en'
-    this._TranslateService.use(this.currentLang)
+    this.currentLanguage = localStorage.getItem("currentLanguage") || 'en'
+    this._TranslateService.use(this.currentLanguage)
     this._TranslateService.onLangChange.subscribe(
       (language: any) => {
         if (language.lang == 'en') {

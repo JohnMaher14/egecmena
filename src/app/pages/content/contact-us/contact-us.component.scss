@@ -1,0 +1,36 @@
+.contact__form-input
+{
+  position: relative;
+  margin-bottom: 20px;
+
+  input , select{
+    margin: 0;
+  }
+  button{
+    &.validation{
+      width: 30px;
+      height: 30px;
+      background-color: #dc3545;
+      line-height: 50px;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      outline: none;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      i{
+        color: #fff;
+      }
+    }
+  }
+}

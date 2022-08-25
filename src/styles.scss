@@ -47,13 +47,22 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+button[disabled]{
+  opacity: 0.5;
+}
+.popover{
+  position: absolute;
+  .arrow{
+    position: absolute;
+  }
+}
 $mainColor: #202556 ;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-a{
-  text-decoration: unset;
-  color: #fff;
-}
+// a{
+//   text-decoration: unset;
+//   color: #fff;
+// }
 .border_radius_100{
   border-radius: 100px;
 
@@ -81,13 +90,11 @@ a{
   padding: 0 25px;
   border-radius: 4px;
   font-weight: 500;
-}
-.btn-primary{
-  background-color: #fff;
-  border: 1px solid #fff;
-  color: $mainColor;
   box-shadow: 0px 10px 24px 0px rgb(4 ,23 ,118 , 30%);
-
+}
+.text_main{
+  color: $mainColor;
+  font-weight: 500;
 }
 @import 'assets/theme/css/style.css';
 @import 'swiper/scss';
@@ -1306,6 +1313,78 @@ body{
       }
     }
   }
+  .sign{
+    &__input{
+      i{
+        left: auto;
+        right: 25px;
+      }
+      &--container{
+        position: relative;
+
+        button{
+          &.validation{
+            width: 30px;
+            height: 30px;
+            background-color: #dc3545;
+            line-height: 50px;
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            outline: none;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            i{
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+  .country-dropdown.dropdown-menu{
+
+    inset: unset !important;
+    right:0 !important;
+    left: auto !important
+    }
+
+    .iti {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        &__country{
+          text-align: right;
+        }
+        &--allow-dropdown input, &--allow-dropdown input[type=tel]{
+          padding-left: 6px;
+              padding-right: 52px;
+        }
+        .search-container{
+          input{
+            padding-right: 6px;
+
+          }
+        }
+        &__arrow{
+          margin-left: 0;
+          margin-right: 6px;
+        }
+    }
+    .iti--allow-dropdown .iti__flag-container{
+    left: auto;
+        right: 0;
+    }
 }
 .card-hover:hover img{
   animation: flip 1s ease;

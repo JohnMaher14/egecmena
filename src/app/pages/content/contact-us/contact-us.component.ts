@@ -32,12 +32,10 @@ export class ContactUsComponent implements OnInit {
     'message': new FormControl('', [Validators.required]),
   })
   contact(contactForm: FormGroup){
-    console.log(contactForm.value);
     this._HomeService.submitInquiry(
       contactForm.value
     ).subscribe(
       (response) => {
-        console.log(response);
         if(response.success){
           if (this.currentLanguage == 'ar') {
             Swal.fire(
@@ -59,8 +57,8 @@ export class ContactUsComponent implements OnInit {
     )
   }
   translateFunction(){
-    this.currentLang = localStorage.getItem("currentLanguage") || 'ar'
-    this._TranslateService.use(this.currentLang)
+    this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
+    this._TranslateService.use(this.currentLanguage)
     this._TranslateService.onLangChange.subscribe(
       (language: any) => {
         if (language.lang == 'en') {

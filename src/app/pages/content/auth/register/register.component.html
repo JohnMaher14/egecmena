@@ -1,0 +1,167 @@
+   <!-- page title area start -->
+   <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">    <div class="container">
+    <div class="row">
+       <div class="col-xxl-12">
+          <div class="page__title-wrapper mt-110">
+             <h3 class="page__title">
+               {{ "register" | translate }}
+             </h3>
+             <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                   <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+                   <li class="breadcrumb-item active"  aria-current="page">{{"register" | translate }}</li>
+                </ol>
+             </nav>
+          </div>
+       </div>
+    </div>
+ </div>
+</section>
+<!-- page title area end -->
+<!-- sign up area start -->
+<section class="signup__area po-rel-z1 pt-100 pb-145">
+  <div class="sign__shape">
+     <img class="man-1" src="assets/theme/img/icon/sign/man-1.png" alt="">
+     <img class="man-2" src="assets/theme/img/icon/sign/man-2.png" alt="">
+     <img class="circle" src="assets/theme/img/icon/sign/circle.png" alt="">
+     <img class="zigzag" src="assets/theme/img/icon/sign/zigzag.png" alt="">
+     <img class="dot" src="assets/theme/img/icon/sign/dot.png" alt="">
+     <img class="bg" src="assets/theme/img/icon/sign/sign-up.png" alt="">
+  </div>
+  <div class="container">
+     <div class="row justify-content-center">
+        <div class="col-xxl-8 col-xl-8 ">
+           <div class="section__title-wrapper text-center mb-55">
+              <h2 class="section__title">{{"register_title" | translate}}</h2>
+              <p>{{"register_text" | translate}} <a routerLink="/register" class="text_main">{{ "register_button" | translate}}</a></p>
+           </div>
+        </div>
+     </div>
+     <div class="row justify-content-center">
+        <div class="col-xxl-6 col-xl-6 col-lg-8">
+           <div class="sign__wrapper white-bg">
+
+              <div class="sign__form">
+                 <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
+                    <div class="sign__input-wrapper mb-25">
+                       <h5>{{"form_name" | translate}}</h5>
+                       <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="name" name="name" type="text" >
+                            <i class="fal fa-user"></i>
+                        </div>
+                        <ng-container *ngIf="registerForm.controls['name'].touched && registerForm.controls['name'].errors != null">
+
+                          <button *ngIf="registerForm.controls['name'].errors['required']" type="button" popover="Name is required"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
+
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                       <h5>{{"form_phone" | translate}}</h5>
+                       <div class="sign__input--container">
+                        <div class="sign__input">
+                            <!-- <input formControlName="phone" name="phone" type="number" >
+                            <i class="fa fa-user"></i> -->
+                            <ngx-intl-tel-input
+                              [cssClass]="'custom'"
+                              [preferredCountries]="[CountryISO.UnitedArabEmirates, CountryISO.Qatar , CountryISO.Jordan ,CountryISO.Kuwait , CountryISO.SaudiArabia ]"
+                              [enableAutoCountrySelect]="false"
+                              [enablePlaceholder]="true"
+                              [searchCountryPlaceholder]="'search_key_phone' | translate"
+                              [searchCountryFlag]="true"
+                              [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                              [selectFirstCountry]="false"
+                              [selectedCountryISO]="CountryISO.Egypt"
+                              [maxlength]="15"
+                              [phoneValidation]="true"
+                              name="phone"
+                              formControlName="phone"
+                              >
+                            </ngx-intl-tel-input>
+                        </div>
+                        <ng-container *ngIf="registerForm.controls['phone'].touched && registerForm.controls['phone'].errors != null">
+
+                          <button *ngIf="registerForm.controls['phone'].errors['required']" type="button" popover="Phone is required"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                          <button *ngIf="registerForm.controls['phone'].valid" type="button" popover="Phone is invalid"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
+
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                       <h5>{{"form_email" | translate}}</h5>
+                       <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="email" name="email" type="text" >
+                            <i class="fal fa-envelope"></i>
+                        </div>
+                        <ng-container *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors != null">
+
+                          <button *ngIf="registerForm.controls['email'].errors['required']" type="button" popover="Email is required"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                          <button *ngIf="registerForm.controls['email'].errors['email']" type="button" popover="Email is invalid"
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                          class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>{{"form_password" | translate}}</h5>
+                      <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="password" name="password" type="password">
+                            <i class="fal fa-lock"></i>
+                        </div>
+                        <button *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors != null" type="button" popover="Password is required"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        [outsideClick]="true"
+                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>{{"form_confirmation_password" | translate}}</h5>
+                      <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="password_confirmation" name="password_confirmation" type="password">
+                            <i class="fal fa-lock"></i>
+                        </div>
+                        <button *ngIf="registerForm.controls['password_confirmation'].touched && registerForm.controls['password_confirmation'].errors != null" type="button" popover="Confirm password is required"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        [outsideClick]="true"
+                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      </div>
+                    </div>
+                    <!-- <div class="sign__action d-sm-flex justify-content-between mb-30">
+                       <div class="sign__agree d-flex align-items-center">
+                          <input class="m-check-input" type="checkbox" id="m-agree">
+                          <label class="m-check-label" for="m-agree">Keep me signed in
+                             </label>
+                       </div>
+                       <div class="sign__forgot">
+                          <a href="#">Forgot your password?</a>
+                       </div>
+                    </div> -->
+                    <button class="e-btn  w-100" [disabled]="registerForm.invalid"> <span>
+                      {{ "register" | translate }}
+                    </span> </button>
+                    <div class="sign__new text-center mt-20">
+                       <p>{{"register_text"  | translate}} <a routerLink="/login" >{{"register_button" | translate }}</a></p>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</section>
+<!-- sign up area end -->

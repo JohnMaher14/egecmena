@@ -34,41 +34,84 @@
           <div class="col-xxl-7 col-xl-7 col-lg-6">
              <div class="contact__wrapper">
                 <div class="section__title-wrapper mb-40">
-                   <h2 class="section__title">Get in<span class="yellow-bg yellow-bg-big">touch<img src="assets/img/shape/yellow-bg.png" alt=""></span></h2>
-                   <p>Have a question or just want to say hi? We'd love to hear from you.</p>
+                   <h2 class="section__title">{{"contact_form_title" | translate}}</h2>
+                   <p>{{"contact_form_text" | translate}}</p>
                 </div>
                 <div class="contact__form">
                    <form [formGroup]="contactForm" (ngSubmit)="contact(contactForm)">
                       <div class="row">
                          <div class="col-xxl-6 col-xl-6 col-md-6">
                             <div class="contact__form-input">
-                               <input type="text" formControlName="name"  placeholder="Your Name" name="name">
-                            </div>
+                               <input type="text" formControlName="name"  placeholder="{{'contact_form_name' | translate }}" name="name">
+                               <ng-container *ngIf="contactForm.controls['name'].touched && contactForm.controls['name'].errors != null">
+
+                                <button *ngIf="contactForm.controls['name'].errors['required']" type="button" popover="Name is required"
+                              [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                                <button *ngIf="contactForm.controls['name'].errors['pattern']" type="button" popover="Name must be charachters only"
+                                [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                                class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
+                            </ng-container>
+                          </div>
                          </div>
                          <div class="col-xxl-6 col-xl-6 col-md-6">
                             <div class="contact__form-input">
-                               <input type="email" formControlName="email"  placeholder="Your Email" name="email">
+                               <input type="email" formControlName="email"  placeholder="{{'contact_form_email' | translate}}" name="email">
+                               <ng-container *ngIf="contactForm.controls['email'].touched && contactForm.controls['email'].errors != null">
+
+                                <button *ngIf="contactForm.controls['email'].errors['required']" type="button" popover="Email is required"
+                              [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                                <button *ngIf="contactForm.controls['email'].errors['email']" type="button" popover="Email is invalid"
+                                [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                                class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
+                            </ng-container>
                             </div>
                          </div>
                          <div class="col-xxl-6 col-xl-6 col-md-6">
                           <div class="contact__form-input">
-                             <input type="number" formControlName="phone"  placeholder="Your Phone" name="phone">
+                             <input type="number" formControlName="phone"  placeholder="{{'contact_form_phone' | translate}}" name="phone">
+                             <button *ngIf="contactForm.controls['phone'].touched && contactForm.controls['phone'].errors != null" type="button" popover="Phone is      required"
+                             [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                             [outsideClick]="true"
+                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                           </div>
                        </div>
 
                          <div class="col-xxl-6 col-xl-6 col-md-6">
                             <div class="contact__form-input">
                                <select  formControlName="request_type" name="request_type" >
-                                <option value="" selected>Select request</option>
-                                <option value="inquiry">Inquiry</option>
-                                <option value="request">Request</option>
-                                <option value="complaint">Complaint</option>
-                               </select>
+                                <ng-container *ngIf="currentLanguage === 'ar'">
+                                  <option value="" selected>أختر طلبك</option>
+                                  <option value="inquiry">سؤال</option>
+                                  <option value="request">طلبك</option>
+                                  <option value="complaint">شكوى</option>
+
+                                </ng-container>
+                                <ng-container *ngIf="currentLanguage === 'en'">
+                                  <option value="" selected>Select request</option>
+                                  <option value="inquiry">Inquiry</option>
+                                  <option value="request">Request</option>
+                                  <option value="complaint">Complaint</option>
+
+                                </ng-container>
+                              </select>
+                              <button *ngIf="contactForm.controls['request_type'].touched && contactForm.controls['request_type'].errors != null" type="button" popover="Request type is required"
+                              [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                              [outsideClick]="true"
+                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
                             </div>
                          </div>
                          <div class="col-xxl-12">
                             <div class="contact__form-input">
-                               <textarea placeholder="Enter Your Message" formControlName="message" name="message"></textarea>
+                               <textarea placeholder="{{'contact_form_message' | translate}}" formControlName="message" name="message"></textarea>
+                               <button *ngIf="contactForm.controls['message'].touched && contactForm.controls['message'].errors != null" type="button" popover="Message type is required"
+                               [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                               [outsideClick]="true"
+                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                             </div>
                          </div>
 
@@ -151,9 +194,9 @@
                    <div class="contact__social pl-30">
                       <h4>{{"follow_us" | translate}}</h4>
                       <ul>
-                         <li><a href="#" class="fb" ><i class="social_facebook"></i></a></li>
-                         <li><a href="#" class="tw" ><i class="social_twitter"></i></a></li>
-                         <li><a href="#" class="pin" ><i class="social_pinterest"></i></a></li>
+                         <li><a target="_blank" href="https://www.facebook.com/EGEC.EDU/" class="fb" ><i class="social_facebook"></i></a></li>
+                         <li><a target="_blank" href="https://twitter.com/Egy_Gulf" class="tw" ><i class="social_twitter"></i></a></li>
+                         <li><a target="_blank" href="https://www.instagram.com/egygulf2015" class="pin" ><i class="social_instagram"></i></a></li>
                       </ul>
                    </div>
                 </div>

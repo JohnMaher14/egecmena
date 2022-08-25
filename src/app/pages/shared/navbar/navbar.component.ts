@@ -1,5 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,12 +10,17 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavbarComponent implements OnInit {
   toggleSidebar: boolean = true;
-  currentLanguage:any
+  currentLanguage:any;
   show:boolean=true;
   currentLang:any;
+  currentUsername: any;
+  isLogined: boolean = false;
+  destinations: any[] =[];
     constructor(
     private _Renderer2:Renderer2,
-    public _TranslateService:TranslateService
+    public _TranslateService:TranslateService,
+    private _AuthenticationService:AuthenticationService,
+    private _HomeService:HomeService
   ) { }
 
   closeSidebar(){
@@ -40,6 +47,8 @@ export class NavbarComponent implements OnInit {
     this._Renderer2.removeClass(sidebarArea , 'sidebar-opened')
   }
   ngOnInit(): void {
+    this.authentication();
+    this.showDestination();
     let navbar = document.querySelector('.header__area');
     let sidebar = document.querySelector('#sidebar');
     let btnUp = document.querySelector('.progress-wrap');
@@ -66,16 +75,41 @@ export class NavbarComponent implements OnInit {
     })
 
 
-    this.currentLang = localStorage.getItem("currentLanguage") || 'en'
-    this._TranslateService.use(this.currentLang);
+    this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
+    this._TranslateService.use(this.currentLanguage);
     this._TranslateService.onLangChange.subscribe(
       () => {
         this.currentLanguage = this._TranslateService.currentLang
       }
     )
   }
+  showDestination(){
+    this._HomeService.getHomeData().subscribe(
+      (response) => {
+        this.destinations = response.destinations
+      }
+    )
+  }
   showcurrentLanguage(language:any){
     this._TranslateService.use(language);
     localStorage.setItem("currentLanguage",language)
+  }
+  authentication(){
+    this._AuthenticationService.currentUserData.subscribe(() => {
+      if (this._AuthenticationService.currentUserData.getValue() == null) {
+        this.isLogined = false;
+      } else {
+        this.currentUsername = JSON.parse(
+          sessionStorage.getItem('currentUserArray') || '{}'
+        );
+        console.log(JSON.parse(
+          sessionStorage.getItem('currentUserArray') || '{}'
+        ));
+        this.isLogined = true;
+      }
+    });
+  }
+    logout(){
+      this._AuthenticationService.signOut();
     }
 }

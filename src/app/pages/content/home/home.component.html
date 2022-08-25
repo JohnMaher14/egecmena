@@ -469,7 +469,7 @@
   style="background-image: url(' assets/theme/img/main_images/testominals_cover.png');">
   <div class="container">
     <div class="col-xxl-12">
-      <ng-container *ngIf="currentLanguage === 'en'">
+      <ng-container *ngIf="currentLanguage === 'en' ">
         <owl-carousel-o [options]="testimonials" class="testimonial-box" dir="ltr">
           <ng-container *ngFor="let review of userReviews">
             <ng-template carouselSlide>
@@ -492,7 +492,7 @@
         </owl-carousel-o>
       </ng-container>
 
-      <ng-container *ngIf="currentLanguage === 'ar'">
+      <ng-container *ngIf="currentLanguage === 'ar' ">
         <owl-carousel-o [options]="testimonialsAr" class="testimonial-box" dir="rtl">
           <ng-container *ngFor="let review of userReviews">
             <ng-template carouselSlide>
