@@ -33,6 +33,7 @@
 
   "brand_area_title": "شركاؤنا",
   "brand_area_text": "هنا قائمة شركاؤنا",
+  "related_destination":"البلاد الاخري",
   "mission": "مهمتنا",
   "vision": "رؤية",
   "breadcrumb_home": "الرئيسية",
@@ -50,6 +51,9 @@
   "login":"تسجيل الدخول",
   "login_title":"سجل دخول الي أيجيك",
   "login_text":"ليس لديك حساب يمكنك",
+  "destination": "البلاد",
+  "know_more_universities":"تصفح الجامعات",
+  "know_more_destinations":"تصفح البلاد",
   "login_button":"أنشاء الحساب هنا!",
   "form_name":"الأسم",
   "form_email":"البريد الألكتروني",

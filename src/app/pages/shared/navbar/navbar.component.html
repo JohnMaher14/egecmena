@@ -55,11 +55,11 @@
                     <a routerLink="/about-us">من نحن </a>
 
                   </li>
-                  <li class="has-dropdown">
-                    <a href="course-grid.html">الدراسة بالخارج </a>
+                  <li class="has-dropdown destination_li" (mouseenter)="mouseEnter()">
+                    <a routerLink="/destinations">الدراسة بالخارج </a>
                     <ul class="submenu">
-                      <li *ngFor="let destination of destinations"><a routerLink="" *ngIf="currentLanguage === 'ar'">{{destination.ar_name}}</a>
-                        <a routerLink="" *ngIf="currentLanguage === 'en'">{{destination.en_name}}</a>
+                      <li *ngFor="let destination of destinations" (click)="onClickLi()">
+                        <a [routerLink]="['/destination/', destination.id]">{{currentLanguage === 'ar' ? destination.ar_name  :  destination.en_name}}</a>
                       </li>
 
                     </ul>
@@ -85,6 +85,7 @@
               <li class="has-dropdown">
                 <a >{{currentUsername.name}}</a>
                 <ul class="submenu">
+                  <li><a routerLink="/personal-information">{{currentLanguage === 'ar' ? 'المعلومات الشخصية' : 'Personal Information'}}</a></li>
                   <li><a (click)="logout()">خروج</a></li>
                 </ul>
               </li>

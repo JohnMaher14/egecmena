@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  currentLang: any;
   currentLanguage: any;
   constructor(
     private _TranslateService:TranslateService,

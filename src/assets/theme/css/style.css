@@ -2765,8 +2765,8 @@ p {
   }
 }
 .course__content-4 {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .course__content-4 {
@@ -3103,9 +3103,9 @@ p {
   border-radius: 4px;
   overflow: hidden;
 }
-.course__tab-2 .nav-tabs .nav-item {
+/* .course__tab-2 .nav-tabs .nav-item {
   width: 25%;
-}
+} */
 .course__tab-2 .nav-tabs .nav-item:not(:last-child) .nav-link {
   border-right: 1px solid #d2d3dc;
 }
@@ -8344,7 +8344,7 @@ p.checkout-coupon input[type=text]:focus {
 .sign__input {
   position: relative;
 }
-.sign__input input {
+.sign__input input , .sign__input select {
   width: 100%;
   height: 60px;
   line-height: 52px;
@@ -8360,7 +8360,7 @@ p.checkout-coupon input[type=text]:focus {
 .sign__input input::placeholder {
   color: #8e8c94;
 }
-.sign__input input:focus {
+.sign__input input:focus , .sign__input select:focus {
   outline: none;
   background: #ffffff;
   border-color: #2b4eff;

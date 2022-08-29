@@ -1,0 +1,107 @@
+  <!-- page title area start -->
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
+    style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-12">
+          <div class="page__title-wrapper mt-110">
+            <h3 class="page__title">
+              {{"destination" | translate }}
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+                <li  class="breadcrumb-item active" aria-current="page">
+                  <a routerLink="/destinations">
+                    {{"destination" | translate }}
+                  </a>
+                </li>
+
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- page title area end -->
+
+  <!-- course area start -->
+  <section class="course__area pt-120 pb-120">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-9 col-xl-9 col-lg-9">
+
+          <div class="row">
+            <div class="col-lg-6 wow animate__animated animate__slideInUp" *ngFor="let destination of destinations.slice().reverse()">
+              <div class="course__item white-bg mb-30 fix">
+                <div class="row gx-0 align-items-center">
+                  <div class="col-xxl-3 col-xl-3 col-lg-3">
+                    <div class="course__thumb course__thumb-list w-img p-relative fix text-center">
+                      <a [routerLink]="['/destination', destination.id]">
+                        <img [src]="destinationImage+destination.flag" alt="">
+                      </a>
+                      <!-- <div class="course__tag">
+                        <a href="#">Art & Design</a>
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="col-xxl-9 col-xl-9 col-lg-9">
+                    <div class="course__right">
+                      <div class="course__content course__content-4">
+
+                        <h3 class="course__title">
+                          <a href="course-details.html">
+                            {{currentLanguage === 'ar' ? destination.ar_name : destination.en_name}}
+                          </a>
+                        </h3>
+
+                      </div>
+                      <div
+                        class="course__more course__more-2 course__more-3 d-flex justify-content-between align-items-center">
+
+                        <div class="course__btn">
+                          <a [routerLink]="['/destination' , destination.id]" *ngIf="currentLanguage === 'ar'" class="link-btn">
+                            <i class="far fa-arrow-left"></i>
+                            <i class="far fa-arrow-left"></i>
+                            {{"know_more_destinations" | translate}}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="col-xxl-3 col-xl-3 col-lg-3">
+          <div class="course__sidebar">
+            <div class="course__sidebar-search mb-50">
+              <form action="#">
+                <input type="text" placeholder="Search for courses...">
+                <button type="submit">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px" viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;"
+                    xml:space="preserve">
+                    <g>
+                      <g>
+                        <path class="st0"
+                          d="M565.7,474.9l-61.1-61.1c-3.8-3.8-8.8-5.9-13.9-5.9c-6.3,0-12.1,3-15.9,8.3c-16.3,22.4-36,42.1-58.4,58.4    c-4.8,3.5-7.8,8.8-8.3,14.5c-0.4,5.6,1.7,11.3,5.8,15.4l61.1,61.1c12.1,12.1,28.2,18.8,45.4,18.8c17.1,0,33.3-6.7,45.4-18.8    C590.7,540.6,590.7,499.9,565.7,474.9z" />
+                        <path class="st1"
+                          d="M254.6,509.1c140.4,0,254.5-114.2,254.5-254.5C509.1,114.2,394.9,0,254.6,0C114.2,0,0,114.2,0,254.5    C0,394.9,114.2,509.1,254.6,509.1z M254.6,76.4c98.2,0,178.1,79.9,178.1,178.1s-79.9,178.1-178.1,178.1S76.4,352.8,76.4,254.5    S156.3,76.4,254.6,76.4z" />
+                      </g>
+                    </g>
+                  </svg>
+                </button>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- course area end -->

@@ -9,6 +9,7 @@ import { HttpClient, HttpClientModule} from '@angular/common/http'
 import ar from '@angular/common/locales/ar';
 
 import en from '@angular/common/locales/en';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { registerLocaleData } from '@angular/common';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +32,12 @@ import { LoginComponent } from './pages/content/auth/login/login.component';
 import { RegisterComponent } from './pages/content/auth/register/register.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { ToastrModule } from "ngx-toastr";
+import { UniversitiesComponent } from './pages/content/universities/universities.component';
+import { DestinationComponent } from './pages/content/destination/destination.component';
+import { DestinationsComponent } from './pages/content/destinations/destinations.component';
+import { FacultyComponent } from './pages/content/faculty/faculty.component';
+import { PersonalInformationComponent } from './pages/content/auth/personal-information/personal-information.component';
+import { AcademicInformationComponent } from './pages/content/auth/academic-information/academic-information.component';
 registerLocaleData(ar)
 registerLocaleData(en)
 
@@ -44,7 +51,13 @@ registerLocaleData(en)
     AboutUsComponent,
     ContactUsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UniversitiesComponent,
+    DestinationComponent,
+    DestinationsComponent,
+    FacultyComponent,
+    PersonalInformationComponent,
+    AcademicInformationComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +82,8 @@ registerLocaleData(en)
     SweetAlert2Module,
     PopoverModule.forRoot(),
     NgxIntlTelInputModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

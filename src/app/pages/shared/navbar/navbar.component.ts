@@ -83,6 +83,16 @@ export class NavbarComponent implements OnInit {
       }
     )
   }
+  onClickLi(){
+    let li = document.querySelector('.destination_li');
+    this._Renderer2.addClass(li , 'close_li');
+  }
+  mouseEnter(){
+    let li = document.querySelector('.destination_li');
+    this._Renderer2.removeClass(li , 'close_li');
+ }
+
+
   showDestination(){
     this._HomeService.getHomeData().subscribe(
       (response) => {

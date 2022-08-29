@@ -85,10 +85,10 @@
                         </div>
                         <ng-container *ngIf="registerForm.controls['phone'].touched && registerForm.controls['phone'].errors != null">
 
+                           <button *ngIf="registerForm.controls['phone'].invalid" type="button" popover="Phone is invalid"
+                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                           <button *ngIf="registerForm.controls['phone'].errors['required']" type="button" popover="Phone is required"
-                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-                          <button *ngIf="registerForm.controls['phone'].valid" type="button" popover="Phone is invalid"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
 
@@ -141,16 +141,6 @@
                          class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                       </div>
                     </div>
-                    <!-- <div class="sign__action d-sm-flex justify-content-between mb-30">
-                       <div class="sign__agree d-flex align-items-center">
-                          <input class="m-check-input" type="checkbox" id="m-agree">
-                          <label class="m-check-label" for="m-agree">Keep me signed in
-                             </label>
-                       </div>
-                       <div class="sign__forgot">
-                          <a href="#">Forgot your password?</a>
-                       </div>
-                    </div> -->
                     <button class="e-btn  w-100" [disabled]="registerForm.invalid"> <span>
                       {{ "register" | translate }}
                     </span> </button>

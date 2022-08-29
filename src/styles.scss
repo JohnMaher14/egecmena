@@ -50,12 +50,19 @@ input[type=number] {
 button[disabled]{
   opacity: 0.5;
 }
+.close_li{
+  .submenu{
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
 .popover{
   position: absolute;
   .arrow{
     position: absolute;
   }
 }
+
 $mainColor: #202556 ;
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -63,6 +70,106 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 //   text-decoration: unset;
 //   color: #fff;
 // }
+.registerDiv {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 250px;
+	height: 50px;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.registerDiv .registerButton {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.05);
+	box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 30px;
+	padding: 10px;
+	letter-spacing: 1px;
+	text-decoration: none;
+	overflow: hidden;
+	color: $mainColor;
+	font-weight: 400px;
+	z-index: 1;
+	transition: 0.5s;
+	backdrop-filter: blur(15px);
+}
+ .registerDiv:hover .registerButton {
+	letter-spacing: 3px;
+  color: #fff;
+}
+.registerDiv .registerButton::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(to left, rgba(255, 255, 255, 0.15), transparent);
+	transform: skewX(45deg) translate(0);
+	transition: 0.5s;
+	filter: blur(0px);
+}
+.registerDiv:hover .registerButton::before {
+	transform: skewX(45deg) translate(200px);
+}
+ .registerDiv::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	bottom: -5px;
+	width: 30px;
+	height: 10px;
+	background: #f00;
+	border-radius: 10px;
+	transition: 0.5s;
+	transition-delay: 0.5;
+}
+.registerDiv:hover::before /*lightup button*/ {
+	bottom: 0;
+	height: 50%;
+	width: 80%;
+	border-radius: 30px;
+}
+
+ .registerDiv::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translatex(-50%);
+	top: -5px;
+	width: 30px;
+	height: 10px;
+	background: #f00;
+	border-radius: 10px;
+	transition: 0.5s;
+	transition-delay: 0.5;
+}
+.registerDiv:hover::after /*lightup button*/ {
+	top: 0;
+	height: 50%;
+	width: 80%;
+	border-radius: 30px;
+}
+.registerDiv::before, /*chnage 1*/
+.registerDiv::after {
+	background: $mainColor;
+	box-shadow: 0 0 5px $mainColor, 0 0 15px $mainColor, 0 0 30px $mainColor,
+		0 0 60px $mainColor;
+}
+
 .border_radius_100{
   border-radius: 100px;
 
@@ -1357,7 +1464,7 @@ body{
     inset: unset !important;
     right:0 !important;
     left: auto !important
-    }
+  }
 
     .iti {
         position: relative;
@@ -1385,10 +1492,119 @@ body{
     left: auto;
         right: 0;
     }
+    .course{
+      &__title{
+        margin-bottom: 40px;
+      }
+      &__thumb{
+        &-list{
+          img{
+            height: 100px;
+            width: 100px;
+            object-fit: contain;
+          }
+        }
+      }
+
+    }
+    .university{
+      &__page{
+        &--content{
+          &-icon{
+            margin-left: 15px;
+          }
+        }
+        &--navlink{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          i{
+            padding-right: 0 !important;
+            padding-left: 7px;
+          }
+        }
+      }
+    }
+}
+.course{
+  &__thumb{
+    &-list{
+      img{
+        height: 100px;
+        width: 100px;
+        object-fit: contain;
+      }
+    }
+  }
+  &__btn{
+    .link-btn{
+      padding-left: 21px;
+      padding-right: 0;
+      position: relative;
+      &:hover i{
+        left: -20px !important;
+      }
+      i{
+        right: auto !important;
+        left: 0 !important;
+
+      }
+    }
+  }
+}
+.university{
+  &__page{
+    &--img{
+      img{
+        width: 245px;
+        height: 245px;
+        object-fit: contain;
+      }
+    }
+    &--content{
+      &-icon{
+        margin-left: 15px;
+      }
+    }
+    .course{
+      &__item{
+        .course{
+          &__title{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+          }
+        }
+      }
+      // &__tab{
+      //   &-2{
+      //     .nav-item{
+      //       width: 33.333%;
+      //     }
+      //   }
+      // }
+    }
+    &--navlink{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }
 .card-hover:hover img{
   animation: flip 1s ease;
 
+}
+.card__header{
+  background-color: #f3f4f8;
+  font-size: 20px !important;
+  padding: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #0e1133;
+  p , h1, h2, h3 , h4 , h5 , h6 , span{
+    margin-bottom: 0;
+  }
 }
 .button_login{
   background: linear-gradient(to right , #2abfea , #8b68aa);

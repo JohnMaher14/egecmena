@@ -1,0 +1,316 @@
+  <!-- page title area start -->
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
+    style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+    <div class="container">
+      <div class="row">
+        <div class="col-xxl-12">
+          <div class="page__title-wrapper mt-110">
+            <h3 class="page__title">
+              {{ currentLanguage === 'ar' ? facultyData?.ar_name : facultyData?.en_name }}
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+                <li  class="breadcrumb-item" aria-current="page">
+                  <a routerLink="/destinations">
+                    {{"destination" | translate }}
+                  </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  {{ currentLanguage === 'ar' ? facultyData?.ar_name : facultyData?.en_name }}
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- page title area end -->
+<!-- page title area start -->
+<section class="page__title-area university__page pt-120 pb-90">
+  <div class="page__title-shape">
+      <img class="page-title-shape-5 d-none d-sm-block" src="assets/theme/img/page-title/page-title-shape-1.png" alt="">
+      <img class="page-title-shape-6" src="assets/theme/img/page-title/page-title-shape-6.png" alt="">
+      <img class="page-title-shape-7" src="assets/theme/img/page-title/page-title-shape-4.png" alt="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-9 col-xl-9 col-lg-9">
+          <div class="course__wrapper">
+            <div class="page__title-content mb-25">
+
+                <h5 class="page__title-3">{{ currentLanguage === 'ar' ? facultyData?.ar_name : facultyData?.en_name}}</h5>
+            </div>
+            <!-- <div class="course__meta-2 d-sm-flex mb-30">
+                <div class="course__teacher-3 d-flex align-items-center">
+                  <div class="course__teacher-thumb-3" [ngClass]="currentLanguage === 'ar' ? 'ml-15' : 'mr-15' ">
+                      <img [src]="destinationImage+destinationDetail?.flag" alt="">
+                  </div>
+                  <div class="course__teacher-info-3">
+                      <h5>{{currentLanguage === 'ar' ? destinationDetail?.ar_name : destinationDetail?.en_name }}</h5>
+                  </div>
+                </div>
+
+            </div> -->
+            <!-- <div class="course__img w-img">
+                <img src="assets/theme/img/course/details/course-details-1.jpg" alt="">
+            </div> -->
+            <div class="course__tab-2 mb-45 ">
+
+                <ul ngbNav #nav="ngbNav" class="nav nav-tabs row">
+                  <li [ngbNavItem]="0" class="nav-item university__page--navitem col">
+                    <a ngbNavLink class="nav-link  university__page--navlink">
+                      <i class="fa fa-info-circle" [ngClass]="currentLanguage == 'ar' ? 'ml-3' : 'mr-2'"></i>
+                      <span>{{currentLanguage === 'ar' ? 'عن '+facultyData?.ar_name : 'About '+facultyData?.en_name}}</span>
+                    </a>
+                    <ng-template ngbNavContent>
+                      <div class="course__description" *ngFor="let facultyData of facultyDatas">
+                        <div [innerHtml]="currentLanguage === 'ar' ? facultyData?.ar_title : facultyData?.en_title" class="card__header"></div>
+                        <div [innerHtml]="currentLanguage === 'ar' ?facultyData?.ar_text : facultyData?.en_text"></div>
+                      </div>
+                    </ng-template>
+                  </li>
+                  <li [ngbNavItem]="major.id" class="nav-item university__page--navitem col" *ngFor="let major of facultyUniversity?.majors">
+                    <a ngbNavLink  class="nav-link  university__page--navlink">
+                      <i class="fa fa-university" [ngClass]="currentLanguage == 'ar' ? 'ml-3' : 'mr-2'"></i>
+                      <span>{{currentLanguage === 'ar' ? major.ar_name :  major.en_name }}</span>
+                    </a>
+                    <ng-template ngbNavContent>
+                      <div class="course__tab-2">
+
+                        <ul ngbNav #test="ngbNav" class="nav nav-tabs row justify-content-center">
+                          <li [ngbNavItem]="1" class="nav-item university__page--navitem col-lg-4">
+                            <a ngbNavLink class="nav-link  university__page--navlink"> {{currentLanguage ==='ar' ? 'الأقسام' : 'Departments'}}</a>
+                            <ng-template ngbNavContent>
+                              <div class="row">
+                                <div class="col-lg-6" *ngFor="let department of major.pivot?.departments">
+                                  <div class="course__item white-bg mb-30 fix">
+
+                                      <div class="course__right">
+                                        <div class="course__content course__content-4">
+
+                                          <h3 class="course__title mb-0">
+                                            <a [title]="currentLanguage === 'ar' ? department.ar_name : department.en_name">
+                                              {{currentLanguage === 'ar' ? department.ar_name : department.en_name}}
+                                            </a>
+                                          </h3>
+
+                                        </div>
+
+                                      </div>
+                                  </div>
+                                </div>
+
+                              </div>
+
+                            </ng-template>
+                          </li>
+                          <li [ngbNavItem]="2" class="nav-item university__page--navitem col-lg-4">
+                            <a ngbNavLink class="nav-link  university__page--navlink">{{currentLanguage ==='ar' ? 'الشروط' : 'Conditions'}}</a>
+                            <ng-template ngbNavContent>
+
+                              <div class="course__description" *ngFor="let condition of conditions">
+                                <!-- {{condition.major_id === major.id}} -->
+                              <ng-container *ngIf="condition.major_id === major.id">
+                                <ng-container *ngIf="condition?.ar_title_condition != null || condition?.en_title_condition != null">
+                                  <div [innerHtml]="currentLanguage === 'ar' ? condition?.ar_title_condition : condition?.en_title_condition" class="card__header"></div>
+                                </ng-container>
+                                <ng-container *ngIf="condition?.ar_text_condition != null || condition?.en_text_condition != null">
+                                  <div [innerHtml]="currentLanguage === 'ar' ?condition?.ar_text_condition : condition?.en_text_condition"></div>
+                                </ng-container>
+                              </ng-container>
+                              </div>
+                            </ng-template>
+                          </li>
+
+                        </ul>
+                        <div [ngbNavOutlet]="test" class="mt-2">
+                      </div>
+
+                      </div>
+
+                      <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
+                        <ng-container *ngIf="userArray != ''">
+                          <input type="hidden" formControlName="admission_destination_id" [ngModel]="this.universityData?.destination_id">
+                          <input type="hidden" formControlName="admission_university_id" [ngModel]="this.facultyUniversity?.university_id">
+                          <input type="hidden" formControlName="admission_fac_uni_id" [ngModel]="this.facultyUniversity?.faculty_id">
+                          <input type="hidden" formControlName="admission_fac_uni_major_id" [ngModel]="major.id">
+                          <input type="hidden" formControlName="user_id" [ngModel]="userArray.id">
+                          <div class="registerDiv">
+                            <button class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
+                          </div>
+
+                        </ng-container>
+                        <ng-container *ngIf="userArray == undefined">
+                          <div class="registerDiv">
+                            <a routerLink="/login" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
+                          </div>
+                        </ng-container>
+
+                      </form>
+                    </ng-template>
+                  </li>
+                  <!-- <li [ngbNavItem]="3" class="nav-item university__page--navitem col-lg-4">
+                    <a ngbNavLink class="nav-link  university__page--navlink">
+                      <i class="fa fa-flag" [ngClass]="currentLanguage == 'ar' ? 'ml-3' : 'mr-2'"></i>
+                      <span>{{currentLanguage === 'ar' ? 'عن '+destinationDetail?.ar_name : 'About '+destinationDetail?.en_name}}</span>
+                    </a>
+                    <ng-template ngbNavContent>
+                      <div class="course__description">
+                        <div [innerHtml]="currentLanguage === 'ar' ? destinationDetail?.ar_population_title : destinationDetail?.en_population_title" class="card__header"></div>
+                        <div [innerHtml]="currentLanguage === 'ar' ?destinationDetail?.ar_population_text : destinationDetail?.en_population_text"></div>
+                      </div>
+                      <div class="course__description">
+                        <div [innerHtml]="currentLanguage === 'ar' ? destinationDetail?.ar_why_egypt_title : destinationDetail?.en_why_egypt_title" class="card__header"></div>
+                        <div [innerHtml]="currentLanguage === 'ar' ?destinationDetail?.ar_why_egypt_text : destinationDetail?.en_why_egypt_text"></div>
+                      </div>
+                      <div class="course__description">
+                        <div [innerHtml]="currentLanguage === 'ar' ? destinationDetail?.ar_study_condition_title : destinationDetail?.en_study_condition_title" class="card__header"></div>
+                        <div [innerHtml]="currentLanguage === 'ar' ?destinationDetail?.ar_study_condition_text : destinationDetail?.en_study_condition_text"></div>
+                      </div>
+
+                    </ng-template>
+                  </li> -->
+                </ul>
+
+            </div>
+            <div class="course__tab-content mb-95">
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+
+
+          </div>
+      </div>
+      <div class="col-xxl-3 col-xl-3 col-lg-3">
+          <div class="course__sidebar p-relative">
+            <div class="course__shape">
+                <img class="course-dot" src="assets/theme/img/course/course-dot.png" alt="">
+            </div>
+            <div class="course__sidebar-widget-2 white-bg mb-20">
+                <div class="course__logo">
+                  <div class="course__logo-thumb university__page--img w-img mb-25">
+                      <img [src]="facultyImage+facultyUniversity?.logo" alt="">
+
+                  </div>
+
+                  <div class="course__video-content university__page--content pb-35">
+                      <ul>
+
+                        <li class="d-flex align-items-center">
+                            <div class="course__video-icon">
+                              <i class="fa fa-home university__page--content-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="course__video-info">
+                              <h5><span>{{currentLanguage === 'ar' ? 'العنوان' : 'Address'}} :</span>
+                                <div [innerHtml]="currentLanguage === 'ar' ? facultyUniversity?.ar_address : facultyUniversity?.en_address"></div>
+                              </h5>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="course__video-icon">
+                              <i class="fas fa-browser university__page--content-icon"></i>
+                            </div>
+                            <div class="course__video-info">
+                              <h5><span>{{currentLanguage === 'ar' ? 'الموقع' : 'Website'}} :</span>{{ facultyUniversity?.faculty_site }}</h5>
+                            </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                            <div class="course__video-icon">
+                              <i class="fa fa-phone university__page--content-icon" aria-hidden="true"></i>
+                            </div>
+                            <div class="course__video-info">
+                              <h5><span>{{currentLanguage === 'ar' ? 'رقم الهاتف' : 'Phone number'}} :</span>{{facultyUniversity?.faculty_phone}}</h5>
+                            </div>
+                        </li>
+
+                      </ul>
+                  </div>
+
+                </div>
+            </div>
+            <div class="course__sidebar-widget-2 white-bg mb-20">
+                <div class="course__sidebar-course">
+                  <h3 class="course__sidebar-title">Related courses</h3>
+                  <ul>
+                      <li>
+                        <div class="course__sm d-flex align-items-center mb-30">
+                            <div class="course__sm-thumb mr-20">
+                              <a href="#">
+                                  <img src="assets/img/course/sm/course-sm-1.jpg" alt="">
+                              </a>
+                            </div>
+                            <div class="course__sm-content">
+                              <div class="course__sm-rating">
+                                  <ul>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                  </ul>
+                              </div>
+                              <h5><a href="#">Development</a></h5>
+                              <div class="course__sm-price">
+                                  <span>$54.00</span>
+                              </div>
+                            </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="course__sm d-flex align-items-center mb-30">
+                            <div class="course__sm-thumb mr-20">
+                              <a href="#">
+                                  <img src="assets/img/course/sm/course-sm-2.jpg" alt="">
+                              </a>
+                            </div>
+                            <div class="course__sm-content">
+                              <div class="course__sm-rating">
+                                  <ul>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                  </ul>
+                              </div>
+                              <h5><a href="#">Data Science</a></h5>
+                              <div class="course__sm-price">
+                                  <span>$72.00</span>
+                              </div>
+                            </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="course__sm d-flex align-items-center mb-10">
+                            <div class="course__sm-thumb mr-20">
+                              <a href="#">
+                                  <img src="assets/img/course/sm/course-sm-3.jpg" alt="">
+                              </a>
+                            </div>
+                            <div class="course__sm-content">
+                              <div class="course__sm-rating">
+                                  <ul>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                  </ul>
+                              </div>
+                              <h5><a href="#">UX Design</a></h5>
+                              <div class="course__sm-price">
+                                  <span>Free</span>
+                              </div>
+                            </div>
+                        </div>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- page title area end -->

@@ -39,7 +39,7 @@
      </div>
      <div class="row justify-content-center">
         <div class="col-xxl-6 col-xl-6 col-lg-8">
-          
+
            <div class="sign__wrapper white-bg">
 
               <div class="sign__form">
@@ -67,7 +67,7 @@
                       <h5>{{"form_password" | translate}}</h5>
                       <div class="sign__input--container">
                         <div class="sign__input">
-                            <input formControlName="password" name="password" type="text">
+                            <input formControlName="password" name="password" type="password">
                             <i class="fal fa-lock"></i>
                         </div>
                         <button *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors != null" type="button" popover="password is required"
