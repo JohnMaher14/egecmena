@@ -1,4 +1,5 @@
-  <!-- page title area start -->
+<app-loader *ngIf="loading"></app-loader>
+<!-- page title area start -->
   <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
     style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
     <div class="container">
@@ -131,19 +132,36 @@
                       </div>
 
                       <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
-                        <ng-container *ngIf="userArray != ''">
-                          <input type="hidden" formControlName="admission_destination_id" [ngModel]="this.universityData?.destination_id">
-                          <input type="hidden" formControlName="admission_university_id" [ngModel]="this.facultyUniversity?.university_id">
-                          <input type="hidden" formControlName="admission_fac_uni_id" [ngModel]="this.facultyUniversity?.faculty_id">
-                          <input type="hidden" formControlName="admission_fac_uni_major_id" [ngModel]="major.id">
+                        <ng-container *ngIf="userArray !=  null && userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo.degree_name != null">
+                          <input type="hidden" formControlName="destination" [ngModel]="destinationDetail?.en_name">
+                          <input type="hidden" formControlName="university" [ngModel]="universityData?.en_name">
+                          <input type="hidden" formControlName="faculty" [ngModel]="facultyData?.en_name">
                           <input type="hidden" formControlName="user_id" [ngModel]="userArray.id">
-                          <div class="registerDiv">
+                          <div class="registerDiv button">
                             <button class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
                           </div>
 
                         </ng-container>
+                        <!-- {{userAcademicInfo?.academicInfo != null}}
+                        {{userAcademicInfo?.academicInfo.degree_name != null}}
+                        {{userPersonalInfo?.full_name != null}} -->
+                        <!-- {{userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == "No Academic Info Found"}} -->
+                        <ng-container *ngIf="userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == 'No Academic Info Found' ">
+
+                          <div class="registerDiv academic">
+                            <a routerLink="/academic-information" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
+                          </div>
+
+                        </ng-container>
+                        <ng-container *ngIf="userPersonalInfo?.full_name == null">
+
+                          <div class="registerDiv personal">
+                            <a routerLink="/personal-information" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
+                          </div>
+
+                        </ng-container>
                         <ng-container *ngIf="userArray == undefined">
-                          <div class="registerDiv">
+                          <div class="registerDiv link">
                             <a routerLink="/login" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
                           </div>
                         </ng-container>
@@ -151,27 +169,6 @@
                       </form>
                     </ng-template>
                   </li>
-                  <!-- <li [ngbNavItem]="3" class="nav-item university__page--navitem col-lg-4">
-                    <a ngbNavLink class="nav-link  university__page--navlink">
-                      <i class="fa fa-flag" [ngClass]="currentLanguage == 'ar' ? 'ml-3' : 'mr-2'"></i>
-                      <span>{{currentLanguage === 'ar' ? 'عن '+destinationDetail?.ar_name : 'About '+destinationDetail?.en_name}}</span>
-                    </a>
-                    <ng-template ngbNavContent>
-                      <div class="course__description">
-                        <div [innerHtml]="currentLanguage === 'ar' ? destinationDetail?.ar_population_title : destinationDetail?.en_population_title" class="card__header"></div>
-                        <div [innerHtml]="currentLanguage === 'ar' ?destinationDetail?.ar_population_text : destinationDetail?.en_population_text"></div>
-                      </div>
-                      <div class="course__description">
-                        <div [innerHtml]="currentLanguage === 'ar' ? destinationDetail?.ar_why_egypt_title : destinationDetail?.en_why_egypt_title" class="card__header"></div>
-                        <div [innerHtml]="currentLanguage === 'ar' ?destinationDetail?.ar_why_egypt_text : destinationDetail?.en_why_egypt_text"></div>
-                      </div>
-                      <div class="course__description">
-                        <div [innerHtml]="currentLanguage === 'ar' ? destinationDetail?.ar_study_condition_title : destinationDetail?.en_study_condition_title" class="card__header"></div>
-                        <div [innerHtml]="currentLanguage === 'ar' ?destinationDetail?.ar_study_condition_text : destinationDetail?.en_study_condition_text"></div>
-                      </div>
-
-                    </ng-template>
-                  </li> -->
                 </ul>
 
             </div>
@@ -207,12 +204,15 @@
                               </h5>
                             </div>
                         </li>
-                        <li class="d-flex align-items-center">
+                        <li class="d-flex align-items-center" style="
+                          white-space: nowrap;
+                          overflow: hidden;
+                          text-overflow: ellipsis;">
                             <div class="course__video-icon">
                               <i class="fas fa-browser university__page--content-icon"></i>
                             </div>
                             <div class="course__video-info">
-                              <h5><span>{{currentLanguage === 'ar' ? 'الموقع' : 'Website'}} :</span>{{ facultyUniversity?.faculty_site }}</h5>
+                              <h5><span>{{currentLanguage === 'ar' ? 'الموقع' : 'Website'}} :</span><a target="_blank" [href]="facultyUniversity?.faculty_site">{{ facultyUniversity?.faculty_site }}</a></h5>
                             </div>
                         </li>
                         <li class="d-flex align-items-center">
@@ -220,7 +220,7 @@
                               <i class="fa fa-phone university__page--content-icon" aria-hidden="true"></i>
                             </div>
                             <div class="course__video-info">
-                              <h5><span>{{currentLanguage === 'ar' ? 'رقم الهاتف' : 'Phone number'}} :</span>{{facultyUniversity?.faculty_phone}}</h5>
+                              <h5><span>{{currentLanguage === 'ar' ? 'رقم الهاتف' : 'Phone number'}} :</span><a target="_blank" href="tel:{{facultyUniversity?.faculty_phone}}">{{facultyUniversity?.faculty_phone}}</a></h5>
                             </div>
                         </li>
 

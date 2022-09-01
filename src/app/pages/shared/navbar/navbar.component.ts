@@ -16,6 +16,10 @@ export class NavbarComponent implements OnInit {
   currentUsername: any;
   isLogined: boolean = false;
   destinations: any[] =[];
+  AcademicData!:boolean;
+  userArray: any;
+  userPersonalInfo: any;
+  paperStatus!: any;
     constructor(
     private _Renderer2:Renderer2,
     public _TranslateService:TranslateService,
@@ -34,6 +38,17 @@ export class NavbarComponent implements OnInit {
     this.toggleSidebar = true;
 
   }
+  // showPaperInfo(){
+  //   this._AuthenticationService.getPaperInfo(this.userArray.id).subscribe(
+  //     (response) => {
+  //       console.log(response);
+  //       console.log(response.message);
+
+  //       this.paperStatus = response;
+
+  //     }
+  //   )
+  // }
   openNavbar(){
     let bodyOverlay = document.querySelector('.body-overlay');
     let sidebarArea = document.querySelector('.sidebar__area ');
@@ -49,6 +64,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.authentication();
     this.showDestination();
+    // this.showPaperInfo();
     let navbar = document.querySelector('.header__area');
     let sidebar = document.querySelector('#sidebar');
     let btnUp = document.querySelector('.progress-wrap');
@@ -63,6 +79,8 @@ export class NavbarComponent implements OnInit {
     })
 
     this._Renderer2.listen(window,'scroll', ($event) => {
+
+
       if(window.scrollY > 850){
         this._Renderer2.addClass(sidebar, 'active')
         this._Renderer2.addClass(btnUp, 'active-progress')
@@ -90,7 +108,7 @@ export class NavbarComponent implements OnInit {
   mouseEnter(){
     let li = document.querySelector('.destination_li');
     this._Renderer2.removeClass(li , 'close_li');
- }
+  }
 
 
   showDestination(){
@@ -109,12 +127,26 @@ export class NavbarComponent implements OnInit {
       if (this._AuthenticationService.currentUserData.getValue() == null) {
         this.isLogined = false;
       } else {
-        this.currentUsername = JSON.parse(
-          sessionStorage.getItem('currentUserArray') || '{}'
+        this.userArray = JSON.parse(
+          localStorage.getItem('currentUserArray') || '{}'
         );
-        console.log(JSON.parse(
-          sessionStorage.getItem('currentUserArray') || '{}'
-        ));
+          this._AuthenticationService
+            .getPersonalInformation(this.userArray.id)
+            .subscribe((response) => {
+              console.log(response);
+              this.userPersonalInfo = response.userPersonalInfo;
+
+            });
+            this._AuthenticationService.getPaperInfo(this.userArray.id).subscribe(
+              (response) => {
+                console.log(response);
+                console.log(response.message);
+
+                this.paperStatus = response;
+
+              }
+            )
+
         this.isLogined = true;
       }
     });

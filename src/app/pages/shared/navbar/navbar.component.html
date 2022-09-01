@@ -83,9 +83,11 @@
                 <nav id="mobile-menu">
                   <ul>
               <li class="has-dropdown">
-                <a >{{currentUsername.name}}</a>
+                <a >{{userArray.name}}</a>
                 <ul class="submenu">
                   <li><a routerLink="/personal-information">{{currentLanguage === 'ar' ? 'المعلومات الشخصية' : 'Personal Information'}}</a></li>
+                  <li *ngIf="userPersonalInfo?.full_name != null"><a routerLink="/academic-information">{{currentLanguage === 'ar' ? 'المعلومات الأكاديمية' : 'Academic Information'}}</a></li>
+                  <li *ngIf="paperStatus.message != undefined"><a routerLink="/movement-information">{{currentLanguage === 'ar' ? 'حركة الملفات' : 'Movement Information'}}</a></li>
                   <li><a (click)="logout()">خروج</a></li>
                 </ul>
               </li>

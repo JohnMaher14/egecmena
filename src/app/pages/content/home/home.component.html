@@ -1,18 +1,6 @@
 
-
-    <ngx-skeleton-loader
-    *ngIf="loading"
-    count="15"
-    appearance="line"
-    style="
-    position: fixed;
-    inset: 0;
-    z-index: 9999999;
-    background-color: #ccc;"
-    [theme]="{
-      height: '50px'
-    }"
-  ></ngx-skeleton-loader>
+  <app-home-loader *ngIf="loading"
+  ></app-home-loader>
 
 <!-- hero area start -->
 <section class="hero__area hero__height hero__height-2 d-flex align-items-center white-bg-3 fix">
@@ -176,13 +164,13 @@
       <p>{{'search_area_text' | translate}}</p>
       <img class="search__area--img-3" src="assets/theme/img/icon/circle_group_vertical.png" alt="">
     </div>
-    <form action="">
+    <form [formGroup]="admissionForm" (ngSubmit)="onSubmitSearch(admissionForm)" >
       <div class="row wow animate__slideInRight animate__animated justify-content-between align-items-end">
         <div class="col-lg-2 col-md-3">
           <div class="form-group">
-            <label for="">بلد</label>
-            <select id="my-select"  (change)="onChangeDestination($event)"  class="form-control" name="">
-              <option>اختر بلد</option>
+            <label for="" >بلد</label>
+            <select  id="my-select" formControlName="destination" (change)="onChangeDestination($event)"  class="form-control" name="">
+              <option value="">اختر بلد</option>
               <option value="{{destination.id}}" *ngFor="let destination of destinations">{{destination.ar_name}}</option>
             </select>
           </div>
@@ -190,41 +178,47 @@
         <div class="col-lg-2 col-md-3">
           <div class="form-group">
             <label for="">الجامعة</label>
-            <select id="my-select" placeholder="اختر الجامعة" class="form-control" name="">
+            <select  id="my-select" formControlName="university" (change)="onChangeUniversity($event)" placeholder="اختر الجامعة" class="form-control" name="">
               <option>اختر الجامعة</option>
-              <option value="{{university.id}}" *ngFor="let university of changeUniversities">{{university.ar_name}}</option>
+              <option value="{{university.id}}"  *ngFor="let university of changeUniversities">{{currentLanguage === 'ar' ? university.ar_name : university.en_name}}</option>
             </select>
           </div>
         </div>
         <div class="col-lg-2 col-md-3">
           <div class="form-group">
             <label for="">الكلية</label>
-            <select id="my-select" placeholder="اختر الكلية" class="form-control" name="">
+            <select id="my-select" formControlName="faculty" (change)="onChangeFaculty($event)" placeholder="اختر الكلية" class="form-control" name="">
               <option>اختر الكلية</option>
-              <option value="مصر">مصر</option>
+              <ng-container  *ngFor="let facultyOrginal of faculties" >
+              <ng-container  *ngFor="let faculty of changeFaculty" >
+
+                <option value="{{facultyOrginal.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option>
+              </ng-container>
+              </ng-container>
+
             </select>
           </div>
         </div>
         <div class="col-lg-2 col-md-3">
           <div class="form-group">
             <label for="">التخصص</label>
-            <select id="my-select" placeholder="اختر التخصص" class="form-control" name="">
+            <select id="my-select" (change)="onMajorSaerch($event)" formControlName="major"  placeholder="اختر التخصص" class="form-control" name="">
               <option>اختر التخصص</option>
-              <option value="مصر">مصر</option>
+              <option value="{{major.id}}" *ngFor="let major of majors">{{currentLanguage === 'ar' ? major.ar_name : major.en_name}}</option>
             </select>
           </div>
         </div>
         <div class="col-lg-2 col-md-3">
           <div class="form-group">
             <label for="">القسم</label>
-            <select id="my-select" placeholder="اختر القسم" class="form-control" name="">
+            <select id="my-select"  formControlName="department" placeholder="اختر القسم" class="form-control" name="">
               <option>اختر القسم</option>
-              <option value="مصر">مصر</option>
+              <option *ngFor="let department of departments">{{department.ar_name}}</option>
             </select>
           </div>
         </div>
         <div class="col-md-1">
-          <button class="e-btn border_radius_100" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <button class="e-btn border_radius_100" [disabled]="admissionForm.invalid" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 
         </div>
       </div>
@@ -258,7 +252,7 @@
           <div class="icon">
             <img src="assets/theme/img/icon/Computer_Science.png" alt="">
             <div class="hover-action">
-              <a class="read-more-btn" routerLink="/specialization/3" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+              <a class="read-more-btn" routerLink="/studyByFaculty/3" tabindex="0"><i class="fa fa-arrow-left"></i></a>
             </div>
           </div>
         </div>
@@ -271,7 +265,7 @@
           <div class="icon">
             <img src="assets/theme/img/icon/human_science.png" alt="">
             <div class="hover-action">
-              <a class="read-more-btn" routerLink="/specialization/8" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+              <a class="read-more-btn" routerLink="/studyByFaculty/8" tabindex="0"><i class="fa fa-arrow-left"></i></a>
             </div>
           </div>
         </div>
@@ -284,7 +278,7 @@
           <div class="icon">
             <img src="assets/theme/img/icon/Engineering.png" alt="">
             <div class="hover-action">
-              <a class="read-more-btn" routerLink="/specialization/1" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+              <a class="read-more-btn" routerLink="/studyByFaculty/1" tabindex="0"><i class="fa fa-arrow-left"></i></a>
             </div>
           </div>
         </div>
@@ -297,7 +291,7 @@
           <div class="icon">
             <img src="assets/theme/img/icon/Medical.png" alt="">
             <div class="hover-action">
-              <a class="read-more-btn" routerLink="/specialization/2" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+              <a class="read-more-btn" routerLink="/studyByFaculty/2" tabindex="0"><i class="fa fa-arrow-left"></i></a>
             </div>
           </div>
         </div>
@@ -310,7 +304,7 @@
           <div class="icon">
             <img src="assets/theme/img/icon/Law.png" alt="">
             <div class="hover-action">
-              <a class="read-more-btn" routerLink="/specialization/7" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+              <a class="read-more-btn" routerLink="/studyByFaculty/7" tabindex="0"><i class="fa fa-arrow-left"></i></a>
             </div>
           </div>
         </div>
@@ -323,7 +317,7 @@
           <div class="icon">
             <img src="assets/theme/img/icon/Business.png" alt="">
             <div class="hover-action">
-              <a class="read-more-btn" href="/specialization/4" tabindex="0"><i class="fa fa-arrow-left"></i></a>
+              <a class="read-more-btn" href="/studyByFaculty/4" tabindex="0"><i class="fa fa-arrow-left"></i></a>
             </div>
           </div>
         </div>

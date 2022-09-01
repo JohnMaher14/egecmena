@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
   currentLanguage: any;
+  actionLoading!:boolean;
   constructor(
     private _TranslateService:TranslateService,
     private _Title:Title,
@@ -26,8 +27,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.translateFunction();
-    this._Title.setTitle(`${environment.title}Login`);
-    if (sessionStorage.getItem('currentUserToken') !== null) {
+    if (localStorage.getItem('currentUserToken') !== null) {
       this._Router.navigate(['/'])
     }
   }
@@ -36,39 +36,46 @@ export class LoginComponent implements OnInit {
     'password': new FormControl('', [Validators.required]),
   })
   onLogin(loginForm: FormGroup){
+    this.actionLoading = true;
     this._AuthenticationService.login(
       loginForm.value
     ).subscribe(
       (response) => {
         if(response.access_token){
-          sessionStorage.setItem('currentUserToken', JSON.stringify(response.access_token));
-          sessionStorage.setItem('currentUserArray', JSON.stringify(response.user));
-          sessionStorage.setItem('currentUserExpiresIn', JSON.stringify(response.expires_in));
+          localStorage.setItem('currentUserToken', JSON.stringify(response.access_token));
+          localStorage.setItem('currentUserArray', JSON.stringify(response.user));
+          localStorage.setItem('currentUserExpiresIn', JSON.stringify(response.expires_in));
           // save
           this._AuthenticationService.saveCurrentUserToken();
           this._Router.navigate(['/']);
+
+          this.actionLoading = false;
         }
+        console.log(response);
       }, error => {
         console.log(error);
-        if(error.error){
+        if(error.status == 401){
           this._ToastrService.error(`${error.error.ar_error}` , 'خطأ' , {
             timeOut: 4000
           })
         }
+        this.actionLoading = false;
+
       }
     )
   }
   translateFunction(){
     this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
     this._TranslateService.use(this.currentLanguage)
-    this._TranslateService.onLangChange.subscribe(
-      (language: any) => {
-        if (language.lang == 'en') {
-          this._Title.setTitle(`${environment.title}Contact us`)
-        }else if(language.lang == 'ar'){
-          this._Title.setTitle(`${environment.title}تواصل معنا`)
+    if (this.currentLanguage == 'en') {
+      this._Title.setTitle(`${environment.title}Login`)
+    }else if(this.currentLanguage == 'ar'){
+      this._Title.setTitle(`${environment.title}تسجيل دخول`)
 
-        }
+    }
+    this._TranslateService.onLangChange.subscribe(
+      () => {
+
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

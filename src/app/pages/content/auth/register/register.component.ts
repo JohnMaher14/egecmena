@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.translateFunction()
-    console.log(this.registerForm.controls['phone']);
   }
   changePreferredCountries() {
 		this.preferredCountries = [CountryISO.India, CountryISO.Canada];
@@ -69,6 +68,7 @@ export class RegisterComponent implements OnInit {
       registerForm.value.degree_needed
       ).subscribe(
       (response) => {
+        console.log(response);
         if(response.message){
           if(this.currentLanguage === 'ar'){
 
@@ -85,11 +85,15 @@ export class RegisterComponent implements OnInit {
               'success'
             )
           }
+          setTimeout(() => {
+            this._Router.navigateByUrl('/login');
+            Swal.close();
+          }, 4000);
         }
       }, error => {
         console.log(error);
         console.log(error.error.errors.email);
-        if(error.error){
+        if(error.error.errors.email){
           if(this.currentLanguage === 'ar'){
             Swal.fire(
               `البريد الإلكتروني تم أخذه.`,
@@ -100,6 +104,21 @@ export class RegisterComponent implements OnInit {
 
             Swal.fire(
               `${error.error.errors.email[0]}`,
+              'Please try again',
+              'error'
+              )
+            }
+        }else if(error.error.errors.password){
+          if(this.currentLanguage === 'ar'){
+            Swal.fire(
+              `كلمة السر لا تشبه تأكيد كلمة السر`,
+              'حاول مجددا',
+              'error'
+              )
+          }else{
+
+            Swal.fire(
+              `${error.error.errors.password[0]}`,
               'Please try again',
               'error'
               )

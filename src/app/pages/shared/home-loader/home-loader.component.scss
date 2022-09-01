@@ -1,0 +1,135 @@
+
+.page-breadcrumb{
+  display: flex;
+  align-items: center;
+}
+.page-breadcrumb > li{
+  margin-left: 20px;
+}
+.loader_sekelton{
+  position: fixed;
+  z-index: 999999;
+  inset: 0;
+  &--img{
+    height: 750px;
+    width: 750px;
+  }
+
+  .header .img{
+
+    height: 100vh;
+    width: 100%;
+    background: #d9d9d9;
+    position: relative;
+    overflow: hidden;
+  }
+  .header .details{
+    position: absolute;
+    bottom: 21px;
+
+  }
+  .header .details .title{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .details span{
+    display: block;
+    background: #d9d9d9;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .details .name{
+    height: 15px;
+    width: 100px;
+  }
+  .scene .layer{
+    height: 85px;
+    width: 150px;
+    background: #d9d9d9;
+    border-radius: 10px;
+    overflow: hidden;
+    // position: relative;
+    padding: 0;
+  }
+  .card .description{
+    margin: 25px 0;
+    margin-right: 20px;
+  }
+  .description h3.line{
+    background: #d9d9d9;
+    border-radius: 10px;
+    height: 120px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .description h4.line{
+    background: #d9d9d9;
+    border-radius: 10px;
+    height: 26px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .description p.line{
+    background: #d9d9d9;
+    border-radius: 10px;
+    height: 60px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .description .line-1{
+    width: 100%;
+  }
+
+
+  .header .img::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to left, #d9d9d9 0%, rgba(0,0,0,0.05) 20%, #d9d9d9 40%, #d9d9d9 100%);
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: shimmer 1s linear infinite;
+  }
+  .description .line::before,
+  .details span::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to left, #777 0%, rgba(0,0,0,0.05) 20%, #777 40%, #777 100%);
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: shimmer 1s linear infinite;
+  }
+  .scene .layer::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to left, #777 0%, rgba(0,0,0,0.05) 20%, #777 40%, #777 100%);
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: shimmer 1s linear infinite;
+  }
+  .header .img::before{
+    background-size: 650px 600px;
+  }
+  .details span::before{
+    animation-delay: 0.2s;
+  }
+
+  @keyframes shimmer {
+    100%{
+      background-position: 450px 0;
+    }
+    0%{
+      background-position: -450px 0;
+    }
+  }
+}

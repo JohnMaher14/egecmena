@@ -1380,7 +1380,7 @@ p {
   color: #202556;
   font-family: "Font Awesome 5 Pro";
   font-weight: 400;
-  margin-left: 5px;
+  margin:auto 5px;
   display: inline-block;
 }
 

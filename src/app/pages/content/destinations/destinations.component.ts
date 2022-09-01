@@ -13,6 +13,7 @@ export class DestinationsComponent implements OnInit {
   currentLanguage: any;
   destinationImage:string = `${environment.imageUrl}destinations/`;
   destinations: any[] = [];
+  loading!: boolean;
   constructor(
     private _TranslateService:TranslateService,
     private _Title:Title,
@@ -24,9 +25,11 @@ export class DestinationsComponent implements OnInit {
     this.showDestinations();
   }
   showDestinations(){
+    this.loading = true;
     this._HomeService.getHomeData().subscribe(
       (response) => {
         this.destinations = response.destinations
+        this.loading = false
       }
     )
   }

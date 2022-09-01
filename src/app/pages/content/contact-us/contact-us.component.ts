@@ -59,14 +59,14 @@ export class ContactUsComponent implements OnInit {
   translateFunction(){
     this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
     this._TranslateService.use(this.currentLanguage)
-    this._TranslateService.onLangChange.subscribe(
-      (language: any) => {
-        if (language.lang == 'en') {
-          this._Title.setTitle(`${environment.title}Contact us`)
-        }else if(language.lang == 'ar'){
-          this._Title.setTitle(`${environment.title}تواصل معنا`)
+    if (this.currentLanguage == 'en') {
+      this._Title.setTitle(`${environment.title}Contact us`)
+    }else if(this.currentLanguage == 'ar'){
+      this._Title.setTitle(`${environment.title}تواصل معنا`)
 
-        }
+    }
+    this._TranslateService.onLangChange.subscribe(
+      () => {
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

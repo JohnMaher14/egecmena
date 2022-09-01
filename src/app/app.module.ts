@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule} from '@angular/common/http'
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import ar from '@angular/common/locales/ar';
 
 import en from '@angular/common/locales/en';
@@ -38,6 +38,15 @@ import { DestinationsComponent } from './pages/content/destinations/destinations
 import { FacultyComponent } from './pages/content/faculty/faculty.component';
 import { PersonalInformationComponent } from './pages/content/auth/personal-information/personal-information.component';
 import { AcademicInformationComponent } from './pages/content/auth/academic-information/academic-information.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { AuthenticationInterceptor } from './services/authentication.interceptor';
+import { StudyByFacultyComponent } from './pages/content/study-by-faculty/study-by-faculty.component';
+import { StudyByFacultyUniversityComponent } from './pages/content/study-by-faculty-university/study-by-faculty-university.component';
+import { HomeLoaderComponent } from './pages/shared/home-loader/home-loader.component';
+import { LoaderComponent } from './pages/shared/loader/loader.component';
+import { ActionLoaderComponent } from './pages/shared/action-loader/action-loader.component';
+import { AdmissionFormComponent } from './pages/shared/admission-form/admission-form.component';
+import { MovementInformationComponent } from './pages/content/auth/movement-information/movement-information.component';
 registerLocaleData(ar)
 registerLocaleData(en)
 
@@ -57,7 +66,14 @@ registerLocaleData(en)
     DestinationsComponent,
     FacultyComponent,
     PersonalInformationComponent,
-    AcademicInformationComponent
+    AcademicInformationComponent,
+    StudyByFacultyComponent,
+    StudyByFacultyUniversityComponent,
+    HomeLoaderComponent,
+    LoaderComponent,
+    ActionLoaderComponent,
+    AdmissionFormComponent,
+    MovementInformationComponent
   ],
   imports: [
     BrowserModule,
@@ -83,9 +99,16 @@ registerLocaleData(en)
     PopoverModule.forRoot(),
     NgxIntlTelInputModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    SelectDropDownModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AuthenticationInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

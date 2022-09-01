@@ -1,0 +1,123 @@
+<app-action-loader *ngIf="actionLoading">
+
+</app-action-loader>
+<button class="btn btn-primary admission__btn" (click)="openAdmissionForm()">
+  {{'admission_form' | translate}}
+</button>
+<div class="admission__card">
+  <div class="sidebar__wrapper">
+    <div class="sidebar__close">
+      <button class="sidebar__close-btn" (click)="closeAdmissionForm()" id="sidebar__close-btn">
+        <span><i class="fal fa-times"></i></span>
+        <span>close</span>
+      </button>
+    </div>
+    <div class="sidebar__content">
+
+      <form [formGroup]="admissionFormPage" (ngSubmit)="onSubmitAdmissionForm(admissionFormPage)">
+        <div class="row">
+          <div class="sign__input-wrapper mb-10">
+            <h5>{{ currentLanguage === 'ar' ? 'الدولة' : 'Full name' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select  id="my-select" formControlName="admission_destination_id" (change)="onChangeDestination($event)"  class="form-control" name="">
+                  <option value="">اختر بلد</option>
+                  <option value="{{destination.id}}" *ngFor="let destination of destinations">{{destination.ar_name}}</option>
+                </select>
+                <i class="fal fa-user"></i>
+              </div>
+              <!-- <button
+              *ngIf="personalInforrmation.controls['full_name'].touched && personalInforrmation.controls['full_name'].errors != null"
+              type="button" popover="Full name is required"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button> -->
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-10">
+            <h5>{{ currentLanguage === 'ar' ? 'الجامعة' : 'Full name' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select  id="my-select" formControlName="admission_university_id" (change)="onChangeUniversity($event)" placeholder="اختر الجامعة" class="form-control" name="">
+                  <option>اختر الجامعة</option>
+                  <option value="{{university.id}}"  *ngFor="let university of changeUniversities">{{currentLanguage === 'ar' ? university.ar_name : university.en_name}}</option>
+                </select>
+                <i class="fal fa-user"></i>
+              </div>
+              <!-- <button
+              *ngIf="personalInforrmation.controls['full_name'].touched && personalInforrmation.controls['full_name'].errors != null"
+              type="button" popover="Full name is required"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button> -->
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-10">
+            <h5>{{ currentLanguage === 'ar' ? 'الكلية' : 'Full name' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select id="my-select" formControlName="admission_fac_uni_id" (change)="onChangeFaculty($event)" placeholder="اختر الكلية" class="form-control" name="">
+                  <option>اختر الكلية</option>
+                  <ng-container  *ngFor="let facultyOrginal of faculties" >
+                  <ng-container  *ngFor="let faculty of changeFaculty" >
+
+                    <option value="{{facultyOrginal.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option>
+                  </ng-container>
+                  </ng-container>
+
+                </select>
+                <i class="fal fa-user"></i>
+              </div>
+              <!-- <button
+              *ngIf="personalInforrmation.controls['full_name'].touched && personalInforrmation.controls['full_name'].errors != null"
+              type="button" popover="Full name is required"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button> -->
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-10">
+            <h5>{{ currentLanguage === 'ar' ? 'التخصص' : 'Full name' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select id="my-select" (change)="onMajorSaerch($event)"   placeholder="اختر التخصص" class="form-control" name="">
+                  <option>اختر التخصص</option>
+                  <option value="{{major.id}}" *ngFor="let major of majors">{{currentLanguage === 'ar' ? major.ar_name : major.en_name}}</option>
+                </select>
+                <i class="fal fa-user"></i>
+              </div>
+              <!-- <button
+              *ngIf="personalInforrmation.controls['full_name'].touched && personalInforrmation.controls['full_name'].errors != null"
+              type="button" popover="Full name is required"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button> -->
+            </div>
+          </div>
+          <input type="hidden" name="admission_fac_uni_major_id" formControlName="admission_fac_uni_major_id" [ngModel]="majorId">
+          <div class="sign__input-wrapper mb-10">
+            <h5>{{ currentLanguage === 'ar' ? 'القسم' : 'Full name' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select id="my-select"  formControlName="admission_department_id" placeholder="اختر القسم" class="form-control" name="">
+                  <option>اختر القسم</option>
+                  <option value="{{department.id}}" *ngFor="let department of departments">{{department.ar_name}}</option>
+                </select>
+                <i class="fal fa-user"></i>
+              </div>
+              <input type="hidden" formControlName="user_id" [ngModel]="userArray.id">
+
+              <!-- <button
+              *ngIf="personalInforrmation.controls['full_name'].touched && personalInforrmation.controls['full_name'].errors != null"
+              type="button" popover="Full name is required"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button> -->
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-10">
+            <button class="btn btn-success w-100" [disabled]="admissionFormPage.invalid">
+              {{currentLanguage === 'ar' ? 'التحاق' : 'Apply'}}
+            </button>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

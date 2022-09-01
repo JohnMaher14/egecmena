@@ -23,4 +23,8 @@ export class HomeService {
   submitInquiry(data: any): Observable<any>{
     return this._HttpClient.post(`${environment.apiKey}send-feedback` , data)
   }
+  getMajorSearch(id:number) :Observable<any>{
+    return this._HttpClient.get(`${environment.apiKey}filterDepartments?fac_uni_major_id=${id}`)
+  }
+
 }

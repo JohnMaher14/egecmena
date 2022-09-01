@@ -20,7 +20,7 @@ export class UniversitiesComponent implements OnInit {
   facultyImage:string = `${environment.imageUrl}faculties/`;
   destinationImage:string = `${environment.imageUrl}destinations/`;
   currentLanguage: any;
-
+  loading!:boolean;
   constructor(
     private _StudyService:StudyService,
     private _HomeService:HomeService ,
@@ -33,51 +33,50 @@ export class UniversitiesComponent implements OnInit {
   ngOnInit(): void {
     this.showUniversities();
     this.translateFunction();
-    this.showDestination();
   }
   showUniversities(){
 
     this._ActivatedRoute.paramMap.subscribe(
       (params:Params) => {
+        this.loading = true;
+
         this._StudyService.getUniversityData(params['params'].id).subscribe(
           (response) => {
             this.faculties = response.faculties;
             this.university = response.university;
+            this._HomeService.getHomeData().subscribe(
+              (response) => {
+                const destinationConatiner = response.destinations.filter(
+                  (destination:any) => {
+                    return destination.id = response.university;
+                  }
+                )
+
+                this.destinationDetail = destinationConatiner[0];
+                this.loading = false
+
+              }
+            )
+              if(this.currentLanguage === 'ar'){
+
+                this._Title.setTitle(`${environment.title}${response.university.ar_name}`)
+
+                }else if(this.currentLanguage === 'en'){
+                  this._Title.setTitle(`${environment.title}${response.university.en_name}`)
+                }
+            this.loading = false;
+
           })
         }
     )
   }
-  showDestination(){
-    this._ActivatedRoute.paramMap.subscribe(
-      (params:Params) => {
-        this._HomeService.getHomeData().subscribe(
-          (response) => {
-            console.log(response);
-            const destinationConatiner = response.destinations.filter(
-              (destination:any) => {
-                return destination.id = this.university.destination_id;
-              }
-            )
 
-            this.destinationDetail = destinationConatiner[0];
-            console.log(this.destinationDetail);
-          }
-        )
-      }
-    )
-    }
   translateFunction(){
     this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
     this._TranslateService.use(this.currentLanguage)
     this._TranslateService.onLangChange.subscribe(
-      (language: any) => {
-        if (language.lang == 'en') {
-          this._Title.setTitle(`${environment.title}${this.university?.en_name}`)
-        }else if(language.lang == 'ar'){
-          this._Title.setTitle(`${environment.title}${this.university?.ar_name}`)
+      () => {
 
-          console.log(this.university);
-        }
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

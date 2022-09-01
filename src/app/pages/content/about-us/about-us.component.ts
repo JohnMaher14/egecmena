@@ -15,7 +15,6 @@ SwiperCore.use([Navigation]);
 export class AboutUsComponent implements OnInit {
   loading: boolean = false;
   aboutUs!: any ;
-  currentLang: any;
   currentLanguage: any;
   clients: any[] =[];
   clientImage: string = `${environment.imageUrl}clients/`;
@@ -52,16 +51,16 @@ export class AboutUsComponent implements OnInit {
     )
   }
   translateFunction(){
-    this.currentLang = localStorage.getItem("currentLanguage") || 'ar'
-    this._TranslateService.use(this.currentLang)
-    this._TranslateService.onLangChange.subscribe(
-      (language: any) => {
-        if (language.lang == 'en') {
-          this._Title.setTitle(`${environment.title}About us`)
-        }else if(language.lang == 'ar'){
-          this._Title.setTitle(`${environment.title}عنا`)
+    this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
+    this._TranslateService.use(this.currentLanguage)
+    if (this.currentLanguage== 'en') {
+      this._Title.setTitle(`${environment.title}About us`)
+    }else if(this.currentLanguage == 'ar'){
+      this._Title.setTitle(`${environment.title}عنا`)
 
-        }
+    }
+    this._TranslateService.onLangChange.subscribe(
+      () => {
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

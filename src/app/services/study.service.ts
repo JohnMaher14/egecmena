@@ -33,4 +33,9 @@ export class StudyService {
     FormData
     )
   }
+  studyByFaculty(
+    id:number
+  ):Observable<any>{
+    return this._HttpClient.get(`${environment.apiKey}engineering?special_id=${id}`)
+  }
 }
