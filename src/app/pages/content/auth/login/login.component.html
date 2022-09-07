@@ -1,4 +1,5 @@
 <app-action-loader *ngIf="actionLoading"></app-action-loader>
+<app-loader *ngIf="loading"></app-loader>
 <!-- page title area start -->
 <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
   style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
@@ -11,7 +12,7 @@
           </h3>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{"login" | translate }}</li>
             </ol>
           </nav>
@@ -22,7 +23,7 @@
 </section>
 <!-- page title area end -->
 <!-- sign up area start -->
-<section class="signup__area po-rel-z1 pt-100 pb-145">
+<section class="signup__area po-rel-z1 p-relative pt-100 pb-145">
   <div class="sign__shape">
     <img class="man-1" src="assets/theme/img/icon/sign/man-1.png" alt="">
     <img class="man-2" src="assets/theme/img/icon/sign/man-2.png" alt="">
@@ -37,7 +38,7 @@
         <div class="section__title-wrapper text-center mb-55">
           <h2 class="section__title">{{"login_title" | translate}}</h2>
           <p>{{"login_text" | translate}} <a routerLink="/register"
-              class="text_main">{{ "login_button" | translate}}</a></p>
+              class="text_main boldness_font">{{ "login_button" | translate}}</a></p>
         </div>
       </div>
     </div>
@@ -59,10 +60,10 @@
                     *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors != null">
 
                     <button *ngIf="loginForm.controls['email'].errors['required']" type="button"
-                      popover="Email is required" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                      [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني مطلوب' : 'Email is required'" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                       class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                     <button *ngIf="loginForm.controls['email'].errors['email']" type="button"
-                      popover="Email is invalid" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                      [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني غير صحيح' : 'Email is invalid'" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                       class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
 
                   </ng-container>
@@ -77,7 +78,7 @@
                   </div>
                   <button
                     *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors != null"
-                    type="button" popover="password is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'كلمة السر غير صحيحة' : 'password is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                 </div>
@@ -87,8 +88,8 @@
                   {{currentLanguage === 'ar' ? 'تسجيل دخول' : 'Login' }}
                 </span> </button>
               <div class="sign__new text-center mt-20">
-                <p *ngIf="currentLanguage ==='ar'">جديد في ايجيك؟ <a routerLink="/register">إنشاء حساب</a></p>
-                <p *ngIf="currentLanguage ==='en'">New to egec?<a routerLink="/register">Register</a></p>
+                <p *ngIf="currentLanguage ==='ar'">جديد في إايجيك؟ <a routerLink="/register" class="text_main boldness_font mx-2">إنشاء حساب</a></p>
+                <p *ngIf="currentLanguage ==='en'">New to egec?<a routerLink="/register" class="text_main boldness_font mx-2">Register</a></p>
               </div>
             </form>
           </div>

@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
+import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HomeService } from 'src/app/services/home.service';
 import { environment } from 'src/environments/environment';
@@ -22,19 +23,28 @@ export class RegisterComponent implements OnInit {
 	preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
   currentLang: any;
   currentLanguage: any;
+  loading!:boolean;
   constructor(
     private _TranslateService:TranslateService,
     private _Title:Title,
     private _AuthenticationService:AuthenticationService,
-    private _Router:Router
+    private _Router:Router,
+    private _ToastrService:ToastrService
   ) {
     if (sessionStorage.getItem('currentUserToken') !== null) {
       this._Router.navigate(['/'])
     }
    }
+   loader(){
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
 
+    }, 1500);
+  }
   ngOnInit(): void {
     this.translateFunction()
+    this.loader()
   }
   changePreferredCountries() {
 		this.preferredCountries = [CountryISO.India, CountryISO.Canada];
@@ -43,7 +53,7 @@ export class RegisterComponent implements OnInit {
     'name': new FormControl('', Validators.required),
     'email': new FormControl('', [Validators.required, Validators.email]),
     'phone': new FormControl('', Validators.required),
-    'password': new FormControl('', [Validators.required]),
+    'password': new FormControl('', [Validators.required , Validators.minLength(6)]),
     'password_confirmation': new FormControl('', [Validators.required]),
     'source': new FormControl('موقع الكتروني'),
     'degree_needed': new FormControl('bachelor'),
@@ -71,57 +81,48 @@ export class RegisterComponent implements OnInit {
         console.log(response);
         if(response.message){
           if(this.currentLanguage === 'ar'){
+            this._ToastrService.success(`${response.ar_message}` , 'تسجيل صحيح' , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+            })
 
-            Swal.fire(
-              `${response.ar_message}`,
-              ``,
-              'success'
-            )
           }
           else{
-            Swal.fire(
-              `${response.ar_message}`,
-              ``,
-              'success'
-            )
+            this._ToastrService.success(`${response.message}` , 'تسجيل صحيح' , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+            })
           }
           setTimeout(() => {
             this._Router.navigateByUrl('/login');
-            Swal.close();
           }, 4000);
         }
       }, error => {
-        console.log(error);
-        console.log(error.error.errors.email);
+
         if(error.error.errors.email){
           if(this.currentLanguage === 'ar'){
-            Swal.fire(
-              `البريد الإلكتروني تم أخذه.`,
-              'حاول مجددا',
-              'error'
-              )
+
+              this._ToastrService.error(`البريد الإلكتروني تم أخذه.` , 'حاول مجددا' , {
+                timeOut: 4000 , positionClass: 'toast-bottom-left'
+              })
           }else{
 
-            Swal.fire(
-              `${error.error.errors.email[0]}`,
-              'Please try again',
-              'error'
-              )
+
+              this._ToastrService.error(`${error.error.errors.email[0]}` , 'Please try again' , {
+                timeOut: 4000 , positionClass: 'toast-bottom-left'
+              })
             }
         }else if(error.error.errors.password){
           if(this.currentLanguage === 'ar'){
-            Swal.fire(
-              `كلمة السر لا تشبه تأكيد كلمة السر`,
-              'حاول مجددا',
-              'error'
-              )
+
+              this._ToastrService.error(`كلمة السر لا تشبه تأكيد كلمة السر` , 'حاول مجددا' , {
+                timeOut: 4000 , positionClass: 'toast-bottom-left'
+              })
           }else{
 
-            Swal.fire(
-              `${error.error.errors.password[0]}`,
-              'Please try again',
-              'error'
-              )
+
+
+              this._ToastrService.error(`${error.error.errors.password[0]}` , 'Please try again' , {
+                timeOut: 4000 , positionClass: 'toast-bottom-left'
+              })
             }
         }
       }

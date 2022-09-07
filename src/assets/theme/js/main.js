@@ -105,7 +105,7 @@
 		$(this).css("background-image", "url( " + $(this).attr("data-background") + "  )");
 	});
 
-  
+
 	////////////////////////////////////////////////////
     // 08. Testimonial Slider Js
 	var swiper = new Swiper('.testimonial__slider', {
@@ -114,7 +114,7 @@
 			prevEl: '.swiper-button-prev',
 		},
 	});
-	
+
 
 
 	////////////////////////////////////////////////////
@@ -125,7 +125,7 @@
 		freeMode: true,
 		watchSlidesVisibility: true,
 		watchSlidesProgress: true,
-		
+
 	});
 	var galleryTop = new Swiper('.slider__wrapper', {
 		spaceBetween: 0,
@@ -194,7 +194,7 @@
 	var swiper = new Swiper('.course__slider', {
 	spaceBetween: 30,
 	slidesPerView: 2,
-	breakpoints: {  
+	breakpoints: {
 		'768': {
 			slidesPerView: 2,
 		},
@@ -210,7 +210,7 @@
 		clickable: true,
 	},
 	});
-	
+
 	////////////////////////////////////////////////////
     // 13. Masonary Js
 	$('.grid').imagesLoaded( function() {
@@ -250,7 +250,7 @@
 	$("[data-width]").each(function () {
 		$(this).css("width", $(this).attr("data-width"));
 	  });
-	
+
 
 	////////////////////////////////////////////////////
     // 16. Cart Quantity Js
@@ -302,14 +302,19 @@
 		delay: 10,
 		time: 1000
 	});
-	
+  let inputNumbers = $('input[type=number]');
+  inputNumbers.addEventListener("keydown", function(e) {
+    if(["ArrowUp","ArrowDown"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+  }, false);
 	////////////////////////////////////////////////////
 	// 22. Parallax Js
 	if ($('.scene').length > 0 ) {
 		$('.scene').parallax({
 			scalarX: 10.0,
 			scalarY: 15.0,
-		}); 
+		});
 	};
 
 	////////////////////////////////////////////////////

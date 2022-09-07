@@ -14,6 +14,7 @@ export class DestinationsComponent implements OnInit {
   destinationImage:string = `${environment.imageUrl}destinations/`;
   destinations: any[] = [];
   loading!: boolean;
+  term: any;
   constructor(
     private _TranslateService:TranslateService,
     private _Title:Title,

@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class ContactUsComponent implements OnInit {
   currentLang: any;
   currentLanguage: any;
+  loading!:boolean;
   constructor(
     private _TranslateService:TranslateService,
     private _Title:Title,
@@ -22,10 +23,29 @@ export class ContactUsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.translateFunction()
+    this.translateFunction();
+    this.loader()
+  }
+  loader(){
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+
+    }, 1500);
+  }
+  onChangePhone(event:any){
+    var char = String.fromCharCode(event.which);
+    if(!(/[0-9]/.test(char))){
+        event.preventDefault();
+    }
+    window.addEventListener("keydown", function(e) {
+      if(["ArrowUp","ArrowDown"].indexOf(e.code) > -1) {
+          e.preventDefault();
+      }
+    }, false);
   }
   contactForm: FormGroup = new FormGroup({
-    'name': new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
+    'name': new FormControl('', [Validators.required, Validators.pattern(/^([^0-9]*)$/)]),
     'email': new FormControl('', [Validators.required, Validators.email]),
     'phone': new FormControl('', [Validators.required]),
     'request_type': new FormControl('', [Validators.required]),

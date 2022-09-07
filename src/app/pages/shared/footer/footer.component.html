@@ -1,33 +1,36 @@
   <!-- footer area start -->
   <footer>
     <!-- cta area start -->
-    <section class="cta__area mb--120">
-      <div class="container">
-         <div class="cta__inner white-bg fix">
-            <div class="cta__shape">
-               <img src="assets/theme/img/main_images/box.png" alt="">
-            </div>
-            <div class="row align-items-center justify-content-between">
-              <div class="col-lg-4 col-md-4">
-                <div class="cta__content ">
-                  <h3 class="cta__title cta__content--title-1 text-white">
-                    {{'footer_top_title' | translate }}
-
-                  </h3>
-                </div>
+    <section  class="cta__area mb--120">
+      <a routerLink="/contact-us">
+        <div class="container">
+           <div class="cta__inner white-bg fix">
+              <div class="cta__shape">
+                 <img src="assets/theme/img/main_images/box.png" alt="">
               </div>
-              <div class="col-lg-7 col-md-8">
-                <div class="cta__content">
-                  <h3 class="cta__title">
+              <div class="row align-items-center justify-content-between">
+                <div class=" col-md-4" [ngClass]="currentLanguage === 'ar' ? 'col-lg-4' : 'col-lg-5'">
+                  <div class="cta__content ">
+                    <h3 class="cta__title cta__content--title-1 text-white">
+                      {{'footer_top_title' | translate }}
 
-                    {{'footer_top_text' | translate }}
+                    </h3>
+                  </div>
+                </div>
+                <div class="col-lg-7 col-md-8">
+                  <div class="cta__content">
+                    <h3 class="cta__title">
 
-                  </h3>
-               </div>
-               </div>
-            </div>
-         </div>
-      </div>
+                      {{'footer_top_text' | translate }}
+
+                    </h3>
+                 </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+      </a>
    </section>
     <!-- cta area end -->
 <div class="footer footer__area grey-bg-2">
@@ -80,7 +83,7 @@
                   <li>
                     {{'footer_contact_us_li-3' | translate}}
                     <a target="_blank" href="https://goo.gl/maps/bSEjqsTUM18XSAEF6">
-                    : هارون ، الدقي ، الجيزة ، مصر
+                    :{{"address" | translate}}
 
                   </a></li>
 
@@ -101,18 +104,18 @@
             <div class="footer__widget-body">
               <div class="footer__link footer__link-2">
                 <ul>
-                  <li><a href="#">
+                  <li><a routerLink="/home">
                     {{'footer_links_li-1' | translate}}
                   </a></li>
-                  <li><a href="#">
+                  <li><a routerLink="/about-us">
                     {{'footer_links_li-2' | translate}}
 
                   </a></li>
-                  <li><a href="#">
+                  <li><a routerLink="/destinations">
                     {{'footer_links_li-3' | translate}}
 
                   </a></li>
-                  <li><a href="#">
+                  <li><a routerLink="/contact-us">
                     {{'footer_links_li-4' | translate}}
 
                   </a></li>
@@ -125,22 +128,30 @@
       </div>
       <div class="row justify-content-between">
         <div class="col-lg-4">
-          <form action="">
+          <!-- <form action=""> -->
 
-            <div class="input-group mb-3">
+            <div class="footer__search input-group p-relative mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">
-                  خانة البحث
+                  {{"search_label" | translate}}
                 </span>
               </div>
-              <input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
-              <div class="input-group-append">
+
+              <input [(ngModel)]="selectedValue"
+              [typeahead]="arrayOfAll"
+              [typeaheadOptionField]="currentLanguage === 'ar' ?  'ar_name' : 'en_name'"
+              (keypress)="preventEnglish($event)"
+              (typeaheadOnSelect)="onSelect($event)"
+              (typeaheadOnPreview)="onPreview($event)"
+              class="form-control">
+                            <!-- <div class="input-group-append">
                 <button class="btn btn-secondary" type="submit" id="button-addon2">
                   <i class="fas fa-search" aria-hidden="true"></i>
                 </button>
               </div>
+            -->
             </div>
-          </form>
+          <!-- </form> -->
         </div>
         <div class="col-lg-3">
           <div class="social_links">

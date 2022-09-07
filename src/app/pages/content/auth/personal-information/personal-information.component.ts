@@ -20,6 +20,7 @@ export class PersonalInformationComponent implements OnInit {
   userAcademicInfo: any;
   isLogined!: boolean;
   actionLoading!:boolean;
+  loading!:boolean;
   constructor(
     private _TranslateService: TranslateService,
     private _Title: Title,
@@ -89,12 +90,21 @@ export class PersonalInformationComponent implements OnInit {
               'success',
 
             );
+            setTimeout(() => {
+              Swal.close()
+
+              this._Router.navigate(['/academic-information'])
+            }, 1000);
           } else {
             Swal.fire(
               `Your personal information had saved`,
               `${response.success}`,
               'success'
             );
+            setTimeout(() => {
+              Swal.close()
+              this._Router.navigate(['/academic-information'])
+            }, 1000);
           }
           // localStorage.setItem('')
           this.actionLoading = false;
@@ -103,6 +113,7 @@ export class PersonalInformationComponent implements OnInit {
       });
   }
   showPersonalInformation() {
+    this.loading = true;
     if (localStorage.getItem('currentUserToken') !== null) {
 
     this._AuthenticationService
@@ -110,6 +121,7 @@ export class PersonalInformationComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         this.userPersonalInfo = response.userPersonalInfo;
+        this.loading = false;
       });
     }
   }

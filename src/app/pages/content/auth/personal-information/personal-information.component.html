@@ -11,7 +11,7 @@
           </h3>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 {{ currentLanguage === 'ar' ? 'معلومات شخصية' : 'Personal information' }}
               </li>
@@ -24,7 +24,7 @@
 </section>
 <!-- page title area end -->
 <!-- sign up area start -->
-<section class="signup__area po-rel-z1 pt-100 pb-145">
+<section class="signup__area p-relative po-rel-z1 pt-100 pb-145">
   <div class="sign__shape">
     <img class="man-1" src="assets/theme/img/icon/sign/man-1.png" alt="">
     <img class="man-2" src="assets/theme/img/icon/sign/man-2.png" alt="">
@@ -65,7 +65,7 @@
                     </div>
                     <button
                     *ngIf="personalInforrmation.controls['full_name'].touched && personalInforrmation.controls['full_name'].errors != null"
-                    type="button" popover="Full name is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'الأسم بالكامل مطلوب' : 'Full name is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                   </div>
@@ -74,9 +74,8 @@
                   <h5>{{ currentLanguage === 'ar' ? 'بلد الأقامة' : 'Nation' }}</h5>
                   <div class="sign__input--container">
                     <div class="sign__input">
-                      <select [ngModel]="userPersonalInfo?.nation" formControlName="nation" id="nation" name="nation"
-                        class="d-block" required="">
-
+                      <select  formControlName="nation" placeholder="بلد الأقامة"  [ngModel]="userPersonalInfo?.nation">
+                        <option value="" [selected]="currentLanguage === 'ar' ? 'بلد الأقامة' : 'Nation'">{{ currentLanguage === 'ar' ? 'بلد الأقامة' : 'Nation' }}</option>
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
                         <option value="Albania">Albania</option>
@@ -333,7 +332,7 @@
                     </div>
                     <button
                     *ngIf="personalInforrmation.controls['nation'].touched && personalInforrmation.controls['nation'].errors != null"
-                    type="button" popover="Nation is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'بلد الأقامة مطلوبة' : 'Nation is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                   </div>
@@ -342,8 +341,9 @@
                   <h5>{{ currentLanguage === 'ar' ? 'الجنسية' : 'Nationality' }}</h5>
                   <div class="sign__input--container">
                     <div class="sign__input">
-                      <select [ngModel]="userPersonalInfo?.nationality" formControlName="nationality" id="nationality"
-                        name="nationality" class="d-block" required="">
+                      <select [ngModel]="userPersonalInfo?.nationality" formControlName="nationality">
+                        <option value="" [selected]="currentLanguage === 'ar' ? 'الجنسية' : 'Nationality'">{{ currentLanguage === 'ar' ? 'الجنسية' : 'Nationality' }}</option>
+
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Åland Islands">Åland Islands</option>
                         <option value="Albania">Albania</option>
@@ -600,7 +600,7 @@
                     </div>
                     <button
                     *ngIf="personalInforrmation.controls['nationality'].touched && personalInforrmation.controls['nationality'].errors != null"
-                    type="button" popover="Nationality is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'الجنسية مطلوبة' : 'Nationality is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                   </div>
@@ -616,7 +616,7 @@
                   </div>
                   <button
                     *ngIf="personalInforrmation.controls['address'].touched && personalInforrmation.controls['address'].errors != null"
-                    type="button" popover="Address is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'العنوان مطلوب' : 'Address is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                 </div>
@@ -625,13 +625,13 @@
                   <div class="sign__input--container">
                     <div class="sign__input">
                       <input type="text" formControlName="area" [ngModel]="userPersonalInfo?.area" id="area" name="area"
-                        value="" placeholder="Write Area" required="">
+                        value="" [placeholder]="" required="">
                         <i class="fad fa-map-marker-check"></i>
                       </div>
                   </div>
                   <button
                     *ngIf="personalInforrmation.controls['area'].touched && personalInforrmation.controls['area'].errors != null"
-                    type="button" popover="Area is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'المنطقة مطلوبة' : 'Area is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                 </div>
@@ -645,7 +645,7 @@
                     </div>
                     <button
                     *ngIf="personalInforrmation.controls['birthdate'].touched && personalInforrmation.controls['birthdate'].errors != null"
-                    type="button" popover="Birthdate is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'تاريخ الميلاد مطلوب' : 'Birthdate is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                   </div>
@@ -654,9 +654,9 @@
                   <h5>{{ currentLanguage === 'ar' ? 'النوع' : 'Gender' }}</h5>
                   <div class="sign__input--container">
                     <div class="sign__input">
-                      <select [ngModel]="userPersonalInfo?.gender" formControlName="gender" name="gender" id="gender"
-                        class="d-block" required="">
-                        <option value="">Select</option>
+                      <select [ngModel]="userPersonalInfo?.gender" formControlName="gender" >
+                        <option value="" [selected]="currentLanguage === 'ar' ? 'النوع' : 'Gender'">{{ currentLanguage === 'ar' ? 'النوع' : 'Gender' }}</option>
+
                         <option value="ذكر">Male</option>
                         <option value="انثي">Female</option>
                       </select>
@@ -664,7 +664,7 @@
                     </div>
                     <button
                     *ngIf="personalInforrmation.controls['gender'].touched && personalInforrmation.controls['gender'].errors != null"
-                    type="button" popover="Gender is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'النوع مطلوب' : 'Gender is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                   </div>
@@ -673,9 +673,8 @@
                   <h5>{{ currentLanguage === 'ar' ? 'الدرجة العلمية المطلوبة' : 'Degree needed' }}</h5>
                   <div class="sign__input--container">
                     <div class="sign__input">
-                      <select [ngModel]="userPersonalInfo?.degree_needed" formControlName="degree_needed"
-                        name="degree_needed" id="degree_needed" class="d-block" required="">
-                        <option value="">Select</option>
+                      <select [ngModel]="userPersonalInfo?.degree_needed" formControlName="degree_needed">
+                        <option value="" [selected]="currentLanguage === 'ar' ? 'اختار' : 'Choose'">{{ currentLanguage === 'ar' ? 'اختار' : 'Choose' }}</option>
                         <option value="Bachelor">Bachelor</option>
                         <option value="Master">Master</option>
                         <option value="PhD">PhD</option>
@@ -684,7 +683,7 @@
                     </div>
                     <button
                     *ngIf="personalInforrmation.controls['degree_needed'].touched && personalInforrmation.controls['degree_needed'].errors != null"
-                    type="button" popover="Degree needed is required"
+                    type="button" [popover]="currentLanguage === 'ar' ? 'الدرجة العلمية مطلوبة' : 'Degree needed is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
                     class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
                   </div>

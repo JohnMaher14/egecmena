@@ -21,6 +21,7 @@ export class StudyByFacultyUniversityComponent implements OnInit {
   destinationImage:string = `${environment.imageUrl}destinations/`;
   currentLanguage: any;
   loading!:boolean;
+  term:any;
   constructor(
     private _StudyService:StudyService,
     private _ActivatedRoute: ActivatedRoute,
@@ -49,13 +50,13 @@ export class StudyByFacultyUniversityComponent implements OnInit {
               }
 
             )
+            this.university = universityArray[0];
             if (this.currentLanguage == 'en') {
               this._Title.setTitle(`${environment.title}${this.university?.en_name}`)
             }else if(this.currentLanguage == 'ar'){
               this._Title.setTitle(`${environment.title}${this.university?.ar_name}`)
 
             }
-            this.university = universityArray[0];
             this.loading = false;
           })
         }

@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
     this.toggleSidebar = true;
 
   }
+
   // showPaperInfo(){
   //   this._AuthenticationService.getPaperInfo(this.userArray.id).subscribe(
   //     (response) => {
@@ -57,10 +58,20 @@ export class NavbarComponent implements OnInit {
   }
   closeNavbar(){
     let bodyOverlay = document.querySelector('.body-overlay');
+    let admissionCard = document.querySelector('.admission__card');
+
     let sidebarArea = document.querySelector('.sidebar__area ');
     this._Renderer2.removeClass(bodyOverlay , 'opened')
     this._Renderer2.removeClass(sidebarArea , 'sidebar-opened')
+    this._Renderer2.removeClass(admissionCard , 'admission__card--opened')
   }
+  openAdmissionForm(){
+    let admissionCard = document.querySelector('.admission__card');
+    let bodyOverlay = document.querySelector('.body-overlay');
+    this._Renderer2.addClass(admissionCard ,'admission__card--opened')
+    this._Renderer2.addClass(bodyOverlay ,'opened')
+  }
+
   ngOnInit(): void {
     this.authentication();
     this.showDestination();
@@ -135,17 +146,25 @@ export class NavbarComponent implements OnInit {
             .subscribe((response) => {
               console.log(response);
               this.userPersonalInfo = response.userPersonalInfo;
+              if(response.userPersonalInfo?.full_name == null){
+                this.AcademicData = false
+                console.log("false");
+              }else{
+                this.AcademicData = true
+                console.log("true");
+                this._AuthenticationService.getPaperInfo(this.userArray.id).subscribe(
+                  (response) => {
+                    console.log(response);
+                    console.log(response.message);
 
-            });
-            this._AuthenticationService.getPaperInfo(this.userArray.id).subscribe(
-              (response) => {
-                console.log(response);
-                console.log(response.message);
+                    this.paperStatus = response;
 
-                this.paperStatus = response;
-
+                  }
+                )
               }
-            )
+            });
+
+
 
         this.isLogined = true;
       }

@@ -20,6 +20,10 @@ export class HomeComponent implements OnInit {
   faculties: any[] = [];
   majors: any[] = [];
   departments: any[] = [];
+  universityChoice:boolean =  false;
+  facultyChoice:boolean =  false;
+  majorChoice:boolean =  false;
+  departmentChoice:boolean =  false;
   universityOnchangeId!:number;
   facultyUniversity: any[] = [];
   changeUniversities: any[] = [];
@@ -50,9 +54,9 @@ export class HomeComponent implements OnInit {
     this.currentLanguage = localStorage.getItem("currentLanguage") || 'en'
     this._TranslateService.use(this.currentLanguage)
     if (this.currentLanguage == 'en') {
-      this._Title.setTitle(`${environment.title}Home`)
+      this._Title.setTitle(`${environment.title}Egyptian Gulf For Educational Consultant`)
     }else if(this.currentLanguage  == 'ar'){
-      this._Title.setTitle(`${environment.title}الصفحة الريسية`)
+      this._Title.setTitle(`${environment.title}المصرية الخليجية للخدمات التعليمية`)
 
     }
     this._TranslateService.onLangChange.subscribe(
@@ -67,7 +71,7 @@ export class HomeComponent implements OnInit {
     // center: true,
     dots: true,
     margin:30,
-    autoplay: false,
+    autoplay: true,
     navSpeed: 700,
     navText: [`<i class="fa fa-angle-left"></i>`
     , `<i class="fa fa-angle-right"></i>`],
@@ -98,7 +102,7 @@ export class HomeComponent implements OnInit {
     autoHeight:true,
 
     margin:30,
-    autoplay: false,
+    autoplay: true,
     rtl: true,
     navSpeed: 700,
     navText: [`<i class="fa fa-angle-right"></i>`
@@ -149,10 +153,10 @@ export class HomeComponent implements OnInit {
   }
   admissionForm: FormGroup = new FormGroup({
     'destination' : new FormControl('', Validators.required),
-    'university' : new FormControl('', Validators.required),
-    'faculty' : new FormControl('', Validators.required),
-    'major' : new FormControl('', Validators.required),
-    'department' : new FormControl('', Validators.required),
+    'university' : new FormControl(''),
+    'faculty' : new FormControl(''),
+    'major' : new FormControl(''),
+    'department' : new FormControl(''),
   })
   onSubmitSearch(admissionForm:FormGroup){
 
@@ -171,6 +175,7 @@ export class HomeComponent implements OnInit {
       return universities.destination_id == event.target.value;
     });
     this.changeUniversities = universitiesArray;
+    this.universityChoice = true;
   }
   onChangeUniversity(event: any) {
     const facultyArray = this.facultyUniversity.filter((faculty: any) => {
@@ -178,6 +183,7 @@ export class HomeComponent implements OnInit {
     });
     this.universityOnchangeId = event.target.value
     this.changeFaculty = facultyArray;
+    this.facultyChoice = true;
   }
   onChangeFaculty(event: any) {
     const majorArray = this.facultyUniversity.filter((major: any) => {
@@ -188,6 +194,7 @@ export class HomeComponent implements OnInit {
         this.majors = response.facultyUniversity.majors
       }
     )
+    this.majorChoice = true;
   }
   onMajorSaerch(event: any){
     const departmentsArray = this.majors.filter(
@@ -196,6 +203,6 @@ export class HomeComponent implements OnInit {
       }
     )
     this.departments = departmentsArray[0].pivot.departments;
-
+      this.departmentChoice = true;
   }
 }

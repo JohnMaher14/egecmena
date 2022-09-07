@@ -1,209 +1,236 @@
-   <!-- page title area start -->
-   <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">    <div class="container">
-       <div class="row">
-          <div class="col-xxl-12">
-             <div class="page__title-wrapper mt-110">
-                <h3 class="page__title" *ngIf="currentLanguage === 'en'">
-                  Contact
-                </h3>
-                <h3 class="page__title" *ngIf="currentLanguage === 'ar'">
-                  تواصل معنا
-                </h3>
-                <nav aria-label="breadcrumb">
-                   <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
-                      <li class="breadcrumb-item active" *ngIf="currentLanguage === 'en'" aria-current="page">Contact</li>
-                      <li class="breadcrumb-item active" *ngIf="currentLanguage === 'ar'" aria-current="page">تواصل معنا</li>
-                   </ol>
-                </nav>
-             </div>
-          </div>
-       </div>
-    </div>
- </section>
- <!-- page title area end -->
- <section class="map pt-90 pb-90">
+<app-loader *ngIf="loading"></app-loader>
+<!-- page title area start -->
+<section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/about/Header.jpg');">
+
   <div class="container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10201.95944527887!2d31.21267461862183!3d30.03642221750194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145847eacaf7adfd%3A0xf55de03861a346ef!2sEGEC%20-%20Egyptian%20Gulf%20for%20Educational%20Consultant!5e0!3m2!1sen!2seg!4v1661352448189!5m2!1sen!2seg" width="100%" height="450" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
- </section>
- <!-- contact area start -->
- <section class="contact__area pt-90 pb-120">
-    <div class="container">
-       <div class="row">
-          <div class="col-xxl-7 col-xl-7 col-lg-6">
-             <div class="contact__wrapper">
-                <div class="section__title-wrapper mb-40">
-                   <h2 class="section__title">{{"contact_form_title" | translate}}</h2>
-                   <p>{{"contact_form_text" | translate}}</p>
-                </div>
-                <div class="contact__form">
-                   <form [formGroup]="contactForm" (ngSubmit)="contact(contactForm)">
-                      <div class="row">
-                         <div class="col-xxl-6 col-xl-6 col-md-6">
-                            <div class="contact__form-input">
-                               <input type="text" formControlName="name"  placeholder="{{'contact_form_name' | translate }}" name="name">
-                               <ng-container *ngIf="contactForm.controls['name'].touched && contactForm.controls['name'].errors != null">
-
-                                <button *ngIf="contactForm.controls['name'].errors['required']" type="button" popover="Name is required"
-                              [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-                                <button *ngIf="contactForm.controls['name'].errors['pattern']" type="button" popover="Name must be charachters only"
-                                [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                                class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-
-                            </ng-container>
-                          </div>
-                         </div>
-                         <div class="col-xxl-6 col-xl-6 col-md-6">
-                            <div class="contact__form-input">
-                               <input type="email" formControlName="email"  placeholder="{{'contact_form_email' | translate}}" name="email">
-                               <ng-container *ngIf="contactForm.controls['email'].touched && contactForm.controls['email'].errors != null">
-
-                                <button *ngIf="contactForm.controls['email'].errors['required']" type="button" popover="Email is required"
-                              [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-                                <button *ngIf="contactForm.controls['email'].errors['email']" type="button" popover="Email is invalid"
-                                [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                                class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-
-                            </ng-container>
-                            </div>
-                         </div>
-                         <div class="col-xxl-6 col-xl-6 col-md-6">
-                          <div class="contact__form-input">
-                             <input type="number" formControlName="phone"  placeholder="{{'contact_form_phone' | translate}}" name="phone">
-                             <button *ngIf="contactForm.controls['phone'].touched && contactForm.controls['phone'].errors != null" type="button" popover="Phone is      required"
-                             [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                             [outsideClick]="true"
-                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-                          </div>
-                       </div>
-
-                         <div class="col-xxl-6 col-xl-6 col-md-6">
-                            <div class="contact__form-input">
-                               <select  formControlName="request_type" name="request_type" >
-                                <ng-container *ngIf="currentLanguage === 'ar'">
-                                  <option value="" selected>أختر طلبك</option>
-                                  <option value="inquiry">سؤال</option>
-                                  <option value="request">طلبك</option>
-                                  <option value="complaint">شكوى</option>
-
-                                </ng-container>
-                                <ng-container *ngIf="currentLanguage === 'en'">
-                                  <option value="" selected>Select request</option>
-                                  <option value="inquiry">Inquiry</option>
-                                  <option value="request">Request</option>
-                                  <option value="complaint">Complaint</option>
-
-                                </ng-container>
-                              </select>
-                              <button *ngIf="contactForm.controls['request_type'].touched && contactForm.controls['request_type'].errors != null" type="button" popover="Request type is required"
-                              [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                              [outsideClick]="true"
-                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-
-                            </div>
-                         </div>
-                         <div class="col-xxl-12">
-                            <div class="contact__form-input">
-                               <textarea placeholder="{{'contact_form_message' | translate}}" formControlName="message" name="message"></textarea>
-                               <button *ngIf="contactForm.controls['message'].touched && contactForm.controls['message'].errors != null" type="button" popover="Message type is required"
-                               [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                               [outsideClick]="true"
-                              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-                            </div>
-                         </div>
-
-                         <div class="col-xxl-12">
-                            <div class="contact__btn">
-                               <button type="submit" class="e-btn" [disabled]="contactForm.invalid">Send your message</button>
-                            </div>
-                         </div>
-                      </div>
-                   </form>
-                </div>
-             </div>
-          </div>
-          <div class="col-xxl-4 offset-xxl-1 col-xl-4 offset-xl-1 col-lg-5 offset-lg-1">
-             <div class="contact__info white-bg p-relative z-index-1">
-                <div class="contact__shape">
-                   <img class="contact-shape-1" src="assets/theme/img/contact/contact-shape-1.png" alt="">
-                   <img class="contact-shape-2" src="assets/theme/img/contact/contact-shape-2.png" alt="">
-                   <img class="contact-shape-3" src="assets/theme/img/contact/contact-shape-3.png" alt="">
-                </div>
-                <div class="contact__info-inner white-bg">
-                   <ul>
-                      <li>
-                         <div class="contact__info-item d-flex align-items-start mb-35">
-                            <div class="contact__info-icon mr-15">
-                               <svg class="map" viewBox="0 0 24 24">
-                                  <path class="st0" d="M21,10c0,7-9,13-9,13s-9-6-9-13c0-5,4-9,9-9S21,5,21,10z"/>
-                                  <circle class="st0" cx="12" cy="10" r="3"/>
-                               </svg>
-                            </div>
-                            <div class="contact__info-text">
-                               <h4>{{"office" | translate}}</h4>
-                               <p><a target="_blank" href="https://goo.gl/maps/AfnRF13U5WxBABfe8">{{"address" | translate}}</a></p>
-
-                            </div>
-                         </div>
-                      </li>
-                      <li>
-                         <div class="contact__info-item d-flex align-items-start mb-35">
-                            <div class="contact__info-icon mr-15">
-                               <svg class="mail" viewBox="0 0 24 24">
-                                  <path class="st0" d="M4,4h16c1.1,0,2,0.9,2,2v12c0,1.1-0.9,2-2,2H4c-1.1,0-2-0.9-2-2V6C2,4.9,2.9,4,4,4z"/>
-                                  <polyline class="st0" points="22,6 12,13 2,6 "/>
-                               </svg>
-                            </div>
-                            <div class="contact__info-text">
-                               <h4>{{"email_title" | translate}}</h4>
-                               <p><a href="mailto:admission@egecmena.com ">admission@egecmena.com </a></p>
-                            </div>
-                         </div>
-                      </li>
-                      <li>
-                         <div class="contact__info-item d-flex align-items-start mb-35">
-                            <div class="contact__info-icon mr-15">
-                               <i class="fas fa-clock text-main" aria-hidden="true"></i>
-                            </div>
-                            <div class="contact__info-text">
-                               <h4>{{"work_hours" | translate}}</h4>
-                               <p>الاحد - الخميس
-                              </p>
-                               <p>العاشره صباحا - الثامنه مساء
-                              </p>
-                            </div>
-                         </div>
-                      </li>
-                      <li>
-                         <div class="contact__info-item d-flex align-items-start mb-35">
-                            <div class="contact__info-icon mr-15">
-                               <svg class="call" viewBox="0 0 24 24">
-                                  <path class="st0" d="M22,16.9v3c0,1.1-0.9,2-2,2c-0.1,0-0.1,0-0.2,0c-3.1-0.3-6-1.4-8.6-3.1c-2.4-1.5-4.5-3.6-6-6  c-1.7-2.6-2.7-5.6-3.1-8.7C2,3.1,2.8,2.1,3.9,2C4,2,4.1,2,4.1,2h3c1,0,1.9,0.7,2,1.7c0.1,1,0.4,1.9,0.7,2.8c0.3,0.7,0.1,1.6-0.4,2.1  L8.1,9.9c1.4,2.5,3.5,4.6,6,6l1.3-1.3c0.6-0.5,1.4-0.7,2.1-0.4c0.9,0.3,1.8,0.6,2.8,0.7C21.3,15,22,15.9,22,16.9z"/>
-                                  </svg>
-                            </div>
-                            <div class="contact__info-text">
-                               <h4>{{"phone_title" | translate }}</h4>
-                               <p><a href="tel:2-01000670590+">2-01000670590+ </a></p>
-                            </div>
-                         </div>
-                      </li>
-                   </ul>
-                   <div class="contact__social pl-30">
-                      <h4>{{"follow_us" | translate}}</h4>
-                      <ul>
-                         <li><a target="_blank" href="https://www.facebook.com/EGEC.EDU/" class="fb" ><i class="social_facebook"></i></a></li>
-                         <li><a target="_blank" href="https://twitter.com/Egy_Gulf" class="tw" ><i class="social_twitter"></i></a></li>
-                         <li><a target="_blank" href="https://www.instagram.com/egygulf2015" class="pin" ><i class="social_instagram"></i></a></li>
-                      </ul>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
+    <div class="row">
+      <div class="col-xxl-12">
+        <div class="page__title-wrapper mt-110">
+          <h3 class="page__title" *ngIf="currentLanguage === 'en'">
+            Contact
+          </h3>
+          <h3 class="page__title" *ngIf="currentLanguage === 'ar'">
+            تواصل معنا
+          </h3>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item active" *ngIf="currentLanguage === 'en'" aria-current="page">Contact</li>
+              <li class="breadcrumb-item active" *ngIf="currentLanguage === 'ar'" aria-current="page">تواصل معنا</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
     </div>
- </section>
- <!-- contact area end -->
+  </div>
+</section>
+<!-- page title area end -->
 
+<!-- contact area start -->
+<section class="contact__area pt-90 pb-120">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-xxl-7 col-xl-7 col-lg-6">
+        <div class="contact__wrapper">
+          <div class="section__title-wrapper mb-40">
+            <h2 class="section__title">{{"contact_form_title" | translate}}</h2>
+            <p>{{"contact_form_text" | translate}}</p>
+          </div>
+          <div class="contact__form">
+            <form [formGroup]="contactForm" (ngSubmit)="contact(contactForm)">
+              <div class="row">
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                  <div class="contact__form-input">
+                    <input type="text" formControlName="name" placeholder="{{'contact_form_name' | translate }}"
+                      name="name">
+                    <ng-container
+                      *ngIf="contactForm.controls['name'].touched && contactForm.controls['name'].errors != null">
+
+                      <button *ngIf="contactForm.controls['name'].errors['required']" type="button"
+                      [popover]="currentLanguage === 'ar' ? 'اللأسم مطلوب' : 'Name is required'" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      <button *ngIf="contactForm.controls['name'].errors['pattern']" type="button"
+                      [popover]="currentLanguage === 'ar' ? 'يجب أن يتكون الاسم من أحرف فقط' : 'Name must be charachters only'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'" class="btn-danger validation"><i
+                          class="fa fa-exclamation"></i></button>
+
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                  <div class="contact__form-input">
+                    <input type="email" formControlName="email" placeholder="{{'contact_form_email' | translate}}"
+                      name="email">
+                    <ng-container
+                      *ngIf="contactForm.controls['email'].touched && contactForm.controls['email'].errors != null">
+
+                      <button *ngIf="contactForm.controls['email'].errors['required']" type="button"
+                        [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني مطلوب' : 'Email is required'" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      <button *ngIf="contactForm.controls['email'].errors['email']" type="button"
+                        [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني غير صحيح' : 'Email is invalid'" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
+                    </ng-container>
+                  </div>
+                </div>
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                  <div class="contact__form-input">
+                    <input type="number" (change)="onChangePhone($event)" formControlName="phone"
+                      placeholder="{{'contact_form_phone' | translate}}" name="phone">
+                    <button
+                      *ngIf="contactForm.controls['phone'].touched && contactForm.controls['phone'].errors != null"
+                      type="button" [popover]="currentLanguage === 'ar' ? 'رقم الهاتف مطلوب' : 'Phone is required'"
+                      [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                  </div>
+                </div>
+
+                <div class="col-xxl-6 col-xl-6 col-md-6">
+                  <div class="contact__form-input">
+                    <select formControlName="request_type" name="request_type">
+                      <ng-container *ngIf="currentLanguage === 'ar'">
+                        <option value="" selected>أختر طلبك</option>
+                        <option value="inquiry">سؤال</option>
+                        <option value="request">طلبك</option>
+                        <option value="complaint">شكوى</option>
+
+                      </ng-container>
+                      <ng-container *ngIf="currentLanguage === 'en'">
+                        <option value="" selected>Select request</option>
+                        <option value="inquiry">Inquiry</option>
+                        <option value="request">Request</option>
+                        <option value="complaint">Complaint</option>
+
+                      </ng-container>
+                    </select>
+                    <button
+                      *ngIf="contactForm.controls['request_type'].touched && contactForm.controls['request_type'].errors != null"
+                      type="button" [popover]="currentLanguage === 'ar' ? 'نوع الطلب مطلوب' : 'Request type is required'"
+                      [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+
+                  </div>
+                </div>
+                <div class="col-xxl-12">
+                  <div class="contact__form-input">
+                    <textarea placeholder="{{'contact_form_message' | translate}}" formControlName="message"
+                      name="message"></textarea>
+                    <button
+                      *ngIf="contactForm.controls['message'].touched && contactForm.controls['message'].errors != null"
+                      type="button" [popover]="currentLanguage === 'ar' ? 'الرسالة مطلوبة' : 'Message type is required'"
+                      [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                  </div>
+                </div>
+
+                <div class="col-xxl-12">
+                  <div class="contact__btn">
+                    <button type="submit" class="e-btn"
+                      [disabled]="contactForm.invalid">{{currentLanguage == 'ar' ? 'ارسل  ' : 'Send message ' }}</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-xxl-4  col-xl-4  col-lg-5 ">
+        <div class="contact__info white-bg p-relative z-index-1">
+          <div class="contact__shape">
+            <img class="contact-shape-1" src="assets/theme/img/contact/contact-shape-1.png" alt="">
+            <img class="contact-shape-2" src="assets/theme/img/contact/contact-shape-2.png" alt="">
+            <img class="contact-shape-3" src="assets/theme/img/contact/contact-shape-3.png" alt="">
+          </div>
+          <div class="contact__info-inner white-bg">
+            <ul>
+              <li>
+                <div class="contact__info-item d-flex align-items-start mb-35">
+                  <div class="contact__info-icon mr-15">
+                    <svg class="map" viewBox="0 0 24 24">
+                      <path class="st0" d="M21,10c0,7-9,13-9,13s-9-6-9-13c0-5,4-9,9-9S21,5,21,10z" />
+                      <circle class="st0" cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
+                  <div class="contact__info-text">
+                    <h4>{{"office" | translate}}</h4>
+                    <p><a target="_blank" href="https://goo.gl/maps/AfnRF13U5WxBABfe8">{{"address" | translate}}</a></p>
+
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="contact__info-item d-flex align-items-start mb-35">
+                  <div class="contact__info-icon mr-15">
+                    <svg class="mail" viewBox="0 0 24 24">
+                      <path class="st0"
+                        d="M4,4h16c1.1,0,2,0.9,2,2v12c0,1.1-0.9,2-2,2H4c-1.1,0-2-0.9-2-2V6C2,4.9,2.9,4,4,4z" />
+                      <polyline class="st0" points="22,6 12,13 2,6 " />
+                    </svg>
+                  </div>
+                  <div class="contact__info-text">
+                    <h4>{{"email_title" | translate}}</h4>
+                    <p><a href="mailto:admission@egecmena.com ">admission@egecmena.com </a></p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="contact__info-item d-flex align-items-start mb-35">
+                  <div class="contact__info-icon mr-15">
+                    <i class="fal fa-clock text-main fw-700" style="color: #2b4eff; font-weight: 500;"></i>
+                  </div>
+                  <div class="contact__info-text">
+                    <h4>{{"work_hours" | translate}}</h4>
+                    <a class="d-block">
+                      {{currentLanguage === 'ar' ? 'من الأحد الي الخميس' : 'From Sunday to Thursday' }}
+                    </a>
+                    <a class="d-block">
+                      {{currentLanguage === 'ar' ? 'العاشره صباحا - الثامنه مساء' : 'From 10 a.m. to 8 p.m.' }}
+
+                      
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="contact__info-item d-flex align-items-start mb-35">
+                  <div class="contact__info-icon mr-15">
+                    <svg class="call" viewBox="0 0 24 24">
+                      <path class="st0"
+                        d="M22,16.9v3c0,1.1-0.9,2-2,2c-0.1,0-0.1,0-0.2,0c-3.1-0.3-6-1.4-8.6-3.1c-2.4-1.5-4.5-3.6-6-6  c-1.7-2.6-2.7-5.6-3.1-8.7C2,3.1,2.8,2.1,3.9,2C4,2,4.1,2,4.1,2h3c1,0,1.9,0.7,2,1.7c0.1,1,0.4,1.9,0.7,2.8c0.3,0.7,0.1,1.6-0.4,2.1  L8.1,9.9c1.4,2.5,3.5,4.6,6,6l1.3-1.3c0.6-0.5,1.4-0.7,2.1-0.4c0.9,0.3,1.8,0.6,2.8,0.7C21.3,15,22,15.9,22,16.9z" />
+                    </svg>
+                  </div>
+                  <div class="contact__info-text">
+                    <h4>{{"phone_title" | translate }}</h4>
+                    <p><a href="tel:2-01000670590+">2-01000670590+ </a></p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="contact__social pl-30">
+              <h4>{{"follow_us" | translate}}</h4>
+              <ul>
+                <li><a target="_blank" href="https://www.facebook.com/EGEC.EDU/" class="fb"><i
+                      class="social_facebook"></i></a></li>
+                <li><a target="_blank" href="https://twitter.com/Egy_Gulf" class="tw"><i class="social_twitter"></i></a>
+                </li>
+                <li><a target="_blank" href="https://www.instagram.com/egygulf2015" class="pin"><i
+                      class="social_instagram"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- contact area end -->
+
+<section class="map pt-90 pb-90">
+  <div class="container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10201.95944527887!2d31.21267461862183!3d30.03642221750194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145847eacaf7adfd%3A0xf55de03861a346ef!2sEGEC%20-%20Egyptian%20Gulf%20for%20Educational%20Consultant!5e0!3m2!1sen!2seg!4v1661352448189!5m2!1sen!2seg"
+      width="100%" height="450" style="border:0; border-radius: 20px;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</section>

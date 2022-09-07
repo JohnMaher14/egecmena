@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -14,12 +14,14 @@ import { environment } from 'src/environments/environment';
   templateUrl: './faculty.component.html',
   styleUrls: ['./faculty.component.scss']
 })
-export class FacultyComponent implements OnInit {
+export class FacultyComponent implements OnInit  {
 
   faculties: any[] = [];
   facultyData: any;
   facultyUniversity: any;
+  facultyUniversities: any[] = [];
   destinations : any[] = [];
+  otherFaculties : any[] = [];
   universityData: any;
   facultyDatas: any[] = [];
   conditions: any[] = [];
@@ -65,15 +67,28 @@ export class FacultyComponent implements OnInit {
             this.facultyDatas = response.facultyDatas
             this.conditions = response.mejorData
             this.universityData = response.university
-            this.loading = false;
+            if (this.currentLanguage == 'en') {
+              this._Title.setTitle(`${environment.title}${this.facultyData?.en_name}`)
+            }else if(this.currentLanguage == 'ar'){
+              this._Title.setTitle(`${environment.title}${this.facultyData?.ar_name}`)
+
+            }
+            // this.loading = false;
             this._HomeService.getHomeData().subscribe(
               (response) => {
+                console.log(response);
+                this.facultyUniversities = response.facultyUniversity;
+                const facultyContainer = response.faculty.filter(
+                  (faculty:any) => {
+                    return faculty.id != params['params'].faculty_id;
+                  }
+                )
                 const destinationConatiner = response.destinations.filter(
                   (destination:any) => {
                     return destination.id = params['params'].university_id;
                   }
                 )
-
+                  this.otherFaculties = facultyContainer;
                 this.destinationDetail = destinationConatiner[0];
                 this.loading = false
 
@@ -141,16 +156,12 @@ export class FacultyComponent implements OnInit {
     this._TranslateService.use(this.currentLanguage)
     this._TranslateService.onLangChange.subscribe(
       (language: any) => {
-        if (language.lang == 'en') {
-          this._Title.setTitle(`${environment.title}${this.facultyData?.en_name}`)
-        }else if(language.lang == 'ar'){
-          this._Title.setTitle(`${environment.title}${this.facultyData?.ar_name}`)
 
-        }
         this.currentLanguage = this._TranslateService.currentLang
       }
     )
   }
+
   authenticationData(){
       this._AuthenticationService.currentUserData.subscribe(() => {
         if (this._AuthenticationService.currentUserData.getValue() == null) {
@@ -165,4 +176,5 @@ export class FacultyComponent implements OnInit {
       });
 
   }
+
 }

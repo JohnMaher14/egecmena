@@ -20,6 +20,7 @@ export class AcademicInformationComponent implements OnInit {
   userAcademicInfo: any;
   isLogined!: boolean;
   actionLoading!:boolean;
+  loading!:boolean;
   constructor(
     private _TranslateService: TranslateService,
     private _Title: Title,
@@ -74,14 +75,25 @@ export class AcademicInformationComponent implements OnInit {
       });
   }
   showAcademicInformation() {
-    this.actionLoading = true
+    this.loading = true
     this._AuthenticationService
       .getAcademicInformation(this.userArray.id)
       .subscribe((response) => {
         console.log(response);
         this.userAcademicInfo = response;
-        this.actionLoading = false;
+        this.loading = false;
       });
+  }
+  onChangeNumber(event:any){
+    var char = String.fromCharCode(event.which);
+    if(!(/[0-9]/.test(char))){
+        event.preventDefault();
+    }
+    window.addEventListener("keydown", function(e) {
+      if(["ArrowUp","ArrowDown"].indexOf(e.code) > -1) {
+          e.preventDefault();
+      }
+    }, false);
   }
   translateFunction() {
     this.currentLanguage = localStorage.getItem('currentLanguage') || 'ar';

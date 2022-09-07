@@ -56,7 +56,7 @@ export class AboutUsComponent implements OnInit {
     if (this.currentLanguage== 'en') {
       this._Title.setTitle(`${environment.title}About us`)
     }else if(this.currentLanguage == 'ar'){
-      this._Title.setTitle(`${environment.title}عنا`)
+      this._Title.setTitle(`${environment.title}من نحن`)
 
     }
     this._TranslateService.onLangChange.subscribe(

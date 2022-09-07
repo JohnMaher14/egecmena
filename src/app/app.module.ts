@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import ar from '@angular/common/locales/ar';
@@ -28,6 +28,7 @@ import { CountUpModule } from 'ngx-countup';
 import { ContactUsComponent } from './pages/content/contact-us/contact-us.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PopoverModule } from "ngx-bootstrap/popover";
+import { TypeaheadModule } from "ngx-bootstrap/typeahead";
 import { LoginComponent } from './pages/content/auth/login/login.component';
 import { RegisterComponent } from './pages/content/auth/register/register.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
@@ -47,6 +48,9 @@ import { LoaderComponent } from './pages/shared/loader/loader.component';
 import { ActionLoaderComponent } from './pages/shared/action-loader/action-loader.component';
 import { AdmissionFormComponent } from './pages/shared/admission-form/admission-form.component';
 import { MovementInformationComponent } from './pages/content/auth/movement-information/movement-information.component';
+import { SearchUniversityPipe } from './pipes/search-university.pipe';
+import { SearchDestinationPipe } from './pipes/search-destination.pipe';
+import { InnerPageLoaderComponent } from './pages/shared/inner-page-loader/inner-page-loader.component';
 registerLocaleData(ar)
 registerLocaleData(en)
 
@@ -73,7 +77,10 @@ registerLocaleData(en)
     LoaderComponent,
     ActionLoaderComponent,
     AdmissionFormComponent,
-    MovementInformationComponent
+    MovementInformationComponent,
+    SearchUniversityPipe,
+    SearchDestinationPipe,
+    InnerPageLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +88,7 @@ registerLocaleData(en)
     ReactiveFormsModule,
     HttpClientModule,
     AngularMaterialModule,
+    FormsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'ar',
       loader: {
@@ -100,7 +108,9 @@ registerLocaleData(en)
     NgxIntlTelInputModule,
     ToastrModule.forRoot(),
     NgbModule,
-    SelectDropDownModule
+    SelectDropDownModule,
+    TypeaheadModule.forRoot(),
+
   ],
   providers: [
     {

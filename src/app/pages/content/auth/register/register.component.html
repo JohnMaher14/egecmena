@@ -1,3 +1,4 @@
+   <app-loader *ngIf="loading"></app-loader>
    <!-- page title area start -->
    <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">    <div class="container">
     <div class="row">
@@ -8,8 +9,8 @@
              </h3>
              <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                   <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
-                   <li class="breadcrumb-item active"  aria-current="page">{{"register" | translate }}</li>
+                  <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
+                  <li class="breadcrumb-item active"  aria-current="page">{{"register" | translate }}</li>
                 </ol>
              </nav>
           </div>
@@ -19,7 +20,7 @@
 </section>
 <!-- page title area end -->
 <!-- sign up area start -->
-<section class="signup__area po-rel-z1 pt-100 pb-145">
+<section class="signup__area p-relative po-rel-z1 pt-100 pb-145">
   <div class="sign__shape">
      <img class="man-1" src="assets/theme/img/icon/sign/man-1.png" alt="">
      <img class="man-2" src="assets/theme/img/icon/sign/man-2.png" alt="">
@@ -33,7 +34,7 @@
         <div class="col-xxl-8 col-xl-8 ">
            <div class="section__title-wrapper text-center mb-55">
               <h2 class="section__title">{{"register_title" | translate}}</h2>
-              <p>{{"register_text" | translate}} <a routerLink="/register" class="text_main">{{ "register_button" | translate}}</a></p>
+              <p>{{"register_text" | translate}} <a routerLink="/login" class="text_main boldness_font">{{ "register_button" | translate}}</a></p>
            </div>
         </div>
      </div>
@@ -52,7 +53,7 @@
                         </div>
                         <ng-container *ngIf="registerForm.controls['name'].touched && registerForm.controls['name'].errors != null">
 
-                          <button *ngIf="registerForm.controls['name'].errors['required']" type="button" popover="Name is required"
+                          <button *ngIf="registerForm.controls['name'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'الأسم مطلوب' :'Name is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
 
@@ -85,10 +86,10 @@
                         </div>
                         <ng-container *ngIf="registerForm.controls['phone'].touched && registerForm.controls['phone'].errors != null">
 
-                           <button *ngIf="registerForm.controls['phone'].invalid" type="button" popover="Phone is invalid"
+                           <button *ngIf="registerForm.controls['phone'].invalid" type="button" [popover]="currentLanguage === 'ar' ? 'رقم الهاتف غير صحيح' : 'Phone is invalid'"
                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                          class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-                          <button *ngIf="registerForm.controls['phone'].errors['required']" type="button" popover="Phone is required"
+                          <button *ngIf="registerForm.controls['phone'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'رقم الهاتف مطلوب' : 'Phone is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
 
@@ -105,10 +106,10 @@
                         </div>
                         <ng-container *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors != null">
 
-                          <button *ngIf="registerForm.controls['email'].errors['required']" type="button" popover="Email is required"
+                          <button *ngIf="registerForm.controls['email'].errors['required']" type="button"[popover]="currentLanguage === 'ar' ? 'البريد الألكتروني مطلوب' : 'Email is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
-                          <button *ngIf="registerForm.controls['email'].errors['email']" type="button" popover="Email is invalid"
+                          <button *ngIf="registerForm.controls['email'].errors['email']" type="button" [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني غير صحيح' : 'Email is invalid'"
                           [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                           class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
 
@@ -122,10 +123,17 @@
                             <input formControlName="password" name="password" type="password">
                             <i class="fal fa-lock"></i>
                         </div>
-                        <button *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors != null" type="button" popover="Password is required"
+                        <ng-container *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors != null">
+
+                        <button *ngIf="registerForm.controls['password'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'كلمة السر غير صحيحة' : 'password is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         [outsideClick]="true"
                          class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                        <button *ngIf="registerForm.controls['password'].errors['minlength']" type="button" [popover]="currentLanguage === 'ar'  ? 'كلمة السر يجب ان تكون 6 حروف علي الأقل' : 'Password minimum length is 6'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        [outsideClick]="true"
+                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                         </ng-container>
                       </div>
                     </div>
                     <div class="sign__input-wrapper mb-25">
@@ -135,7 +143,7 @@
                             <input formControlName="password_confirmation" name="password_confirmation" type="password">
                             <i class="fal fa-lock"></i>
                         </div>
-                        <button *ngIf="registerForm.controls['password_confirmation'].touched && registerForm.controls['password_confirmation'].errors != null" type="button" popover="Confirm password is required"
+                        <button *ngIf="registerForm.controls['password_confirmation'].touched && registerForm.controls['password_confirmation'].errors != null" type="button" [popover]="currentLanguage === 'ar' ? 'تأكيد كلمة السر غير صحيحة' : 'Confirm password is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         [outsideClick]="true"
                          class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
@@ -145,7 +153,7 @@
                       {{ "register" | translate }}
                     </span> </button>
                     <div class="sign__new text-center mt-20">
-                       <p>{{"register_text"  | translate}} <a routerLink="/login" >{{"register_button" | translate }}</a></p>
+                       <p>{{"register_text"  | translate}} <a routerLink="/login" class="text_main boldness_font">{{"register_button" | translate }}</a></p>
                     </div>
                  </form>
               </div>

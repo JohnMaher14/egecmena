@@ -15,8 +15,10 @@ export class DestinationComponent implements OnInit {
   destinations : any[] = [];
   destinationDetail: any;
   universityImage:string = `${environment.imageUrl}universities/`;
+  destinationImage:string = `${environment.imageUrl}destination/`;
   currentLanguage: any;
   loading!:boolean;
+  term:any;
   constructor(
     private _HomeService:HomeService,
     private _ActivatedRoute: ActivatedRoute,

@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class UniversitiesComponent implements OnInit {
   faculties: any[] = [];
   university: any;
+  universities: any[]=[];
   destinations : any[] = [];
   destinationDetail: any;
   universityImage:string = `${environment.imageUrl}universities/`;
@@ -44,14 +45,23 @@ export class UniversitiesComponent implements OnInit {
           (response) => {
             this.faculties = response.faculties;
             this.university = response.university;
+            this.loading = true
             this._HomeService.getHomeData().subscribe(
               (response) => {
+                const universityContainer = response.university.filter(
+                  (university:any) => {
+                    return university.id != params['params'].id;
+                  }
+                )
+                this.universities = universityContainer;
+                console.log(response.university);
                 const destinationConatiner = response.destinations.filter(
                   (destination:any) => {
                     return destination.id = response.university;
                   }
                 )
 
+                console.log(destinationConatiner);
                 this.destinationDetail = destinationConatiner[0];
                 this.loading = false
 
@@ -64,7 +74,7 @@ export class UniversitiesComponent implements OnInit {
                 }else if(this.currentLanguage === 'en'){
                   this._Title.setTitle(`${environment.title}${response.university.en_name}`)
                 }
-            this.loading = false;
+            // this.loading = false;
 
           })
         }

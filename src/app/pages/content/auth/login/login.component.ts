@@ -5,9 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { HomeService } from 'src/app/services/home.service';
 import { environment } from 'src/environments/environment';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +15,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   currentLanguage: any;
   actionLoading!:boolean;
+  loading!:boolean;
   constructor(
     private _TranslateService:TranslateService,
     private _Title:Title,
@@ -30,6 +29,14 @@ export class LoginComponent implements OnInit {
     if (localStorage.getItem('currentUserToken') !== null) {
       this._Router.navigate(['/'])
     }
+    this.loader();
+  }
+  loader(){
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+
+    }, 1500);
   }
   loginForm: FormGroup = new FormGroup({
     'email': new FormControl('', [Validators.required, Validators.email]),
@@ -56,7 +63,7 @@ export class LoginComponent implements OnInit {
         console.log(error);
         if(error.status == 401){
           this._ToastrService.error(`${error.error.ar_error}` , 'خطأ' , {
-            timeOut: 4000
+            timeOut: 4000 , positionClass: 'toast-bottom-left'
           })
         }
         this.actionLoading = false;

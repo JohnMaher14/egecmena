@@ -1,7 +1,7 @@
-  <app-loader *ngIf="loading"></app-loader>
+  <app-inner-page-loader *ngIf="loading"></app-inner-page-loader>
   <!-- page title area start -->
-  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
-    style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/about/Header.jpg');">
+
     <div class="container">
       <div class="row">
         <div class="col-xxl-12">
@@ -11,7 +11,7 @@
             </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+                <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
                 <li  class="breadcrumb-item" aria-current="page">
                   <a routerLink="/destinations">
                     {{"destination" | translate }}
@@ -82,7 +82,7 @@
                         <div class="col-lg-6" *ngFor="let faculty of faculties">
                           <div class="course__item white-bg mb-30 fix">
                             <div class="row gx-0 align-items-center">
-                              <div class="col-xxl-3 col-xl-3 col-lg-3">
+                              <div class="col-3">
                                 <div class="course__thumb course__thumb-list w-img p-relative fix text-center">
                                   <a href="course-details.html">
                                     <img [src]="facultyImage+faculty.pivot.logo" [alt]="currentLanguage === 'ar' ?  faculty.ar_name : faculty.en_name ">
@@ -90,7 +90,7 @@
 
                                 </div>
                               </div>
-                              <div class="col-xxl-9 col-xl-9 col-lg-9">
+                              <div class="col-9">
                                 <div class="course__right">
                                   <div class="course__content course__content-4">
 
@@ -102,13 +102,13 @@
 
                                   </div>
                                   <div
-                                    class="course__more course__more-2 course__more-3 d-flex justify-content-between align-items-center">
+                                    class="course__more  d-flex justify-content-between align-items-center">
 
                                     <div class="course__btn">
-                                      <a [routerLink]="['/faculty' ,faculty.id , university?.id]" *ngIf="currentLanguage === 'ar'" class="link-btn">
-                                        <i class="far fa-arrow-left"></i>
-                                        <i class="far fa-arrow-left"></i>
-                                        {{"know_more_universities" | translate}}
+                                      <a [routerLink]="['/faculty' ,faculty.id , university?.id]"  class="link-btn">
+                                        {{"know_more_faculties" | translate}}
+                                        <i class="far" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i>
+                                        <i class="far" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i>
                                       </a>
                                     </div>
                                   </div>
@@ -162,12 +162,11 @@
                 <div class="course__logo">
                   <div class="course__logo-thumb university__page--img w-img mb-25">
                       <img [src]="universityImage+university?.logo" alt="">
-
                   </div>
 
                   <div class="course__video-content university__page--content pb-35">
                       <ul>
-                        <li class="d-flex align-items-center">
+                        <li class="d-flex">
                             <div class="course__video-icon">
                               <i class="fa fa-map-marker university__page--content-icon" aria-hidden="true"></i>
                             </div>
@@ -175,7 +174,7 @@
                               <h5><span>{{currentLanguage === 'ar' ? 'محافظة' : 'State'}} :</span> {{ currentLanguage === 'ar' ? university?.ar_governorate: university?.en_governorate }}</h5>
                             </div>
                         </li>
-                        <li class="d-flex align-items-center">
+                        <li class="d-flex">
                             <div class="course__video-icon">
                               <i class="fa fa-home university__page--content-icon" aria-hidden="true"></i>
                             </div>
@@ -183,15 +182,18 @@
                               <h5><span>{{currentLanguage === 'ar' ? 'العنوان' : 'Address'}} :</span>{{currentLanguage === 'ar' ? university?.ar_address : university?.en_address }}</h5>
                             </div>
                         </li>
-                        <li class="d-flex align-items-center">
+                        <li class="d-flex" style="
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;">
                             <div class="course__video-icon">
                               <i class="fas fa-browser university__page--content-icon"></i>
                             </div>
                             <div class="course__video-info">
-                              <h5><span>{{currentLanguage === 'ar' ? 'الموقع' : 'Website'}} :</span>{{ university?.university_site }}</h5>
+                              <h5><span class="d-block">{{currentLanguage === 'ar' ? 'الموقع' : 'Website'}} :</span><a href="{{ university?.university_site }}">{{ university?.university_site }}</a></h5>
                             </div>
                         </li>
-                        <li class="d-flex align-items-center">
+                        <li class="d-flex">
                             <div class="course__video-icon">
                               <i class="fa fa-university university__page--content-icon" aria-hidden="true"></i>
                             </div>
@@ -205,84 +207,43 @@
 
                 </div>
             </div>
-            <div class="course__sidebar-widget-2 white-bg mb-20">
-                <div class="course__sidebar-course">
-                  <h3 class="course__sidebar-title">Related courses</h3>
-                  <ul>
-                      <li>
+            <div class="course__sidebar-widget-2 white-bg">
+              <div class="course__sidebar-course">
+                <h3 class="course__sidebar-title">{{"related_section" | translate }}</h3>
+                <ul>
+                  <ng-container *ngIf="universities.length > 1; else universityEmpty">
+                    <li *ngFor="let otherUniversity of universities | slice:0:3">
+                      <a [routerLink]="['/university', otherUniversity.id]">
+
                         <div class="course__sm d-flex align-items-center mb-30">
-                            <div class="course__sm-thumb mr-20">
-                              <a href="#">
-                                  <img src="assets/img/course/sm/course-sm-1.jpg" alt="">
-                              </a>
-                            </div>
-                            <div class="course__sm-content">
-                              <div class="course__sm-rating">
-                                  <ul>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                  </ul>
-                              </div>
-                              <h5><a href="#">Development</a></h5>
-                              <div class="course__sm-price">
-                                  <span>$54.00</span>
-                              </div>
-                            </div>
+                          <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
+                              <img [src]="universityImage+otherUniversity.logo" alt="">
+                          </div>
+                          <div class="course__sm-content">
+
+                            <h5>{{currentLanguage === 'ar' ?  otherUniversity.ar_name : otherUniversity.en_name}}</h5>
+
+                          </div>
                         </div>
-                      </li>
-                      <li>
-                        <div class="course__sm d-flex align-items-center mb-30">
-                            <div class="course__sm-thumb mr-20">
-                              <a href="#">
-                                  <img src="assets/img/course/sm/course-sm-2.jpg" alt="">
-                              </a>
-                            </div>
-                            <div class="course__sm-content">
-                              <div class="course__sm-rating">
-                                  <ul>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                  </ul>
-                              </div>
-                              <h5><a href="#">Data Science</a></h5>
-                              <div class="course__sm-price">
-                                  <span>$72.00</span>
-                              </div>
-                            </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="course__sm d-flex align-items-center mb-10">
-                            <div class="course__sm-thumb mr-20">
-                              <a href="#">
-                                  <img src="assets/img/course/sm/course-sm-3.jpg" alt="">
-                              </a>
-                            </div>
-                            <div class="course__sm-content">
-                              <div class="course__sm-rating">
-                                  <ul>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                  </ul>
-                              </div>
-                              <h5><a href="#">UX Design</a></h5>
-                              <div class="course__sm-price">
-                                  <span>Free</span>
-                              </div>
-                            </div>
-                        </div>
-                      </li>
-                  </ul>
-                </div>
+                      </a>
+                    </li>
+                    <li>
+                      <a [routerLink]="['/destination/', university?.destination_id]">
+
+                        {{currentLanguage === 'ar' ?  'تصفح المزيد' : 'Explore more'}}
+                        <i class="fa mx-2" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ng-container>
+
+                  <ng-template #universityEmpty>
+                    <li>
+                      {{currentLanguage === 'ar' ? 'لا يوحد جامعات أخرى حاليًا' : 'No other universities currently'}}
+                    </li>
+                  </ng-template>
+
+                </ul>
+              </div>
             </div>
           </div>
       </div>

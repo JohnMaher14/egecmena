@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -18,6 +18,10 @@ export class AdmissionFormComponent implements OnInit {
   faculties: any[] = [];
   facultyData: any;
   facultyUniversity: any;
+  universityChoice:boolean =  false;
+  facultyChoice:boolean =  false;
+  majorChoice:boolean =  false;
+  departmentChoice:boolean =  false;
   destinations : any[] = [];
   universities: any[] = [];
   majors: any[] = [];
@@ -41,7 +45,7 @@ export class AdmissionFormComponent implements OnInit {
   constructor(
     private _StudyService:StudyService,
     private _HomeService:HomeService,
-    private _ActivatedRoute: ActivatedRoute,
+    private _Router: Router,
     private _TranslateService:TranslateService,
     private _AuthenticationService:AuthenticationService,
     private _ToastrService:ToastrService,
@@ -57,15 +61,49 @@ export class AdmissionFormComponent implements OnInit {
     this.showHomeData();
   }
 
+  navigateToAcademic(){
+    this._Router.navigate(['/academic-information'])
+    let admissionCard = document.querySelector('.admission__card');
+    let bodyOverlay = document.querySelector('.body-overlay');
 
+    this._Renderer2.removeClass(admissionCard ,'admission__card--opened');
+    this._Renderer2.removeClass(bodyOverlay ,'opened');
+
+
+  }
+  navigateToPersonal(){
+    this._Router.navigate(['/personal-information'])
+    let admissionCard = document.querySelector('.admission__card');
+    let bodyOverlay = document.querySelector('.body-overlay');
+
+    this._Renderer2.removeClass(admissionCard ,'admission__card--opened');
+    this._Renderer2.removeClass(bodyOverlay ,'opened');
+
+
+  }
+  navigateToLogin(){
+    this._Router.navigate(['/login'])
+    let admissionCard = document.querySelector('.admission__card');
+    let bodyOverlay = document.querySelector('.body-overlay');
+
+    this._Renderer2.removeClass(admissionCard ,'admission__card--opened');
+    this._Renderer2.removeClass(bodyOverlay ,'opened');
+
+
+  }
   openAdmissionForm(){
     let admissionCard = document.querySelector('.admission__card');
+    let bodyOverlay = document.querySelector('.body-overlay');
     this._Renderer2.addClass(admissionCard ,'admission__card--opened')
+    this._Renderer2.addClass(bodyOverlay ,'opened')
   }
   closeAdmissionForm(){
     let admissionCard = document.querySelector('.admission__card');
-    this._Renderer2.removeClass(admissionCard ,'admission__card--opened')
+    let bodyOverlay = document.querySelector('.body-overlay');
 
+    this._Renderer2.removeClass(admissionCard ,'admission__card--opened')
+    this._Renderer2.removeClass(bodyOverlay ,'opened');
+    this.admissionFormPage.reset();
   }
   showPersonalInformation() {
     if (localStorage.getItem('currentUserToken') !== null) {
@@ -127,7 +165,7 @@ export class AdmissionFormComponent implements OnInit {
     'admission_fac_uni_id': new FormControl('', Validators.required),
     'admission_fac_uni_major_id': new FormControl(''),
     'admission_department_id': new FormControl('', Validators.required),
-    'user_id': new FormControl('', Validators.required)
+    'user_id': new FormControl('')
   })
   onSubmitAdmissionForm(admissionFormPage: FormGroup){
     this.actionLoading = true
@@ -159,6 +197,7 @@ export class AdmissionFormComponent implements OnInit {
       return universities.destination_id == event.target.value;
     });
     this.changeUniversities = universitiesArray;
+    this.universityChoice = true;
   }
   onChangeUniversity(event: any) {
     const facultyArray = this.facultyUniversity.filter((faculty: any) => {
@@ -166,6 +205,7 @@ export class AdmissionFormComponent implements OnInit {
     });
     this.universityOnchangeId = event.target.value
     this.changeFaculty = facultyArray;
+    this.facultyChoice = true;
   }
   onChangeFaculty(event: any) {
     const majorArray = this.facultyUniversity.filter((major: any) => {
@@ -178,6 +218,7 @@ export class AdmissionFormComponent implements OnInit {
 
       }
     )
+    this.majorChoice = true;
   }
   onMajorSaerch(event: any){
     const departmentsArray = this.majors.filter(
@@ -186,6 +227,6 @@ export class AdmissionFormComponent implements OnInit {
       }
     )
     this.departments = departmentsArray[0].pivot?.departments;
-
+      this.departmentChoice = true;
   }
 }

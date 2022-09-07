@@ -1,29 +1,17 @@
 
 
-    <ngx-skeleton-loader
-    *ngIf="loading"
-    count="15"
-    appearance="line"
-    style="
-    position: fixed;
-    inset: 0;
-    z-index: 9999999;
-    background-color: #ccc;"
-    [theme]="{
-      height: '50px'
-    }"
-  ></ngx-skeleton-loader>
+<app-loader *ngIf="loading"></app-loader>
   <!-- page title area start -->
-  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/about/Header.jpg');">
     <div class="container">
        <div class="row">
           <div class="col-xxl-12">
              <div class="page__title-wrapper mt-110">
-                <h3 class="page__title">About</h3>
+                <h3 class="page__title">{{currentLanguage === 'ar' ? 'من نحن' : 'About us' }}</h3>
                 <nav aria-label="breadcrumb">
                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">About</li>
+                      <li class="breadcrumb-item"><a routerLink="/">{{"breadcrumb_home" | translate}}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{currentLanguage === 'ar' ? 'من نحن' : 'About us' }}</li>
                    </ol>
                 </nav>
              </div>
@@ -36,32 +24,28 @@
  <!-- about area start -->
  <section class="about__area pt-120 pb-150">
     <div class="container">
-       <div class="row">
-          <div class="col-xxl-5 offset-xxl-1 col-xl-6 col-lg-6">
+       <div class="row justify-content-around">
+          <div class=" col-xl-4 col-lg-6">
              <div class="about__thumb-wrapper">
 
-                <div class="about__review">
-                   <h5> <span>8,200+</span> five ster reviews</h5>
-                </div>
+
                 <div class="about__thumb">
-                   <img src="assets/theme/img/about/about.jpg" alt="">
+                   <img src="assets/theme/img/about/about.jpg" class="w-100" alt="">
                 </div>
                 <div class="about__banner mt--210">
-                   <img src="assets/theme/img/about/about-banner.jpg" alt="">
+                   <img src="assets/theme/img/about/about-banner.jpg" class="w-100" alt="">
                 </div>
 
              </div>
           </div>
-          <div class="col-xxl-6 col-xl-6 col-lg-6">
+          <div class=" col-xl-8 col-lg-6">
              <div class="about__content pl-70 pr-60 pt-25">
                 <div class="section__title-wrapper mb-25">
                    <h2 class="section__title">{{"our_story_title" | translate }} </h2>
-                   <p *ngIf="currentLanguage === 'ar'">
-                    {{aboutUs?.ar_story}}
+                   <p>
+                    {{currentLanguage === 'ar' ? aboutUs?.ar_story : aboutUs?.en_story}}
                    </p>
-                   <p *ngIf="currentLanguage === 'en'">
-                    {{aboutUs?.en_story}}
-                   </p>
+                   
                 </div>
 
              </div>
@@ -113,32 +97,51 @@
   <div class="container-fluid">
      <div class="row">
         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-           <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-1.jpg')">
-              <div class="banner__content">
-                <span class="orange">{{ "mission" | translate}}</span>
-                <h3 class="banner__title">
-                    <a href="course-details.html">Germany Foundation <br> Document</a>
-                 </h3>
-                 <a href="course-grid.html" class="e-btn e-btn-2">View Courses</a>
+          <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-1.jpg')">
+            <div class="row no-gutters align-items-center">
+              <div class="col-md-7">
+                <div class="banner__content">
+                   <span class="orange">{{ "mission" | translate}}</span>
+                   <h3 class="banner__title">
+                       <a >
+                        {{"mission_text" | translate }}
+                       </a>
+                    </h3>
+                 </div>
+
               </div>
-              <div class="about__page--banner banner__thumb d-none d-sm-block d-md-none d-lg-block">
-                 <img src="assets/theme/img/banner/banner-img-1.png" alt="">
+              <div class="col-md-5">
+                <div class="about__page--banner banner__thumb">
+                   <img src="assets/theme/img/banner/banner-img-1.png" class="w-100"  alt="">
+                </div>
+
               </div>
-           </div>
+            </div>
+          </div>
+
         </div>
         <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-           <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-2.jpg')">
-              <div class="banner__content">
-                 <span class="orange">{{ "vision" | translate}}</span>
-                 <h3 class="banner__title">
-                    <a href="course-details.html">Online Courses <br>From Eduka University</a>
-                 </h3>
-                 <a href="course-grid.html" class="e-btn e-btn-2">Find Out More</a>
+          <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-2.jpg')">
+
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <div class="banner__content">
+                  <span class="orange">{{ "vision" | translate}}</span>
+                  <h3 class="banner__title">
+                     <a >
+                      {{"vision_text" | translate}}
+                     </a>
+                  </h3>
+               </div>
               </div>
-              <div class="about__page--banner banner__thumb banner__thumb-2 d-none d-sm-block d-md-none d-lg-block">
-                 <img src="assets/theme/img/banner/banner-img-2.png" alt="">
+              <div class="col-md-4">
+                <div class="about__page--banner banner__thumb banner__thumb-2 ">
+                  <img src="assets/theme/img/banner/banner-img-2.png"  class="w-100" alt="">
+               </div>
               </div>
-           </div>
+            </div>
+
+          </div>
         </div>
      </div>
   </div>
@@ -150,7 +153,7 @@
   <img class="counter__area--img-1" src="assets/theme/img/icon/circle.png" alt="">
   <img class="counter__area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
 
-  <div class="container pt-145 pb-100 position-relative">
+  <div class="container pb-100 position-relative">
     <div class="row justify-content-center ">
       <div class="col-xl-6 ">
         <div class="section__title-wrapper text-center mb-60">

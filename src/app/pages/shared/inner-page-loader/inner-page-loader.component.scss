@@ -1,0 +1,125 @@
+
+.page-breadcrumb{
+  display: flex;
+  align-items: center;
+}
+.page-breadcrumb > li{
+  margin-left: 20px;
+}
+.loader_sekelton{
+  position: fixed;
+  z-index: 999999;
+  inset: 0;
+
+  .first_section{
+    height: 65vh;
+    background-color: #d9d9d9;
+
+  }
+  .second_section{
+    height: 35vh;
+    background-color: #fff;
+  }
+  .card{
+
+    height: 100vh;
+
+  }
+
+  .header .img{
+
+    height: 100vh;
+    width: 100%;
+    background: #d9d9d9;
+    position: relative;
+    overflow: hidden;
+  }
+  .header .details{
+    position: absolute;
+    bottom: 21px;
+
+  }
+  .header .details .title{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .details span{
+    display: block;
+    background: #d9d9d9;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .details .name{
+    height: 15px;
+    width: 100px;
+  }
+  .details .about{
+    height: 13px;
+    width: 150px;
+  }
+  .card .description{
+    margin: 25px 0;
+    margin-right: 20px;
+  }
+  .description .line.page__title{
+    background: #d9d9d9;
+    border-radius: 10px;
+    height: 13px;
+    width: 250px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .description .line.breadcrumb-item{
+    background: #d9d9d9;
+    border-radius: 10px;
+    height: 13px;
+    width: 100px;
+    margin: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .description .line-1{
+    width: 100%;
+  }
+
+
+  .header .img::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to left, #d9d9d9 0%, rgba(0,0,0,0.05) 20%, #d9d9d9 40%, #d9d9d9 100%);
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: shimmer 1s linear infinite;
+  }
+  .description .line::before,
+  .details span::before{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to left, #777 0%, rgba(0,0,0,0.05) 20%, #777 40%, #777 100%);
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: shimmer 1s linear infinite;
+  }
+  .header .img::before{
+    background-size: 650px 600px;
+  }
+  .details span::before{
+    animation-delay: 0.2s;
+  }
+
+  @keyframes shimmer {
+    100%{
+      background-position: 450px 0;
+    }
+    0%{
+      background-position: -450px 0;
+    }
+  }
+}

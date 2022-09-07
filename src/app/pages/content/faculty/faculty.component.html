@@ -1,7 +1,7 @@
-<app-loader *ngIf="loading"></app-loader>
+<app-inner-page-loader *ngIf="loading"></app-inner-page-loader>
 <!-- page title area start -->
-  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
-    style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+<section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/about/Header.jpg');">
+
     <div class="container">
       <div class="row">
         <div class="col-xxl-12">
@@ -11,7 +11,7 @@
             </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+                <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
                 <li  class="breadcrumb-item" aria-current="page">
                   <a routerLink="/destinations">
                     {{"destination" | translate }}
@@ -61,9 +61,9 @@
 
                 <ul ngbNav #nav="ngbNav" class="nav nav-tabs row">
                   <li [ngbNavItem]="0" class="nav-item university__page--navitem col">
-                    <a ngbNavLink class="nav-link  university__page--navlink">
+                    <a ngbNavLink class="nav-link  university__page--navlink" [title]="currentLanguage === 'ar' ? 'عن '+facultyData?.ar_name : 'About '+facultyData?.en_name">
                       <i class="fa fa-info-circle" [ngClass]="currentLanguage == 'ar' ? 'ml-3' : 'mr-2'"></i>
-                      <span>{{currentLanguage === 'ar' ? 'عن '+facultyData?.ar_name : 'About '+facultyData?.en_name}}</span>
+                      <span>{{currentLanguage === 'ar' ? 'عن الكلية': 'About faculty'}}</span>
                     </a>
                     <ng-template ngbNavContent>
                       <div class="course__description" *ngFor="let facultyData of facultyDatas">
@@ -72,7 +72,7 @@
                       </div>
                     </ng-template>
                   </li>
-                  <li [ngbNavItem]="major.id" class="nav-item university__page--navitem col" *ngFor="let major of facultyUniversity?.majors">
+                  <li [ngbNavItem]="major.id" class="nav-item university__page--navitem col" [title]="currentLanguage === 'ar' ? major.ar_name :  major.en_name" *ngFor="let major of facultyUniversity?.majors">
                     <a ngbNavLink  class="nav-link  university__page--navlink">
                       <i class="fa fa-university" [ngClass]="currentLanguage == 'ar' ? 'ml-3' : 'mr-2'"></i>
                       <span>{{currentLanguage === 'ar' ? major.ar_name :  major.en_name }}</span>
@@ -80,7 +80,7 @@
                     <ng-template ngbNavContent>
                       <div class="course__tab-2">
 
-                        <ul ngbNav #test="ngbNav" class="nav nav-tabs row justify-content-center">
+                        <ul ngbNav #test="ngbNav" class="nav nav-tabs tabs-2 row justify-content-center">
                           <li [ngbNavItem]="1" class="nav-item university__page--navitem col-lg-4">
                             <a ngbNavLink class="nav-link  university__page--navlink"> {{currentLanguage ==='ar' ? 'الأقسام' : 'Departments'}}</a>
                             <ng-template ngbNavContent>
@@ -91,7 +91,7 @@
                                       <div class="course__right">
                                         <div class="course__content course__content-4">
 
-                                          <h3 class="course__title mb-0">
+                                          <h3 class="course__title text-center mb-0">
                                             <a [title]="currentLanguage === 'ar' ? department.ar_name : department.en_name">
                                               {{currentLanguage === 'ar' ? department.ar_name : department.en_name}}
                                             </a>
@@ -137,10 +137,12 @@
                           <input type="hidden" formControlName="university" [ngModel]="universityData?.en_name">
                           <input type="hidden" formControlName="faculty" [ngModel]="facultyData?.en_name">
                           <input type="hidden" formControlName="user_id" [ngModel]="userArray.id">
-                          <div class="registerDiv button">
+                          <!-- <div class="registerDiv button">
                             <button class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
-                          </div>
-
+                          </div> -->
+                          <button class="btn btn-transparent d-flex justify-content-center">
+                            <img src="https://egecmena.com/frontend/images/register.png" alt="">
+                          </button>
                         </ng-container>
                         <!-- {{userAcademicInfo?.academicInfo != null}}
                         {{userAcademicInfo?.academicInfo.degree_name != null}}
@@ -148,22 +150,25 @@
                         <!-- {{userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == "No Academic Info Found"}} -->
                         <ng-container *ngIf="userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == 'No Academic Info Found' ">
 
-                          <div class="registerDiv academic">
-                            <a routerLink="/academic-information" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
-                          </div>
 
+                          <a routerLink="/academic-information" class="btn btn-transparent d-flex justify-content-center">
+                            <img src="https://egecmena.com/frontend/images/register.png" class="w300px">
+                          </a>
                         </ng-container>
-                        <ng-container *ngIf="userPersonalInfo?.full_name == null">
+                        <ng-container *ngIf="userPersonalInfo?.full_name == null && userArray != undefined">
 
-                          <div class="registerDiv personal">
-                            <a routerLink="/personal-information" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
-                          </div>
 
+                          <a routerLink="/personal-information" class="btn btn-transparent d-flex justify-content-center">
+                            <img src="https://egecmena.com/frontend/images/register.png" class="w300px">
+                          </a>
                         </ng-container>
                         <ng-container *ngIf="userArray == undefined">
-                          <div class="registerDiv link">
+                          <!-- <div class="registerDiv link">
                             <a routerLink="/login" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
-                          </div>
+                          </div> -->
+                          <a routerLink="/login" class="btn btn-transparent d-flex justify-content-center">
+                            <img src="https://egecmena.com/frontend/images/register.png" class="w300px">
+                          </a>
                         </ng-container>
 
                       </form>
@@ -194,7 +199,7 @@
                   <div class="course__video-content university__page--content pb-35">
                       <ul>
 
-                        <li class="d-flex align-items-center">
+                        <li class="d-flex">
                             <div class="course__video-icon">
                               <i class="fa fa-home university__page--content-icon" aria-hidden="true"></i>
                             </div>
@@ -204,7 +209,7 @@
                               </h5>
                             </div>
                         </li>
-                        <li class="d-flex align-items-center" style="
+                        <li class="d-flex" style="
                           white-space: nowrap;
                           overflow: hidden;
                           text-overflow: ellipsis;">
@@ -215,7 +220,7 @@
                               <h5><span>{{currentLanguage === 'ar' ? 'الموقع' : 'Website'}} :</span><a target="_blank" [href]="facultyUniversity?.faculty_site">{{ facultyUniversity?.faculty_site }}</a></h5>
                             </div>
                         </li>
-                        <li class="d-flex align-items-center">
+                        <li class="d-flex">
                             <div class="course__video-icon">
                               <i class="fa fa-phone university__page--content-icon" aria-hidden="true"></i>
                             </div>
@@ -229,84 +234,42 @@
 
                 </div>
             </div>
-            <div class="course__sidebar-widget-2 white-bg mb-20">
-                <div class="course__sidebar-course">
-                  <h3 class="course__sidebar-title">Related courses</h3>
-                  <ul>
-                      <li>
-                        <div class="course__sm d-flex align-items-center mb-30">
-                            <div class="course__sm-thumb mr-20">
-                              <a href="#">
-                                  <img src="assets/img/course/sm/course-sm-1.jpg" alt="">
-                              </a>
+            <div class="course__sidebar-widget-2 white-bg">
+              <div class="course__sidebar-course">
+                <h3 class="course__sidebar-title">{{"related_faculties" | translate }}</h3>
+                <ul>
+                  <ng-container *ngIf="otherFaculties.length > 1; else facultyEmpty">
+                    <ng-container *ngFor="let facultyUniversity of facultyUniversities">
+
+                      <li *ngFor="let otherFaculty of otherFaculties | slice:0:3">
+                        <a *ngIf="facultyUniversity.faculty_id  === otherFaculty.id" [routerLink]="['/faculty', otherFaculty.id , facultyUniversity.university_id]">
+
+                          <div class="course__sm d-flex align-items-center mb-30">
+                            <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
+                                <img [src]="facultyImage+facultyUniversity.logo" alt="">
                             </div>
                             <div class="course__sm-content">
-                              <div class="course__sm-rating">
-                                  <ul>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                  </ul>
-                              </div>
-                              <h5><a href="#">Development</a></h5>
-                              <div class="course__sm-price">
-                                  <span>$54.00</span>
-                              </div>
+
+                              <h5>{{currentLanguage === 'ar' ?  otherFaculty.ar_name : otherFaculty.en_name}}</h5>
+
                             </div>
-                        </div>
+                          </div>
+                        </a>
                       </li>
-                      <li>
-                        <div class="course__sm d-flex align-items-center mb-30">
-                            <div class="course__sm-thumb mr-20">
-                              <a href="#">
-                                  <img src="assets/img/course/sm/course-sm-2.jpg" alt="">
-                              </a>
-                            </div>
-                            <div class="course__sm-content">
-                              <div class="course__sm-rating">
-                                  <ul>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                  </ul>
-                              </div>
-                              <h5><a href="#">Data Science</a></h5>
-                              <div class="course__sm-price">
-                                  <span>$72.00</span>
-                              </div>
-                            </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="course__sm d-flex align-items-center mb-10">
-                            <div class="course__sm-thumb mr-20">
-                              <a href="#">
-                                  <img src="assets/img/course/sm/course-sm-3.jpg" alt="">
-                              </a>
-                            </div>
-                            <div class="course__sm-content">
-                              <div class="course__sm-rating">
-                                  <ul>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                    <li><a href="#"> <i class="icon_star"></i> </a></li>
-                                  </ul>
-                              </div>
-                              <h5><a href="#">UX Design</a></h5>
-                              <div class="course__sm-price">
-                                  <span>Free</span>
-                              </div>
-                            </div>
-                        </div>
-                      </li>
-                  </ul>
-                </div>
+
+                    </ng-container>
+
+
+                  </ng-container>
+
+                  <ng-template #facultyEmpty>
+                    <li>
+                      {{currentLanguage === 'ar' ? 'لا يوحد كليات جديدة' : 'No new faculty'}}
+                    </li>
+                  </ng-template>
+
+                </ul>
+              </div>
             </div>
           </div>
       </div>

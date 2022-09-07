@@ -1,7 +1,7 @@
   <app-loader *ngIf="loading"></app-loader>
   <!-- page title area start -->
-  <section class=" page__title-area page__title-height page__title-overlay d-flex align-items-center"
-    style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/about/Header.jpg');">
+
     <div class="container">
       <div class="row">
         <div class="col-xxl-12">
@@ -11,7 +11,7 @@
             </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="contact-us">{{'breadcrumb_home' | translate}}</a></li>
+                <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
                 <li  class="breadcrumb-item active" aria-current="page">
                   <a routerLink="/destinations">
                     {{"destination" | translate }}
@@ -34,46 +34,50 @@
         <div class="col-xxl-9 col-xl-9 col-lg-9">
 
           <div class="row">
-            <div class="col-lg-6 wow animate__animated animate__slideInUp" *ngFor="let destination of destinations.slice().reverse()">
-              <div class="course__item white-bg mb-30 fix">
-                <div class="row gx-0 align-items-center">
-                  <div class="col-xxl-3 col-xl-3 col-lg-3">
-                    <div class="course__thumb course__thumb-list w-img p-relative fix text-center">
-                      <a [routerLink]="['/destination', destination.id]">
-                        <img [src]="destinationImage+destination.flag" alt="">
-                      </a>
-                      <!-- <div class="course__tag">
-                        <a href="#">Art & Design</a>
-                      </div> -->
-                    </div>
-                  </div>
-                  <div class="col-xxl-9 col-xl-9 col-lg-9">
-                    <div class="course__right">
-                      <div class="course__content course__content-4">
-
-                        <h3 class="course__title">
-                          <a href="course-details.html">
-                            {{currentLanguage === 'ar' ? destination.ar_name : destination.en_name}}
-                          </a>
-                        </h3>
-
+            <ng-container *ngIf="(destinations  | searchDestination: term) as destinations">
+              <div class="col-lg-6 wow animate__animated animate__slideInUp" *ngFor="let destination of destinations">
+                <div class="course__item white-bg mb-30 fix">
+                  <div class="row gx-0 align-items-center">
+                    <div class=" col-3">
+                      <div class="course__thumb course__thumb-list w-img p-relative fix text-center">
+                        <a [routerLink]="['/destination', destination.id]">
+                          <img [src]="destinationImage+destination.flag" alt="">
+                        </a>
+                        <!-- <div class="course__tag">
+                          <a href="#">Art & Design</a>
+                        </div> -->
                       </div>
-                      <div
-                        class="course__more course__more-2 course__more-3 d-flex justify-content-between align-items-center">
+                    </div>
+                    <div class=" col-9">
+                      <div class="course__right">
+                        <div class="course__content course__content-4">
 
-                        <div class="course__btn">
-                          <a [routerLink]="['/destination' , destination.id]" *ngIf="currentLanguage === 'ar'" class="link-btn">
-                            <i class="far fa-arrow-left"></i>
-                            <i class="far fa-arrow-left"></i>
-                            {{"know_more_destinations" | translate}}
-                          </a>
+                          <h3 class="course__title">
+                            <a>
+                              {{currentLanguage === 'ar' ? destination.ar_name : destination.en_name}}
+                            </a>
+                          </h3>
+
+                        </div>
+                        <div
+                          class="course__more d-flex justify-content-between align-items-center">
+
+                          <div class="course__btn">
+                            <a [routerLink]="['/destination' , destination.id]"  class="link-btn">
+                              {{"know_more_destinations" | translate}}
+                              <i class="far" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i>
+                              <i class="far" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <h4 *ngIf="destinations.length === 0">{{ currentLanguage === 'ar' ? 'لا يوجد بلاد' : 'No destinations' }}</h4>
+            </ng-container>
+
 
           </div>
 
@@ -81,9 +85,8 @@
         <div class="col-xxl-3 col-xl-3 col-lg-3">
           <div class="course__sidebar">
             <div class="course__sidebar-search mb-50">
-              <form action="#">
-                <input type="text" placeholder="Search for courses...">
-                <button type="submit">
+              <input type="text"[(ngModel)]="term" [placeholder]="currentLanguage === 'ar' ? 'أبحث في البلاد' : 'Search for destinations...'">
+              <!-- <button type="submit">
                   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                     x="0px" y="0px" viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;"
                     xml:space="preserve">
@@ -96,8 +99,7 @@
                       </g>
                     </g>
                   </svg>
-                </button>
-              </form>
+                </button> -->
             </div>
 
           </div>

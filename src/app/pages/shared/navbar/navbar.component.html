@@ -2,30 +2,36 @@
   <header class="main-header">
     <div class="top-header">
       <div class="container">
-          <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between">
 
-            <div class="left-side  ">
-              <ul>
-                <li><span class="icon round-border"><i class="fas fa-mobile"></i></span> <a target="_blank" href="tel:+2-01000670590" class="tran3s">2-01000670590+
+          <div class="left-side  ">
+            <ul>
+              <li><span class="icon round-border"><i class="fas fa-mobile"></i></span> <a target="_blank"
+                  href="tel:+2-01000670590" class="tran3s">2-01000670590+
                 </a></li>
-                <li><span class="icon round-border"><i class="fa fa-envelope"></i></span> <a target="_blank" href="mailto:admission@egecmena.com" class="tran3s">admission@egecmena.com
+              <li><span class="icon round-border"><i class="fa fa-envelope"></i></span> <a target="_blank"
+                  href="mailto:admission@egecmena.com" class="tran3s">admission@egecmena.com
                 </a></li>
-                <li><span class="icon round-border"><i class="fa fa-map-marker-alt"></i></span> <a target="_blank" href="https://goo.gl/maps/bSEjqsTUM18XSAEF6" class="tran3s">11 هارون ، الدقي ، الجيزة ، مصر
+              <li><span class="icon round-border"><i class="fa fa-map-marker-alt"></i></span> <a target="_blank"
+                  href="https://goo.gl/maps/3iHBEFt2wF4pUShT9" class="tran3s">{{"address" | translate}}
 
                 </a></li>
 
-              </ul>
+            </ul>
 
-            </div> <!-- /.left-side -->
+          </div> <!-- /.left-side -->
 
-            <div class="right-side">
-              <ul>
-                <li><a target="_blank" href="https://www.facebook.com/EGEC.EDU/" class="tran3s round-border icon"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                    <li><a target="_blank" href="https://twitter.com/Egy_Gulf" class="tran3s round-border icon"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a target="_blank" href="https://www.instagram.com/egygulf2015" class="tran3s round-border icon"><i class="fab fa-instagram"></i></a></li>
-              </ul>
-            </div>
+          <div class="right-side">
+            <ul>
+              <li><a target="_blank" href="https://www.facebook.com/EGEC.EDU/" class="tran3s round-border icon"><i
+                    class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+              <li><a target="_blank" href="https://twitter.com/Egy_Gulf" class="tran3s round-border icon"><i
+                    class="fab fa-twitter" aria-hidden="true"></i></a></li>
+              <li><a target="_blank" href="https://www.instagram.com/egygulf2015" class="tran3s round-border icon"><i
+                    class="fab fa-instagram"></i></a></li>
+            </ul>
           </div>
+        </div>
 
       </div>
     </div>
@@ -47,30 +53,46 @@
             <div class="main-menu main-menu-2">
               <nav id="mobile-menu">
                 <ul>
-                  <li >
-                    <a routerLink="/">الرئيسية</a>
+                  <li>
+                    <a routerLink="/">
+                      {{"navbar_home_text" | translate}}
+                    </a>
 
                   </li>
-                  <li >
-                    <a routerLink="/about-us">من نحن </a>
+                  <li>
+                    <a routerLink="/about-us">
+                      {{"navbar_about_text" | translate}}
+
+                    </a>
 
                   </li>
                   <li class="has-dropdown destination_li" (mouseenter)="mouseEnter()">
-                    <a routerLink="/destinations">الدراسة بالخارج </a>
+                    <a routerLink="/destinations">
+                      {{"navbar_destination_text" | translate}}
+
+                    </a>
                     <ul class="submenu">
                       <li *ngFor="let destination of destinations" (click)="onClickLi()">
-                        <a [routerLink]="['/destination/', destination.id]">{{currentLanguage === 'ar' ? destination.ar_name  :  destination.en_name}}</a>
+                        <a
+                          [routerLink]="['/destination/', destination.id]">{{currentLanguage === 'ar' ? destination.ar_name  :  destination.en_name}}</a>
                       </li>
 
                     </ul>
                   </li>
 
-                  <li><a routerLink="contact-us">اتصل بنا </a></li>
+                  <li><a routerLink="contact-us">
+                      {{"navbar_contact_text" | translate}}
+
+                    </a></li>
                   <li *ngIf="currentLanguage === 'ar'">
-                    <a (click)="showcurrentLanguage('en')">English</a>
+                    <a (click)="showcurrentLanguage('en')">
+                      <img src="assets/theme/img/flags/usa.png" class="header__area--language" alt="header language">
+                    </a>
                   </li>
                   <li *ngIf="currentLanguage === 'en'">
-                    <a (click)="showcurrentLanguage('ar')">عربي</a>
+                    <a (click)="showcurrentLanguage('ar')">
+                      <img src="assets/theme/img/flags/egypt.png" class="header__area--language" alt="header language">
+                    </a>
                   </li>
                 </ul>
               </nav>
@@ -78,21 +100,32 @@
           </div>
           <div class="header__right">
             <div class="header__btn header__btn-2 d-none d-sm-block">
-              <a routerLink="/login" class="e-btn button_login" *ngIf="!isLogined">{{"navbar-button" | translate}} <i class="fas fa-chevron-right"></i></a>
+              <a routerLink="/login" class="e-btn button_login" *ngIf="!isLogined">
+                <p class="mb-0">
+                  {{"navbar-button" | translate}}
+                </p>
+                <i class="fas fa-chevron-right"></i>
+              </a>
               <div class="main-menu main-menu-2" *ngIf="isLogined">
                 <nav id="mobile-menu">
                   <ul>
-              <li class="has-dropdown">
-                <a >{{userArray.name}}</a>
-                <ul class="submenu">
-                  <li><a routerLink="/personal-information">{{currentLanguage === 'ar' ? 'المعلومات الشخصية' : 'Personal Information'}}</a></li>
-                  <li *ngIf="userPersonalInfo?.full_name != null"><a routerLink="/academic-information">{{currentLanguage === 'ar' ? 'المعلومات الأكاديمية' : 'Academic Information'}}</a></li>
-                  <li *ngIf="paperStatus.message != undefined"><a routerLink="/movement-information">{{currentLanguage === 'ar' ? 'حركة الملفات' : 'Movement Information'}}</a></li>
-                  <li><a (click)="logout()">خروج</a></li>
-                </ul>
-              </li>
-              </ul>
-              </nav>
+                    <li class="has-dropdown">
+                      <a>{{userArray.name}}</a>
+                      <ul class="submenu">
+                        <li><a
+                            routerLink="/personal-information">{{currentLanguage === 'ar' ? 'المعلومات الشخصية' : 'Personal Information'}}</a>
+                        </li>
+                        <li *ngIf="userPersonalInfo?.full_name != null"><a
+                            routerLink="/academic-information">{{currentLanguage === 'ar' ? 'المعلومات الأكاديمية' : 'Academic Information'}}</a>
+                        </li>
+                        <li *ngIf="paperStatus?.message != undefined"><a
+                            routerLink="/movement-information">{{currentLanguage === 'ar' ? 'حركة الملفات' : 'Movement Information'}}</a>
+                        </li>
+                        <li><a (click)="logout()">{{currentLanguage === 'ar' ?  'خروج' : 'Logout'}}</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
             <div class="sidebar__menu d-xl-none">
@@ -110,29 +143,118 @@
   <!-- header area end -->
 
   <!-- sidebar area start -->
-  <div class="sidebar__area">
+  <div class="sidebar__area responsive_navbar">
     <div class="sidebar__wrapper">
-      <div class="sidebar__close">
-        <button (click)="closeNavbar()" class="sidebar__close-btn" id="sidebar__close-btn">
-          <span><i class="fal fa-times"></i></span>
-          <span>close</span>
-        </button>
-      </div>
-      <div class="sidebar__content">
-        <div class="mobile-menu fix"></div>
+      <!-- <div class="sidebar__close">
 
-        <div class="sidebar__cart mt-30">
-          <a href="#">
-            <div class="header__cart-icon">
-              <svg viewBox="0 0 24 24">
-                <circle class="st0" cx="9" cy="21" r="1" />
-                <circle class="st0" cx="20" cy="21" r="1" />
-                <path class="st0" d="M1,1h4l2.7,13.4c0.2,1,1,1.6,2,1.6h9.7c1,0,1.8-0.7,2-1.6L23,6H6" />
-              </svg>
-            </div>
-            <span class="cart-item">2</span>
-          </a>
+      </div> -->
+      <!-- <div class="sidebar__content">
+        <div class="mobile-menu fix">
+          <ul>
+            <li >
+              <a routerLink="/">
+                {{"navbar_home_text" | translate}}
+                </a>
+
+            </li>
+            <li >
+              <a routerLink="/about-us">
+                {{"navbar_about_text" | translate}}
+
+                </a>
+
+            </li>
+            <li class="has-dropdown destination_li" (mouseenter)="mouseEnter()">
+              <a routerLink="/destinations">
+                {{"navbar_destination_text" | translate}}
+
+                </a>
+              <ul class="submenu">
+                <li *ngFor="let destination of destinations" (click)="onClickLi()">
+                  <a [routerLink]="['/destination/', destination.id]">{{currentLanguage === 'ar' ? destination.ar_name  :  destination.en_name}}</a>
+                </li>
+
+              </ul>
+            </li>
+
+            <li><a routerLink="contact-us">
+              {{"navbar_contact_text" | translate}}
+
+              </a></li>
+            <li *ngIf="currentLanguage === 'ar'">
+              <a (click)="showcurrentLanguage('en')">
+                English
+              </a>
+            </li>
+            <li *ngIf="currentLanguage === 'en'">
+              <a (click)="showcurrentLanguage('ar')">
+                عربي
+              </a>
+            </li>
+          </ul>
         </div>
+
+
+      </div> -->
+      <div class="sidebar__content">
+        <div class="logo mb-20 d-flex justify-content-between">
+          <a routerLink="/">
+            <img src="assets/theme/img/logo/logo.png" alt="logo">
+          </a>
+          <button (click)="closeNavbar()" class="btn sidebar__close-btn" id="sidebar__close-btn">
+            <span><i class="fal fa-times"></i></span>
+          </button>
+        </div>
+        <div class="mobile-menu fix mean-container">
+          <div class="mean-bar"><a href="#nav" class="meanmenu-reveal"
+              style="right: 0px; left: auto; display: inline;"><span><span><span></span></span></span></a>
+            <nav class="mean-nav">
+              <ul style="display: none;">
+                <li (click)="closeNavbar()">
+                  <a routerLink="/">
+                    {{"navbar_home_text" | translate}}
+                  </a>
+
+                </li>
+                <li (click)="closeNavbar()">
+                  <a routerLink="/about-us">
+                    {{"navbar_about_text" | translate}}
+
+                  </a>
+
+                </li>
+                <li  (click)="closeNavbar()">
+                  <a routerLink="/destinations">
+                    {{"navbar_destination_text" | translate}}
+
+                  </a>                
+                </li>
+                <li (click)="closeNavbar()"><a routerLink="contact-us">
+                  {{"navbar_contact_text" | translate}}
+
+                </a></li> 
+                <li (click)="closeNavbar()">
+                  <a routerLink="/login">
+                    {{"navbar-button" | translate}}
+                  </a>
+
+                </li>  
+                <li (click)="closeNavbar()" *ngIf="currentLanguage === 'ar'">
+                  <a (click)="showcurrentLanguage('en')">
+                    English
+                  </a>
+                </li>
+                <li (click)="closeNavbar()" *ngIf="currentLanguage === 'en'">
+                  <a (click)="showcurrentLanguage('ar')">
+                    
+                  </a>
+                </li>           
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -141,29 +263,29 @@
   <!-- sidebar area end -->
   <div id="sidebar" style="display: flex;">
     <div id="sidebar_container">
-        <ul class="list-unstyled icons_container">
-            <li class="whatsapp" title="Whatsapp"><a href="https://api.whatsapp.com/send?phone=01000670590" target="_blank">
-              <img src="assets/theme/img/icon/whatsapp.png" alt="Whatsapp">
-            </a></li>
-            <li class="facebook" title="Facebook"><a href="https://www.facebook.com/EGEC.EDU/" target="_blank">
-              <img src="assets/theme/img/icon/facebook.png" alt="Facebook">
+      <ul class="list-unstyled icons_container">
+        <li class="whatsapp" title="Whatsapp"><a href="https://api.whatsapp.com/send?phone=01000670590" target="_blank">
+            <img src="assets/theme/img/icon/whatsapp.png" alt="Whatsapp">
+          </a></li>
+        <li class="facebook" title="Facebook"><a href="https://www.facebook.com/EGEC.EDU/" target="_blank">
+            <img src="assets/theme/img/icon/facebook.png" alt="Facebook">
 
-            </a></li>
-            <li class="instgram" title="Instagram"><a href="https://www.instagram.com/egygulf2015" target="_blank">
-              <img src="assets/theme/img/icon/instgram.png" alt="Instagram">
+          </a></li>
+        <li class="instgram" title="Instagram"><a href="https://www.instagram.com/egygulf2015" target="_blank">
+            <img src="assets/theme/img/icon/instgram.png" alt="Instagram">
 
-            </a></li>
-            <li class="twitter" title="Twitter"><a href="https://twitter.com/Egy_Gulf" target="_blank">
-              <img src="assets/theme/img/icon/twitter.png" alt="Twitter">
-            </a></li>
-            <li class="admission_form addmission_sidebar" title="Admission form">
-              <a href="">
+          </a></li>
+        <li class="twitter" title="Twitter"><a href="https://twitter.com/Egy_Gulf" target="_blank">
+            <img src="assets/theme/img/icon/twitter.png" alt="Twitter">
+          </a></li>
+        <li (click)="openAdmissionForm()" class="admission_form addmission_sidebar" title="Admission form">
+          <a>
 
-                <img src="assets/theme/img/icon/form.png" alt="Admission form">
-              </a>
-            </li>
+            <img src="assets/theme/img/icon/form.png" alt="Admission form">
+          </a>
+        </li>
 
-        </ul>
+      </ul>
 
 
     </div>
@@ -174,4 +296,4 @@
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </button>
     <div class="clearfix"></div>
-</div>
+  </div>
