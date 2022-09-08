@@ -12,7 +12,7 @@
           </h3>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 {{ currentLanguage === 'ar' ? 'معلومات أكاديمية' : 'Academic information' }}
               </li>
@@ -59,8 +59,18 @@
                     <div class="sign__input">
                       <select formControlName="degree_name" [ngModel]="userAcademicInfo?.academicInfo?.degree_name" name="degree_name">
                         <option value="" [selected]="currentLanguage === 'ar' ? 'اختار' : 'choose'">{{ currentLanguage === 'ar' ? 'اختار' : 'choose' }}</option>
-                        <option value="دبلوم متوسط">دبلوم متوسط</option>
-                        <option value="دبلوم فوق المتوسط" selected="">دبلوم فوق المتوسط</option>
+                        <ng-container *ngIf="currentLanguage === 'ar'">
+                          <option value="دبلوم متوسط">دبلوم متوسط</option>
+                          <option value="دبلوم فوق المتوسط">دبلوم فوق المتوسط</option>
+                        </ng-container>
+                        <ng-container *ngIf="currentLanguage === 'en'">
+                          <option value="دبلوم متوسط">Intermediate Secondary Diploma
+                          </option>
+                          <option value="دبلوم فوق المتوسط">
+                            Upper Intermediate Secondary
+                          </option>
+                        </ng-container>
+
                       </select>
                       <i class="fal fa-user"></i>
                     </div>
@@ -68,7 +78,7 @@
                     *ngIf="academicInformationForm.controls['degree_name'].touched && academicInformationForm.controls['degree_name'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ?  'المؤهل الأكاديمي قبل الجامعي مطلوب'  : 'Degree name is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
 
                   </div>
                 </div>
@@ -109,7 +119,7 @@
                     *ngIf="academicInformationForm.controls['degree_year'].touched && academicInformationForm.controls['degree_year'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'سنة التخرج مطلوبة' : 'Degree year is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-20">
@@ -377,7 +387,7 @@
                     *ngIf="academicInformationForm.controls['degree_country'].touched && academicInformationForm.controls['degree_country'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'بلد المؤهل الأكاديمي قبل الجامعي' : 'Degree country is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-20">
@@ -392,7 +402,7 @@
                     *ngIf="academicInformationForm.controls['school_name'].touched && academicInformationForm.controls['school_name'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'اسم المدرسة مطلوب' : 'School name is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
 
@@ -408,7 +418,7 @@
                     *ngIf="academicInformationForm.controls['gpa_precentage'].touched && academicInformationForm.controls['gpa_precentage'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'النسبة المئوية % مطلوبة' : 'Gpa percentage is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-20">
@@ -418,9 +428,17 @@
                       <select [ngModel]="userAcademicInfo?.academicInfo?.education_system" formControlName="education_system" name="education_system" id="education_system"
                         class="d-block" required="">
                         <option value="" [selected]="currentLanguage === 'ar' ? 'اختار' : 'choose'">{{ currentLanguage === 'ar' ? 'اختار' : 'choose' }}</option>
-                          <option value="علمي علوم">علمي علوم</option>
-                          <option value="علمي رياضة">علمي رياضة</option>
-                          <option value="ادبي">ادبي</option>
+                      <ng-container *ngIf="currentLanguage === 'ar'">
+                        <option value="علمي علوم">علمي علوم</option>
+                        <option value="علمي رياضة">علمي رياضة</option>
+                        <option value="ادبي">ادبي</option>
+                      </ng-container>
+                      <ng-container *ngIf="currentLanguage === 'en'">
+                        <option value="علمي علوم">Scientific Section</option>
+                        <option value="علمي رياضة">Mathematical Section</option>
+                        <option value="ادبي">Literary Section</option>
+                      </ng-container>
+
                       </select>
                       <i class="fas fa-books"></i>
                     </div>
@@ -428,7 +446,7 @@
                     *ngIf="academicInformationForm.controls['education_system'].touched && academicInformationForm.controls['education_system'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ?  'النظام التعليمي مطلوب' : 'Eduction system is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
 
@@ -437,7 +455,7 @@
 
 
               </div>
-              <button class="e-btn w-100" [disabled]="academicInformationForm.invalid"> <span>
+              <button class="e-btn w-100" [disabled]="academicInformationForm.invalid || academicInformationForm.pristine"> <span>
                   {{currentLanguage === 'ar' ? ' ابدا الان' : 'Start now' }}
                 </span> </button>
 

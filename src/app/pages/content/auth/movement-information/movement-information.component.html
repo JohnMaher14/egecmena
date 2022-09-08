@@ -13,7 +13,7 @@
           </h3>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 {{ currentLanguage === 'ar' ? 'حركة الملفات' : 'Paper movement' }}
               </li>
@@ -71,7 +71,7 @@
                       *ngIf="firstPaper.controls['passport'].touched && firstPaper.controls['passport'].errors != null"
                       type="button" popover="Passport is required"
                       [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                     </div>
                   </div>
 
@@ -87,7 +87,7 @@
                       *ngIf="firstPaper.controls['secondary_certificate'].touched && firstPaper.controls['secondary_certificate'].errors != null"
                       type="button" popover="Secondary certificate is required"
                       [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                     </div>
                   </div>
                   <div class="sign__input-wrapper mb-10">
@@ -102,7 +102,7 @@
                       *ngIf="firstPaper.controls['birth_certificate'].touched && firstPaper.controls['birth_certificate'].errors != null"
                       type="button" popover="Birth certificate is required"
                       [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                     </div>
                   </div>
 
@@ -111,7 +111,7 @@
 
 
                 </div>
-                <button class="e-btn w-100" [disabled]="firstPaper.invalid"> <span>
+                <button class="e-btn w-100" [disabled]="firstPaper.invalid ||  firstPaper.pristine"> <span>
                     {{currentLanguage === 'ar' ? ' أكمل' : 'Continue' }}
                   </span> </button>
 
@@ -135,7 +135,7 @@
                     *ngIf="secondPaper.controls['diploma'].touched && secondPaper.controls['diploma'].errors != null"
                     type="button" popover="diploma is required"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
 
@@ -151,7 +151,7 @@
                     *ngIf="secondPaper.controls['authorization'].touched && secondPaper.controls['authorization'].errors != null"
                     type="button" popover="authorization certificate is required"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
@@ -166,7 +166,7 @@
                     *ngIf="secondPaper.controls['image'].touched && secondPaper.controls['image'].errors != null"
                     type="button" popover="Image is required"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
@@ -181,7 +181,7 @@
                     *ngIf="secondPaper.controls['last_document'].touched && secondPaper.controls['last_document'].errors != null"
                     type="button" popover="Last document is required"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
 
@@ -190,7 +190,7 @@
 
 
               </div>
-              <button class="e-btn w-100" [disabled]="secondPaper.invalid"> <span>
+              <button class="e-btn w-100" [disabled]="secondPaper.invalid  ||  secondPaper.pristine"> <span>
                   {{currentLanguage === 'ar' ? ' أكمل' : 'Continue' }}
                 </span> </button>
 

@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/content/auth/login/login.component';
 import { MovementInformationComponent } from './pages/content/auth/movement-information/movement-information.component';
 import { PersonalInformationComponent } from './pages/content/auth/personal-information/personal-information.component';
 import { RegisterComponent } from './pages/content/auth/register/register.component';
+import { BlogDetailsComponent } from './pages/content/blog-details/blog-details.component';
 import { ContactUsComponent } from './pages/content/contact-us/contact-us.component';
 import { DestinationComponent } from './pages/content/destination/destination.component';
 import { DestinationsComponent } from './pages/content/destinations/destinations.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'destinations', component: DestinationsComponent },
   { path: 'destination/:id', component: DestinationComponent },
   { path: 'university/:id', component: UniversitiesComponent },
+  { path: 'blog' , component: BlogDetailsComponent },
   { path: 'faculty/:faculty_id/:university_id', component: FacultyComponent },
   { path:'**' , component: NotfoundComponent },
 ];

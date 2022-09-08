@@ -11,7 +11,7 @@
           </h3>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">
                 {{ currentLanguage === 'ar' ? 'معلومات شخصية' : 'Personal information' }}
               </li>
@@ -67,7 +67,7 @@
                     *ngIf="personalInforrmation.controls['full_name'].touched && personalInforrmation.controls['full_name'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'الأسم بالكامل مطلوب' : 'Full name is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
@@ -334,7 +334,7 @@
                     *ngIf="personalInforrmation.controls['nation'].touched && personalInforrmation.controls['nation'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'بلد الأقامة مطلوبة' : 'Nation is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
@@ -602,7 +602,7 @@
                     *ngIf="personalInforrmation.controls['nationality'].touched && personalInforrmation.controls['nationality'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'الجنسية مطلوبة' : 'Nationality is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
@@ -618,7 +618,7 @@
                     *ngIf="personalInforrmation.controls['address'].touched && personalInforrmation.controls['address'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'العنوان مطلوب' : 'Address is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                 </div>
                 <div class="sign__input-wrapper mb-10">
                   <h5>{{ currentLanguage === 'ar' ? 'المنطقة' : 'Area' }}</h5>
@@ -633,7 +633,7 @@
                     *ngIf="personalInforrmation.controls['area'].touched && personalInforrmation.controls['area'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'المنطقة مطلوبة' : 'Area is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                 </div>
                 <div class="sign__input-wrapper mb-10">
                   <h5>{{ currentLanguage === 'ar' ? 'تاريخ الميلاد' : 'Birthdate' }}</h5>
@@ -647,7 +647,7 @@
                     *ngIf="personalInforrmation.controls['birthdate'].touched && personalInforrmation.controls['birthdate'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'تاريخ الميلاد مطلوب' : 'Birthdate is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
@@ -666,26 +666,17 @@
                     *ngIf="personalInforrmation.controls['gender'].touched && personalInforrmation.controls['gender'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'النوع مطلوب' : 'Gender is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
                   </div>
                 </div>
                 <div class="sign__input-wrapper mb-10">
                   <h5>{{ currentLanguage === 'ar' ? 'الدرجة العلمية المطلوبة' : 'Degree needed' }}</h5>
                   <div class="sign__input--container">
                     <div class="sign__input">
-                      <select [ngModel]="userPersonalInfo?.degree_needed" formControlName="degree_needed">
-                        <option value="" [selected]="currentLanguage === 'ar' ? 'اختار' : 'Choose'">{{ currentLanguage === 'ar' ? 'اختار' : 'Choose' }}</option>
-                        <option value="Bachelor">Bachelor</option>
-                        <option value="Master">Master</option>
-                        <option value="PhD">PhD</option>
-                      </select>
-                      <i class="fas fa-university"></i>
+                      <input [ngModel]="userPersonalInfo?.degree_needed" formControlName="degree_needed" readonly>
                     </div>
-                    <button
-                    *ngIf="personalInforrmation.controls['degree_needed'].touched && personalInforrmation.controls['degree_needed'].errors != null"
-                    type="button" [popover]="currentLanguage === 'ar' ? 'الدرجة العلمية مطلوبة' : 'Degree needed is required'"
-                    [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    <i class="fas fa-cap"></i>
+
                   </div>
                 </div>
 
@@ -693,7 +684,7 @@
 
 
               </div>
-              <button class="e-btn w-100" [disabled]="personalInforrmation.invalid"> <span>
+              <button class="e-btn w-100" [disabled]="personalInforrmation.invalid || personalInforrmation.pristine"> <span>
                   {{currentLanguage === 'ar' ? ' أكمل' : 'Continue' }}
                 </span> </button>
 

@@ -25,7 +25,8 @@ export class PersonalInformationComponent implements OnInit {
     private _TranslateService: TranslateService,
     private _Title: Title,
     private _Router: Router,
-    private _AuthenticationService: AuthenticationService
+    private _AuthenticationService: AuthenticationService,
+    private _ToastrService:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -67,46 +68,45 @@ export class PersonalInformationComponent implements OnInit {
         console.log(response);
         if(response.error === 'Something went wrong, please try again later!'){
           if (this.currentLanguage === 'ar') {
-            Swal.fire(
-              `لقد تم حفظ بياناتك الشخصية`,
-              `${response.ar_error}`,
-              'error'
-            );
+
+            this._ToastrService.error(`${response.ar_error}`,`هناك شئ خاطئ، يرجى المحاولة فى وقت لاحق!` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
+
           } else {
-            Swal.fire(
-              `Your personal information had saved`,
-              `${response.error}`,
-              'error'
-            );
+
+            this._ToastrService.error(`${response.error}`,`Something went wrong, please try again later!` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
           }
           this.actionLoading = false;
 
         }
         if(response.success){
           if (this.currentLanguage === 'ar') {
-            Swal.fire(
-              `لقد تم حفظ بياناتك الشخصية`,
-              `${response.ar_success}`,
-              'success',
 
-            );
+            this._ToastrService.success(`${response.ar_success}`,`لقد تم حفظ بياناتك الشخصية` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
             setTimeout(() => {
               Swal.close()
 
               this._Router.navigate(['/academic-information'])
             }, 1000);
           } else {
-            Swal.fire(
-              `Your personal information had saved`,
-              `${response.success}`,
-              'success'
-            );
-            setTimeout(() => {
-              Swal.close()
-              this._Router.navigate(['/academic-information'])
-            }, 1000);
+
+            this._ToastrService.success(`${response.ar_success}`,`Your personal information had saved` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
+            // setTimeout(() => {
+            //   Swal.close()
+            //   this._Router.navigate(['/academic-information'])
+            // }, 1000);
           }
-          // localStorage.setItem('')
           this.actionLoading = false;
 
         }

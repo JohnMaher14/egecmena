@@ -64,10 +64,16 @@ export class AcademicInformationComponent implements OnInit {
         console.log(response);
         if(response.success){
           if(this.currentLanguage === 'en'){
-            this._ToastrService.success(`${response.success}`,`success`)
+            this._ToastrService.success(`${response.success}`,`success` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
 
           }else if(this.currentLanguage === 'ar'){
-            this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح`)
+            this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
           }
         }
         this.actionLoading = false;

@@ -1,0 +1,117 @@
+
+
+<!-- <app-loader></app-loader> -->
+<!-- page title area start -->
+<section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/about/Header.jpg');">
+  <div class="container">
+     <div class="row">
+        <div class="col-xxl-12">
+           <div class="page__title-wrapper mt-110">
+              <h3 class="page__title">{{currentLanguage === 'ar' ? 'مقالات' : 'Blogs' }}</h3>
+              <nav aria-label="breadcrumb">
+                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/">{{"breadcrumb_home" | translate}}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{currentLanguage === 'ar' ? 'مقالات' : 'Blogs' }}</li>
+                 </ol>
+              </nav>
+           </div>
+        </div>
+     </div>
+  </div>
+</section>
+<!-- page title area end -->
+
+
+<section class="blog_details pt-90 pb-90">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <h1>{{ currentLanguage === 'ar' ? 'مصر تحتل الصدارة في استقبال ' : 'Egypt takes the lead in receiving international ' }}</h1>
+        <h3>{{ currentLanguage === 'ar' ? 'الطلاب الوافدين من الدول العربية' : 'students from Arab countries ' }}</h3>
+        <div class="blog__meta my-3 d-flex align-items-center">
+          <div class="blog__author mr-3 d-flex align-items-center">
+
+            <div class="blog__author-info">
+              <i class="fas ml-2 fa-eye"></i>
+              <span> {{100}} </span>
+            </div>
+          </div>
+          <div class="blog__date d-flex align-items-center">
+            <i class="fal ml-2 fa-clock"></i>
+            <span *ngIf="currentLanguage === 'ar'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'ar'}}</span>
+            <span *ngIf="currentLanguage === 'en'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'en'}}</span>
+            </div>
+        </div>
+        <img src="assets/theme/img/main_images/main_blog.png" class="w-100" alt="">
+
+        <p>{{ currentLanguage === 'ar' ? ' طباعة   البريد الإلكتروني Lorem ipsum للمصممين نص لوريم ايبسوم عربي  المجموعة: مقالات دعاية  الزيارات: 231203 Lorem ipsum  للمصممين نص لوريم ايبسوم بالعربي عربي انجليزي  ما هو لوريم ايبسوم  Lorem ipsum لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ... وعند موافقه العميل المبدئيه على التصميم يتم ازالة هذا النص من التصميم ويتم وضع النصوص النهائية المطلوبة للتصميم ويقول البعض ان وضع النصوص التجريبية بالتصميم قد تشغل المشاهد عن وضع الكثير من الملاحظات او الانتقادات للتصميم الاساسي.  وخلافاَ للاعتقاد السائد فإن لوريم إيبسوم ليس نصاَ عشوائياً، بل إن له جذور في الأدب اللاتيني الكلاسيكي منذ العام 45 قبل الميلاد. من كتاب "حول أقاصي الخير والشر"' : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, nam! Minus laborum aliquid adipisci possimus laboriosam, dolor quibusdam deleniti necessitatibus nisi id? Repellendus accusantium molestias eaque recusandae dicta dolorem necessitatibus repellat dolorum pariatur ratione sapiente vel, commodi fugit aperiam quidem error facere odio distinctio, ea veniam nesciunt asperiores nulla illo explicabo. Ipsum eveniet tempore aperiam voluptate aut? Soluta, molestiae cum sequi non voluptatibus minus veritatis a obcaecati? Ipsam dolor asperiores dolorum necessitatibus rem officia molestiae maxime, laudantium reprehenderit possimus sit tempore perferendis ut quis minima dignissimos unde impedit vero dolore quas praesentium. Dicta vero in ipsa possimus ullam vel fuga eius vitae blanditiis officia ad eaque consequuntur accusantium, rem voluptate itaque fugiat cupiditate sed non ratione error. Eos perspiciatis deleniti asperiores tempora quasi aliquam ducimus est sed neque fugit, repellat ex accusantium quod corrupti. Reiciendis earum impedit ducimus iure in, recusandae neque corrupti asperiores ea iste, a dolore distinctio ab et perspiciatis modi, fugit hic nemo. Laborum fuga sapiente maxime deleniti, dolorum tempore. Quo officiis deleniti qui iste rerum atque quaerat itaque rem similique! Sequi ullam repellendus rerum tenetur sapiente, laudantium voluptate dolor laboriosam sed qui! Nisi quibusdam accusantium molestias consectetur veniam molestiae dolorem, sit blanditiis nostrum ut voluptas qui quis, assumenda architecto asperiores itaque. Quam voluptatum culpa exercitationem voluptates, ipsam voluptatem velit iusto ducimus placeat animi. Officia, aperiam neque qui quo laudantium, magnam eum at, unde dignissimos quasi modi voluptatum eius iusto quam possimus? Quos amet nulla porro odio eius, aspernatur recusandae consectetur cum quo, dolorum rerum fugit excepturi?' }}</p>
+      </div>
+      <div class="col-lg-3">
+        <div class="course__sidebar-widget-2 white-bg">
+          <div class="course__sidebar-course">
+            <h3 class="course__sidebar-title">{{"related_section" | translate }}</h3>
+            <ul>
+              <!-- <ng-container *ngIf="universities.length > 1; else universityEmpty"> -->
+                <li>
+                  <a >
+
+                    <div class="course__sm d-flex align-items-center mb-30">
+                      <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
+                          <img [src]="'assets/theme/img/main_images/blog1.png '" alt="">
+                      </div>
+                      <div class="course__sm-content">
+
+                        <h5>{{currentLanguage === 'ar' ?  '4 أسباب تجعلك تبدأ رحلتك الدراسية بالخارج ' : '4 reasons to start your studying abroad journey ' }}</h5>
+
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a >
+
+                    <div class="course__sm d-flex align-items-center mb-30">
+                      <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
+                          <img [src]="'assets/theme/img/main_images/blog2.png '" alt="">
+                      </div>
+                      <div class="course__sm-content">
+
+                        <h5>{{currentLanguage === 'ar' ?  'كيف تحصل على شهادة جامعة بإجراءات بسيطة' : 'How to get a university degree with simple procedures' }}</h5>
+
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a>
+
+                    <div class="course__sm d-flex align-items-center mb-30">
+                      <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
+                          <img [src]="'assets/theme/img/main_images/blog3.png '" alt="">
+                      </div>
+                      <div class="course__sm-content">
+
+                        <h5>{{currentLanguage === 'ar' ?  ' تعرف على أحدث تصنيف الجامعات عالميًا' : 'Find out the latest university rankings in the world' }}</h5>
+
+                      </div>
+                    </div>
+                  </a>
+                </li>
+
+              <!-- </ng-container> -->
+
+              <ng-template #universityEmpty>
+                <li>
+                  {{currentLanguage === 'ar' ? 'لا يوحد جامعات أخرى حاليًا' : 'No other universities currently'}}
+                </li>
+              </ng-template>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

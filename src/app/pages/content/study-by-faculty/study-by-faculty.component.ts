@@ -41,8 +41,10 @@ export class StudyByFacultyComponent implements OnInit {
       (params:Params) => {
         this.loading = true
         this.specialId = params['params'].id;
+        console.log(this.specialId);
         this._StudyService.studyByFaculty(params['params'].id).subscribe(
           (response) => {
+            console.log(response.faculty);
             this.faculties = response.faculty
             this.loading = false;
             console.log(response.faculty);

@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
 
           }
           else{
-            this._ToastrService.success(`${response.message}` , 'تسجيل صحيح' , {
+            this._ToastrService.success(`${response.message}` , 'You register successfully' , {
               timeOut: 4000 , positionClass: 'toast-bottom-left'
             })
           }
@@ -134,9 +134,9 @@ export class RegisterComponent implements OnInit {
     this._TranslateService.onLangChange.subscribe(
       (language: any) => {
         if (language.lang == 'en') {
-          this._Title.setTitle(`${environment.title}Contact us`)
+          this._Title.setTitle(`${environment.title}Register`)
         }else if(language.lang == 'ar'){
-          this._Title.setTitle(`${environment.title}تواصل معنا`)
+          this._Title.setTitle(`${environment.title}انشاء حساب`)
 
         }
         this.currentLanguage = this._TranslateService.currentLang

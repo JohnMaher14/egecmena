@@ -45,7 +45,7 @@
   "counter_area_title":"سعداء بالتعامل مع",
   "counter__area--text1":"جامعة",
   "counter__area--text2":"طالب",
-  "counter__area--text3":"جهة الحكومية",
+  "counter__area--text3":"جهة حكومية",
   "counter__area--text4":"موظف",
   "our_story_title": "قصتنا",
   "faculty":"كليات",
@@ -61,7 +61,7 @@
   "vision": "رؤية",
   "vision_text": "تأهيل الأفراد لإكسابهم المهارات والمعارف لبناء جيل مبدع قادر على بناء مستقبل أفضل.",
   "latest_blogs": "'آخر المقالات التعليمية'",
-
+  "watches_word": "مشاهدات",
   "breadcrumb_home": "الرئيسية",
   "work_hours": "مواعيد العمل",
   "office": " موقعنا",
@@ -78,6 +78,7 @@
   "login_title":"سجل دخول الي إيجيك",
   "login_text":"ليس لديك حساب يمكنك",
   "destination": "البلاد",
+  "know_more_university":"تصفح الجامعة",
   "know_more_universities":"تصفح الجامعات",
   "know_more_destinations":"تصفح البلاد",
   "know_more_faculties":"تصفح الكلية",
@@ -109,7 +110,7 @@
   "footer_contact_us_li-4" : "سوشيال ميديا",
   "footer_links_li-1" : "الرئيسية",
   "footer_links_li-2" : "من نحن",
-  "footer_links_li-3" : "شركاؤنا",
+  "footer_links_li-3" : "الدراسة بالخارج",
   "footer_links_li-4" : "اتصل بنا",
   "search_label" : "خانة البحث"
 

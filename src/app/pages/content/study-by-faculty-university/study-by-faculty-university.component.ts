@@ -14,6 +14,7 @@ export class StudyByFacultyUniversityComponent implements OnInit {
 
   faculties: any[] = [];
   university: any;
+  faculty:any;
   universities : any[] = [];
   destinationDetail: any;
   universityImage:string = `${environment.imageUrl}universities/`;
@@ -43,6 +44,7 @@ export class StudyByFacultyUniversityComponent implements OnInit {
           (response) => {
             this.loading = true;
             console.log(response.faculty);
+            this.faculty = response.faculty[0];
             const universityArray = response.faculty.filter(
               (responseData:any) => {
                 console.log(responseData);

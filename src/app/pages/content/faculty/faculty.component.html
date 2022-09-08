@@ -78,9 +78,95 @@
                       <span>{{currentLanguage === 'ar' ? major.ar_name :  major.en_name }}</span>
                     </a>
                     <ng-template ngbNavContent>
-                      <div class="course__tab-2">
+                      <div class="course__tab-2 p-relative">
 
                         <ul ngbNav #test="ngbNav" class="nav nav-tabs tabs-2 row justify-content-center">
+                          <div class="alert alert-primary " role="alert">
+                            <h4 class="text-center">{{ currentLanguage === 'ar' ? 'هل تريد الألتحاق بالكلية' : 'Do you want to go to college?' }}</h4>
+                            <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
+                              <div class="row justify-content-center">
+                                <ng-container *ngIf="userArray !=  null && userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo.degree_name != null">
+                                  <input type="hidden" formControlName="destination" [ngModel]="destinationDetail?.en_name">
+                                  <input type="hidden" formControlName="university" [ngModel]="universityData?.en_name">
+                                  <input type="hidden" formControlName="faculty" [ngModel]="facultyData?.en_name">
+                                  <input type="hidden" formControlName="user_id" [ngModel]="userArray.id">
+                                  <!-- <div class="registerDiv button">
+                                    <button class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
+                                  </div> -->
+                                  <div class="row justify-content-center">
+                                    <div class="col-md-2 text-center">
+
+                                      <button class="btn btn-success">
+                                        <!-- <img src="https://egecmena.com/frontend/images/register.png" alt=""> -->
+                                        {{currentLanguage === 'ar' ? 'نعم' : 'Yes'}}
+                                      </button>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                      <button type="button" class="btn btn-danger">
+                                        {{currentLanguage === 'ar' ? 'لا' : 'No'}}
+
+                                      </button>
+
+                                    </div>
+                                  </div>
+                                </ng-container>
+                                <ng-container *ngIf="userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == 'No Academic Info Found' ">
+
+                                  <div class="row justify-content-center">
+                                    <div class="col-md-2 text-center">
+                                  <a routerLink="/academic-information" class="btn btn-success ">
+                                    {{currentLanguage === 'ar' ? 'نعم' : 'Yes'}}
+                                  </a>
+                                  </div>
+                                  <div class="col-md-2 text-center">
+
+                                  <button type="button" class="btn btn-danger">
+                                    {{currentLanguage === 'ar' ? 'لا' : 'No'}}
+
+                                  </button>
+                                  </div>
+                                  </div>
+                                </ng-container>
+                                <ng-container *ngIf="userPersonalInfo?.full_name == null && userArray != undefined">
+
+                                  <div class="row justify-content-center">
+                                    <div class="col-md-2 text-center">
+                                  <a routerLink="/personal-information" class="btn btn-success ">
+                                    {{currentLanguage === 'ar' ? 'نعم' : 'Yes'}}
+                                  </a>
+                                  </div>
+                                  <div class="col-md-2 text-center">
+
+                                  <button type="button" class="btn btn-danger">
+                                    {{currentLanguage === 'ar' ? 'لا' : 'No'}}
+
+                                  </button>
+                                  </div>
+                                  </div>
+                                </ng-container>
+                                <ng-container *ngIf="userArray == undefined">
+                                  <!-- <div class="registerDiv link">
+                                    <a routerLink="/login" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
+                                  </div> -->
+                                  <div class="row justify-content-center">
+                                    <div class="col-md-2 text-center">
+                                  <a routerLink="/login" class="btn btn-success ">
+                                    {{currentLanguage === 'ar' ? 'نعم' : 'Yes'}}
+                                  </a>
+                                  </div>
+                                  <div class="col-md-2 text-center">
+
+                                  <button type="button" class="btn btn-danger">
+                                    {{currentLanguage === 'ar' ? 'لا' : 'No'}}
+
+                                  </button>
+                                  </div>
+                                  </div>
+                                </ng-container>
+                              </div>
+
+                            </form>
+                          </div>
                           <li [ngbNavItem]="1" class="nav-item university__page--navitem col-lg-4">
                             <a ngbNavLink class="nav-link  university__page--navlink"> {{currentLanguage ==='ar' ? 'الأقسام' : 'Departments'}}</a>
                             <ng-template ngbNavContent>
@@ -131,47 +217,7 @@
 
                       </div>
 
-                      <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
-                        <ng-container *ngIf="userArray !=  null && userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo.degree_name != null">
-                          <input type="hidden" formControlName="destination" [ngModel]="destinationDetail?.en_name">
-                          <input type="hidden" formControlName="university" [ngModel]="universityData?.en_name">
-                          <input type="hidden" formControlName="faculty" [ngModel]="facultyData?.en_name">
-                          <input type="hidden" formControlName="user_id" [ngModel]="userArray.id">
-                          <!-- <div class="registerDiv button">
-                            <button class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
-                          </div> -->
-                          <button class="btn btn-transparent d-flex justify-content-center">
-                            <img src="https://egecmena.com/frontend/images/register.png" alt="">
-                          </button>
-                        </ng-container>
-                        <!-- {{userAcademicInfo?.academicInfo != null}}
-                        {{userAcademicInfo?.academicInfo.degree_name != null}}
-                        {{userPersonalInfo?.full_name != null}} -->
-                        <!-- {{userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == "No Academic Info Found"}} -->
-                        <ng-container *ngIf="userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == 'No Academic Info Found' ">
 
-
-                          <a routerLink="/academic-information" class="btn btn-transparent d-flex justify-content-center">
-                            <img src="https://egecmena.com/frontend/images/register.png" class="w300px">
-                          </a>
-                        </ng-container>
-                        <ng-container *ngIf="userPersonalInfo?.full_name == null && userArray != undefined">
-
-
-                          <a routerLink="/personal-information" class="btn btn-transparent d-flex justify-content-center">
-                            <img src="https://egecmena.com/frontend/images/register.png" class="w300px">
-                          </a>
-                        </ng-container>
-                        <ng-container *ngIf="userArray == undefined">
-                          <!-- <div class="registerDiv link">
-                            <a routerLink="/login" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
-                          </div> -->
-                          <a routerLink="/login" class="btn btn-transparent d-flex justify-content-center">
-                            <img src="https://egecmena.com/frontend/images/register.png" class="w300px">
-                          </a>
-                        </ng-container>
-
-                      </form>
                     </ng-template>
                   </li>
                 </ul>
@@ -238,15 +284,18 @@
               <div class="course__sidebar-course">
                 <h3 class="course__sidebar-title">{{"related_faculties" | translate }}</h3>
                 <ul>
-                  <ng-container *ngIf="otherFaculties.length > 1; else facultyEmpty">
-                    <ng-container *ngFor="let facultyUniversity of facultyUniversities">
+                  <ng-container *ngIf="otherFacultiesSpecial.length > 1; else facultyEmpty">
 
-                      <li *ngFor="let otherFaculty of otherFaculties | slice:0:3">
-                        <a *ngIf="facultyUniversity.faculty_id  === otherFaculty.id" [routerLink]="['/faculty', otherFaculty.id , facultyUniversity.university_id]">
+
+
+                    <ng-container *ngFor="let facultyUniversitySpecial of facultyUniversities">
+                    <li *ngFor="let otherFaculty of otherFacultiesSpecial | slice:0:3">
+                        <span *ngIf="  otherFaculty.id === facultyUniversitySpecial.faculty_id">{{facultyUniversitySpecial.faculty_id}}{{  otherFaculty.id === facultyUniversitySpecial.faculty_id}} </span>
+                        <a *ngIf="facultyUniversitySpecial.faculty_id === otherFaculty.id" [routerLink]="['/faculty', otherFaculty.id , facultyUniversitySpecial.university_id]">
 
                           <div class="course__sm d-flex align-items-center mb-30">
                             <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
-                                <img [src]="facultyImage+facultyUniversity.logo" alt="">
+                                <img [src]="facultyImage+facultyUniversitySpecial.logo" alt="">
                             </div>
                             <div class="course__sm-content">
 
@@ -255,9 +304,10 @@
                             </div>
                           </div>
                         </a>
+                        <!-- {{faculties.id === otherFaculty.id}} -->
                       </li>
-
                     </ng-container>
+
 
 
                   </ng-container>

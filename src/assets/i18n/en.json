@@ -62,6 +62,7 @@
   "vision": "Vision",
   "vision_text": "Qualifying individuals to provide them with skills and knowledge to build a creative generation capable of building a better future.",
   "latest_blogs": "Last educational articles",
+  "watches_word":"Views",
   "breadcrumb_home": "Home",
   "work_hours": "Working hours  ",
   "office": "Our location  ",
@@ -79,6 +80,7 @@
   "login_text":"You do not have an account you can",
   "destination": "Destination",
   "know_more_universities":"Explore universities",
+  "know_more_university":"Explore university",
   "know_more_destinations":"Explore destination",
   "know_more_faculties":"Explore faculties",
   "admission_form": "Apply Now",
@@ -109,7 +111,7 @@
   "footer_contact_us_li-4" : "سوشيال ميديا",
   "footer_links_li-1" : "Home  ",
   "footer_links_li-2" : "About",
-  "footer_links_li-3" : "Studying Abroad ",
+  "footer_links_li-3" : "Studying Abroad",
   "footer_links_li-4" : "Contact Us",
   "search_label" : "Search"
 

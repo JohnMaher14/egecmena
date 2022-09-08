@@ -16,12 +16,14 @@
       <form [formGroup]="admissionFormPage" (ngSubmit)="onSubmitAdmissionForm(admissionFormPage)">
         <div class="row">
           <div class="sign__input-wrapper mb-20">
-            <h5>{{ currentLanguage === 'ar' ? 'الدولة' : 'Full name' }}</h5>
+            <h5>{{ currentLanguage === 'ar' ? 'الدولة' : 'Country' }}</h5>
             <div class="sign__input--container">
               <div class="sign__input">
                 <select  id="admission_destination_id" formControlName="admission_destination_id" (change)="onChangeDestination($event)"  class="form-control" name="">
-                  <option value="">اختر بلد</option>
-                  <option value="{{destination.id}}" *ngFor="let destination of destinations">{{destination.ar_name}}</option>
+                  <option value="">
+                    {{ currentLanguage === 'ar' ? 'أختار بلد' :  'Choose Country' }}
+                  </option>
+                  <option value="{{destination.id}}" *ngFor="let destination of destinations">{{currentLanguage === 'ar' ?  destination.ar_name : destination.en_name}}</option>
                 </select>
                 <i class="fal fa-flag"></i>
               </div>
@@ -33,11 +35,15 @@
             </div>
           </div>
           <div class="sign__input-wrapper mb-20">
-            <h5>{{ currentLanguage === 'ar' ? 'الجامعة' : 'Full name' }}</h5>
+            <h5>{{ currentLanguage === 'ar' ? 'الجامعة' : 'University' }}</h5>
             <div class="sign__input--container">
               <div class="sign__input">
                 <select  formControlName="admission_university_id" (change)="onChangeUniversity($event)" class="form-control" name="">
-                  <option *ngIf="universityChoice" value="" selected>اختر الجامعة</option>
+                  <option *ngIf="universityChoice" value="">
+
+                    {{ currentLanguage === 'ar' ? 'اختر الجامعة' :  'Choose university' }}
+
+                  </option>
                   <option value="{{university.id}}"  *ngFor="let university of changeUniversities">{{currentLanguage === 'ar' ? university.ar_name : university.en_name}}</option>
                 </select>
                 <i class="fal fa-university"></i>
@@ -50,11 +56,15 @@
             </div>
           </div>
           <div class="sign__input-wrapper mb-20">
-            <h5>{{ currentLanguage === 'ar' ? 'الكلية' : 'Full name' }}</h5>
+            <h5>{{ currentLanguage === 'ar' ? 'الكلية' : 'Faculty' }}</h5>
             <div class="sign__input--container">
               <div class="sign__input">
                 <select  formControlName="admission_fac_uni_id" (change)="onChangeFaculty($event)" placeholder="اختر الكلية" class="form-control" name="">
-                  <option value *ngIf="facultyChoice" selected>اختر الكلية</option>
+                  <option value="" *ngIf="facultyChoice">
+
+                    {{ currentLanguage === 'ar' ? 'اختر الكلية' :  'Choose faculty' }}
+
+                  </option>
                   <ng-container  *ngFor="let facultyOrginal of faculties" >
                   <ng-container  *ngFor="let faculty of changeFaculty" >
 
@@ -63,7 +73,7 @@
                   </ng-container>
 
                 </select>
-                <i class="fal fa-university"></i>
+                <i class="far fa-users-class"></i>
               </div>
               <button
               *ngIf="admissionFormPage.controls['admission_fac_uni_id'].touched && admissionFormPage.controls['admission_fac_uni_id'].errors != null"
@@ -73,11 +83,15 @@
             </div>
           </div>
           <div class="sign__input-wrapper mb-20">
-            <h5>{{ currentLanguage === 'ar' ? 'التخصص' : 'Full name' }}</h5>
+            <h5>{{ currentLanguage === 'ar' ? 'التخصص' : 'Major' }}</h5>
             <div class="sign__input--container">
               <div class="sign__input">
                 <select (change)="onMajorSaerch($event)"   placeholder="اختر التخصص" class="form-control" name="">
-                  <option value="" *ngIf="majorChoice" selected>اختر التخصص</option>
+                  <option *ngIf="majorChoice">
+
+                    {{ currentLanguage === 'ar' ? 'اختر التخصص' :  'Choose Major' }}
+
+                  </option>
                   <option value="{{major.id}}" *ngFor="let major of majors">{{currentLanguage === 'ar' ? major.ar_name : major.en_name}}</option>
                 </select>
                 <i class="fal fa-cog"></i>
@@ -91,14 +105,17 @@
           </div>
           <input type="hidden" name="admission_fac_uni_major_id" formControlName="admission_fac_uni_major_id" [ngModel]="majorId">
           <div class="sign__input-wrapper mb-20">
-            <h5>{{ currentLanguage === 'ar' ? 'القسم' : 'Full name' }}</h5>
+            <h5>{{ currentLanguage === 'ar' ? 'القسم' : 'Department' }}</h5>
             <div class="sign__input--container">
               <div class="sign__input">
                 <select   formControlName="admission_department_id" placeholder="اختر القسم" class="form-control" name="">
-                  <option value="" *ngIf="departmentChoice" selected>اختر القسم</option>
-                  <option value="{{department.id}}" *ngFor="let department of departments">{{department.ar_name}}</option>
+                  <option *ngIf="departmentChoice">
+                    {{ currentLanguage === 'ar' ? 'اختر القسم' :  'Choose Department' }}
+
+                  </option>
+                  <option value="{{department.id}}" *ngFor="let department of departments">{{currentLanguage === 'ar' ? department.ar_name : department.en_name}}</option>
                 </select>
-                <i class="fal fa-cog"></i>
+                <i class="fal fa-user-cog"></i>
               </div>
               <!-- <input type="hidden" formControlName="user_id" [ngModel]="userArray.id"> -->
 
@@ -169,7 +186,7 @@
       </form>
     </div>
     <div class="sidebar__close">
-      <button class="sidebar__close-btn" (click)="closeAdmissionForm()" id="sidebar__close-btn">
+      <button class="btn sidebar__close-btn" (click)="closeAdmissionForm()" id="sidebar__close-btn">
         {{currentLanguage === 'ar' ? 'أغلاق' : 'Close'}}
         <!-- <span>{{currentLanguage === 'ar' ? 'أغلاق' : 'Close'}}</span> -->
       </button>

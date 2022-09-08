@@ -51,6 +51,7 @@ import { MovementInformationComponent } from './pages/content/auth/movement-info
 import { SearchUniversityPipe } from './pipes/search-university.pipe';
 import { SearchDestinationPipe } from './pipes/search-destination.pipe';
 import { InnerPageLoaderComponent } from './pages/shared/inner-page-loader/inner-page-loader.component';
+import { BlogDetailsComponent } from './pages/content/blog-details/blog-details.component';
 registerLocaleData(ar)
 registerLocaleData(en)
 
@@ -80,7 +81,8 @@ registerLocaleData(en)
     MovementInformationComponent,
     SearchUniversityPipe,
     SearchDestinationPipe,
-    InnerPageLoaderComponent
+    InnerPageLoaderComponent,
+    BlogDetailsComponent
   ],
   imports: [
     BrowserModule,

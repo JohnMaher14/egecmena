@@ -177,8 +177,12 @@ export class AdmissionFormComponent implements OnInit {
         if(this.currentLanguage === 'en'){
           this._ToastrService.success(`${response.success}`,`success`)
 
+          this.actionLoading = false;
+          this.closeAdmissionForm();
         }else if(this.currentLanguage === 'ar'){
           this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح`)
+          this.actionLoading = false;
+          this.closeAdmissionForm();
         }
       }
     )

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { AboutService } from 'src/app/services/about.service';
 import { environment } from 'src/environments/environment';
-import SwiperCore , { SwiperOptions , Navigation } from 'swiper';
-SwiperCore.use([Navigation]);
 
 @Component({
   selector: 'app-about-us',
@@ -21,13 +19,18 @@ export class AboutUsComponent implements OnInit {
   constructor(
     private _AboutService:AboutService,
     private _TranslateService:TranslateService,
-    private _Title:Title
+    private _Title:Title,
+    private _Meta:Meta
   ) { }
 
   ngOnInit(): void {
     this.showPartners();
     this.showAboutus();
     this.translateFunction()
+    this._Meta.addTags([
+
+      {name: 'description' , content: 'ssssssssssssssss'}
+    ])
   }
   showPartners(){
     this.loading = true;
@@ -65,36 +68,30 @@ export class AboutUsComponent implements OnInit {
       }
     )
   }
-  clientsSlider: SwiperOptions = {
-    slidesPerView: 3,
-    spaceBetween: 50,
+  clientsSlider: OwlOptions = {
     loop: true,
-    autoplay:true,
-    // navText: [`<i class="fa fa-angle-right"></i>`
-    // , `<i class="fa fa-angle-left"></i>`],
-
-    breakpoints: {
+    dots: false,
+    margin:30,
+    rtl: true,
+    autoplay: true,
+    nav: false,
+    responsive: {
       0: {
-        slidesPerView: 1
+        items: 1
       },
       400: {
-        slidesPerView: 3
+        items: 1
       },
-
       940: {
 
-        slidesPerView: 4,
+        items: 3,
       },
-      1600: {
+      1024: {
 
-        slidesPerView: 4,
-      }
+        items: 4,
+      },
+
     }
   }
-  onSwiper([swiper]:any) {
-    console.log(swiper);
-  }
-  onSlideChange() {
-    console.log('slide change');
-  }
+
 }

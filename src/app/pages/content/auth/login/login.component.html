@@ -12,7 +12,7 @@
           </h3>
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{"login" | translate }}</li>
             </ol>
           </nav>
@@ -61,10 +61,13 @@
 
                     <button *ngIf="loginForm.controls['email'].errors['required']" type="button"
                       [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني مطلوب' : 'Email is required'" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      class="btn-danger validation"
+                      triggers="mouseenter:mouseleave"
+                      ><i class="fa fa-exclamation"></i></button>
                     <button *ngIf="loginForm.controls['email'].errors['email']" type="button"
                       [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني غير صحيح' : 'Email is invalid'" [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                      class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                      class="btn-danger validation" triggers="mouseenter:mouseleave"
+                      ><i class="fa fa-exclamation"></i></button>
 
                   </ng-container>
                 </div>
@@ -80,7 +83,9 @@
                     *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors != null"
                     type="button" [popover]="currentLanguage === 'ar' ? 'كلمة السر غير صحيحة' : 'password is required'"
                     [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
-                    class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                    class="btn-danger validation"
+                    triggers="mouseenter:mouseleave"
+                    ><i class="fa fa-exclamation"></i></button>
                 </div>
               </div>
 

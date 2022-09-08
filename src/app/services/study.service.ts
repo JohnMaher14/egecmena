@@ -11,6 +11,13 @@ export class StudyService {
   constructor(
     private _HttpClient:HttpClient
   ) { }
+  getDestinations():Observable<any>{
+    return this._HttpClient.get(`${environment.apiKey}destinations`)
+  }
+  getDestinationDetails(slug:string){
+    return this._HttpClient.get(`${environment.apiKey}${slug}`)
+
+  }
   getUniversityData(id:number) :Observable<any>{
     return this._HttpClient.get(`${environment.apiKey}universityData?university_id=${id}`)
   }

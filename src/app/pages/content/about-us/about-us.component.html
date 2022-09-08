@@ -45,7 +45,7 @@
                    <p>
                     {{currentLanguage === 'ar' ? aboutUs?.ar_story : aboutUs?.en_story}}
                    </p>
-                   
+
                 </div>
 
              </div>
@@ -54,44 +54,6 @@
     </div>
  </section>
  <!-- about area end -->
-
- <!-- brand area start -->
- <!-- brand area start -->
- <section class="brand__area pb-110">
-  <div class="container">
-    <div class="row justify-content-center ">
-      <div class="col-xl-6 ">
-        <div class="section__title-wrapper text-center mb-60">
-          <h2 class="section__title">{{'brand_area_title' | translate}}</h2>
-          <p class="">{{'brand_area_text' | translate}}</p>
-
-        </div>
-      </div>
-    </div>
-     <div class="row">
-        <div class="col-xxl-12">
-           <div class="brand__slider swiper-container">
-              <swiper [config]="clientsSlider" [dir]="'ltr'" class="swiper-wrapper">
-                <ng-container *ngFor="let client of clients">
-
-
-                  <ng-template swiperSlide class="swiper-slide">
-                    <div class="brand__item text-center">
-                      <img [src]="clientImage+client.logo" alt="">
-                    </div>
-                  </ng-template>
-                </ng-container>
-
-              </swiper>
-              </div>
-        </div>
-     </div>
-
-  </div>
-</section>
-<!-- brand area end -->
- <!-- brand area end -->
-
  <!-- banner area start -->
  <section class="about__page banner__area pb-110">
   <div class="container-fluid">
@@ -147,13 +109,51 @@
   </div>
 </section>
 <!-- banner area end -->
+ <!-- brand area start -->
+ <!-- brand area start -->
+ <section class="brand__area pb-110">
+  <div class="container">
+    <div class="row justify-content-center ">
+      <div class="col-xl-6 ">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'brand_area_title' | translate}}</h2>
+          <p class="">{{'brand_area_text' | translate}}</p>
+
+        </div>
+      </div>
+    </div>
+     <div class="row">
+        <div class="col-xxl-12">
+           <div class="brand__slider swiper-container">
+              <owl-carousel-o [options]="clientsSlider" class="swiper-wrapper">
+                <ng-container *ngFor="let client of clients">
+
+
+                  <ng-template carouselSlide class="swiper-slide">
+                    <div class="brand__item text-center">
+                      <img [src]="clientImage+client.logo" alt="">
+                    </div>
+                  </ng-template>
+                </ng-container>
+
+              </owl-carousel-o>
+              </div>
+        </div>
+     </div>
+
+  </div>
+</section>
+<!-- brand area end -->
+ <!-- brand area end -->
+
+
 
 <!-- counter area start -->
 <section class="counter__area ">
   <img class="counter__area--img-1" src="assets/theme/img/icon/circle.png" alt="">
   <img class="counter__area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
 
-  <div class="container pb-100 position-relative">
+  <div class="container pt-145 pb-100 position-relative">
     <div class="row justify-content-center ">
       <div class="col-xl-6 ">
         <div class="section__title-wrapper text-center mb-60">
@@ -162,42 +162,42 @@
       </div>
     </div>
     <div class="row position-relative">
-      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInRight">
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' ">
         <div class="counter__item mb-30">
           <div class="counter__icon card-hover user mb-15">
             <img src="assets/theme/img/icon/universityCopy.png" alt="">
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="2485" [options]="{ duration: 20 }"></span></h4>
+            <h4 class="ltr">+<span class="counter" [countUp]="2485" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text1' | translate}}</p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInRight">
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' ">
         <div class="counter__item mb-30">
           <div class="counter__icon card-hover book mb-15">
             <img src="assets/theme/img/icon/student.png" alt="">
 
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="345421" [options]="{ duration: 20 }"></span></h4>
+            <h4>+<span class="counter" [countUp]="345421" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text2' | translate}}</p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInLeft">
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
         <div class="counter__item counter__pl-34 mb-30">
           <div class="counter__icon card-hover graduate mb-15">
             <img src="assets/theme/img/icon/hokomeya.png" alt="">
 
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="24085" [options]="{ duration: 20 }"></span></h4>
+            <h4>+<span class="counter" [countUp]="24085" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text3' | translate}}</p>
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 wow animate__animated animate__slideInLeft">
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
         <div class="counter__item mb-30">
           <div class="counter__icon card-hover globe mb-15">
 
@@ -205,7 +205,7 @@
 
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="1000"></span></h4>
+            <h4>+<span class="counter" [countUp]="1000" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text4' | translate}}</p>
           </div>
         </div>

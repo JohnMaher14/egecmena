@@ -210,7 +210,7 @@
 
             </label>
             <select  id="my-select" formControlName="university" (change)="onChangeUniversity($event)" placeholder="اختر الجامعة" class="form-control" name="">
-              <option *ngIf="universityChoice">
+              <option *ngIf="universityChoice" value="">
 
                 {{ currentLanguage === 'ar' ? 'اختر الجامعة' :  'Choose university' }}
 
@@ -470,7 +470,7 @@
             <img src="assets/theme/img/icon/universityCopy.png" alt="">
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="2485" [options]="{ duration: 20 }"></span></h4>
+            <h4>+<span class="counter" [countUp]="2485" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text1' | translate}}</p>
           </div>
         </div>
@@ -482,7 +482,7 @@
 
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="345421" [options]="{ duration: 20 }"></span></h4>
+            <h4>+<span class="counter" [countUp]="345421" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text2' | translate}}</p>
           </div>
         </div>
@@ -494,7 +494,7 @@
 
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="24085" [options]="{ duration: 20 }"></span></h4>
+            <h4>+<span class="counter" [countUp]="24085" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text3' | translate}}</p>
           </div>
         </div>
@@ -507,7 +507,7 @@
 
           </div>
           <div class="counter__content">
-            <h4><span class="counter" [countUp]="1000"></span></h4>
+            <h4>+<span class="counter" [countUp]="1000" [options]="{ duration: 20 }"></span></h4>
             <p class="">{{'counter__area--text4' | translate}}</p>
           </div>
         </div>
@@ -627,14 +627,14 @@
       <div class="col-xl-6 col-lg-6 wow animate__animated" [ngClass]="currentLanguage === 'ar' ? 'animate__fadeInRight' : 'animate__fadeInLeft' ">
         <div class="blog__item blog__large white-bg mb-30 transition-3 fix">
           <div class="blog__thumb w-img fix">
-            <a >
+            <a routerLink="/blog">
               <img src="assets/theme/img/main_images/main_blog.png" class="w-100" alt="">
               <div class="blog__thumb--layer"></div>
             </a>
           </div>
           <div class="blog__content blog__large--content">
 
-            <h3 class="blog__title" [title]="currentLanguage === 'ar' ? 'مصر تحتل الصدارة في استقبال الطلاب الوافدين من الدول العربية' : 'Egypt takes the lead in receiving international students from Arab countries'"><a >
+            <h3 class="blog__title" [title]="currentLanguage === 'ar' ? 'مصر تحتل الصدارة في استقبال الطلاب الوافدين من الدول العربية' : 'Egypt takes the lead in receiving international students from Arab countries'"><a routerLink="/blog">
               {{currentLanguage === 'ar' ? 'مصر تحتل الصدارة في استقبال الطلاب الوافدين من الدول العربية' : 'Egypt takes the lead in receiving international students from Arab countries'}}
             </a></h3>
 
@@ -643,7 +643,7 @@
 
                 <div class="blog__author-info">
                   <i class="fas fa-eye"></i>
-                  <span> {{100}} مشاهدات</span>
+                  <span> {{100}} </span>
                 </div>
               </div>
               <div class="blog__date d-flex align-items-center">
@@ -666,17 +666,17 @@
               </div>
               <div class="blog__content">
 
-                <h3 class="blog__title"><a [title]="currentLanguage === 'ar' ? '4 أسباب تجعلك تبدأ رحلتك الدراسية بالخارج' : '4 reasons to start your studying abroad journey'">
+                <h3 class="blog__title"><a routerLink="/blog" [title]="currentLanguage === 'ar' ? '4 أسباب تجعلك تبدأ رحلتك الدراسية بالخارج' : '4 reasons to start your studying abroad journey'">
                   {{currentLanguage === 'ar' ? '4 أسباب تجعلك تبدأ رحلتك الدراسية بالخارج' : '4 reasons to start your studying abroad journey'}}
                 </a>
                 </h3>
 
-                <div class="blog__meta d-flex align-items-center">
+                <div class="blog__meta">
                   <div class="blog__author mr-3 d-flex align-items-center">
 
                     <div class="blog__author-info">
                       <i class="fas ml-2 fa-eye"></i>
-                      <span> {{1000}} مشاهدات</span>
+                      <span> {{1000}} </span>
                     </div>
                   </div>
                   <div class="blog__date d-flex align-items-center">
@@ -698,17 +698,17 @@
               </div>
               <div class="blog__content">
 
-                <h3 class="blog__title"><a >
+                <h3 class="blog__title" [title]="currentLanguage === 'ar' ? 'كيف تحصل على شهادة جامعة بإجراءات بسيطة' : 'How to get a university degree with simple procedures'"><a routerLink="/blog">
                   {{currentLanguage === 'ar' ? 'كيف تحصل على شهادة جامعة بإجراءات بسيطة' : 'How to get a university degree with simple procedures'}}
                 </a>
                 </h3>
 
-                <div class="blog__meta d-flex align-items-center">
+                <div class="blog__meta">
                   <div class="blog__author mr-3 d-flex align-items-center">
 
                     <div class="blog__author-info">
                       <i class="fas ml-2 fa-eye"></i>
-                      <span> 10 مشاهدات</span>
+                      <span> 10 </span>
                     </div>
                   </div>
                   <div class="blog__date d-flex align-items-center">
@@ -731,17 +731,17 @@
               </div>
               <div class="blog__content">
 
-                <h3 class="blog__title"><a >
+                <h3 class="blog__title"><a routerLink="/blog">
                   {{currentLanguage === 'ar' ? 'تعرف على أحدث تصنيف الجامعات عالميًا ' : 'Find out the latest university rankings in the world '}}
                 </a>
                 </h3>
 
-                <div class="blog__meta d-flex align-items-center">
+                <div class="blog__meta">
                   <div class="blog__author mr-3 d-flex align-items-center">
 
                     <div class="blog__author-info">
                       <i class="fas ml-2 fa-eye"></i>
-                      <span> 10 مشاهدات</span>
+                      <span> 10 </span>
                     </div>
                   </div>
                   <div class="blog__date d-flex align-items-center">
@@ -763,19 +763,19 @@
               </div>
               <div class="blog__content">
 
-                <h3 class="blog__title"><a
+                <h3 class="blog__title" [title]="currentLanguage === 'ar' ? 'إجراءات الالتحاق بالجامعات في السودان تشهد تسهيلات غير مسبوقة' : 'Sudanese universities are witnessing unprecedented facilitation'"> <a routerLink="/blog"
 
                   >
                   {{currentLanguage === 'ar' ? 'إجراءات الالتحاق بالجامعات في السودان تشهد تسهيلات غير مسبوقة' : 'Sudanese universities are witnessing unprecedented facilitation'}}
                 </a>
                 </h3>
 
-                <div class="blog__meta d-flex align-items-center">
+                <div class="blog__meta">
                   <div class="blog__author mr-3 d-flex align-items-center">
 
                     <div class="blog__author-info">
                       <i class="fas ml-2 fa-eye"></i>
-                      <span> {{100}} مشاهدات</span>
+                      <span> {{100}} </span>
                     </div>
                   </div>
                   <div class="blog__date d-flex align-items-center">

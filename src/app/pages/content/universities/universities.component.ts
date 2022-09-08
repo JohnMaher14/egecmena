@@ -50,11 +50,17 @@ export class UniversitiesComponent implements OnInit {
               (response) => {
                 const universityContainer = response.university.filter(
                   (university:any) => {
+                    // university =  Math.floor(Math.random())
+                    // university.Math.floor(Math.random())
                     return university.id != params['params'].id;
                   }
-                )
-                this.universities = universityContainer;
-                console.log(response.university);
+                  )
+
+                  function func(a:any, b:any) {
+                    return 0.5 - Math.random();
+                  }
+                  universityContainer.sort(func)
+                  this.universities = universityContainer;
                 const destinationConatiner = response.destinations.filter(
                   (destination:any) => {
                     return destination.id = response.university;

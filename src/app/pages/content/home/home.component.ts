@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
 
   testimonials: OwlOptions = {
     loop: true,
-    // center: true,
+    center: true,
     dots: true,
     margin:30,
     autoplay: true,
@@ -87,19 +87,20 @@ export class HomeComponent implements OnInit {
 
       940: {
 
-        items: 2,
+        items: 1,
+        stagePadding:200
       },
       1600: {
 
-        items: 2,
+        items: 1,
+        stagePadding:200
       }
     }
   }
   testimonialsAr: OwlOptions = {
     loop: true,
-    // center: true,
+    center: true,
     dots: true,
-    autoHeight:true,
 
     margin:30,
     autoplay: true,
@@ -119,11 +120,13 @@ export class HomeComponent implements OnInit {
 
       940: {
 
-        items: 2,
+        items: 1,
+        stagePadding:200
       },
       1600: {
 
-        items: 2,
+        items: 1,
+        stagePadding:200
       }
     }
   }

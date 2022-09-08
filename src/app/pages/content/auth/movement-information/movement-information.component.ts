@@ -144,7 +144,9 @@ export class MovementInformationComponent implements OnInit {
         console.log(response);
 
         if(response.success){
-          this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`)
+          this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`,
+          {              timeOut: 4000 , positionClass: 'toast-bottom-left'
+        })
         }
       }
     )

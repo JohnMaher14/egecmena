@@ -9,7 +9,7 @@
              </h3>
              <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a routerLink="/home">{{'breadcrumb_home' | translate}}</a></li>
+                  <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
                   <li class="breadcrumb-item active"  aria-current="page">{{"register" | translate }}</li>
                 </ol>
              </nav>
@@ -55,7 +55,10 @@
 
                           <button *ngIf="registerForm.controls['name'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'الأسم مطلوب' :'Name is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                        class="btn-danger validation"
+                        triggers="mouseenter:mouseleave"
+
+                        ><i class="fa fa-exclamation"></i></button>
 
 
                         </ng-container>
@@ -87,11 +90,17 @@
                         <ng-container *ngIf="registerForm.controls['phone'].touched && registerForm.controls['phone'].errors != null">
 
                            <button *ngIf="registerForm.controls['phone'].invalid" type="button" [popover]="currentLanguage === 'ar' ? 'رقم الهاتف غير صحيح' : 'Phone is invalid'"
-                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
                           <button *ngIf="registerForm.controls['phone'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'رقم الهاتف مطلوب' : 'Phone is required'"
-                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                          class="btn-danger validation"
+                        triggers="mouseenter:mouseleave"
+
+                        ><i class="fa fa-exclamation"></i></button>
 
 
                         </ng-container>
@@ -108,10 +117,16 @@
 
                           <button *ngIf="registerForm.controls['email'].errors['required']" type="button"[popover]="currentLanguage === 'ar' ? 'البريد الألكتروني مطلوب' : 'Email is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                        class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                        class="btn-danger validation"
+                        triggers="mouseenter:mouseleave"
+
+                        ><i class="fa fa-exclamation"></i></button>
                           <button *ngIf="registerForm.controls['email'].errors['email']" type="button" [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني غير صحيح' : 'Email is invalid'"
                           [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
-                          class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                          ><i class="fa fa-exclamation"></i></button>
 
                         </ng-container>
                       </div>
@@ -128,11 +143,17 @@
                         <button *ngIf="registerForm.controls['password'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'كلمة السر غير صحيحة' : 'password is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         [outsideClick]="true"
-                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
                         <button *ngIf="registerForm.controls['password'].errors['minlength']" type="button" [popover]="currentLanguage === 'ar'  ? 'كلمة السر يجب ان تكون 6 حروف علي الأقل' : 'Password minimum length is 6'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         [outsideClick]="true"
-                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
                          </ng-container>
                       </div>
                     </div>
@@ -146,7 +167,10 @@
                         <button *ngIf="registerForm.controls['password_confirmation'].touched && registerForm.controls['password_confirmation'].errors != null" type="button" [popover]="currentLanguage === 'ar' ? 'تأكيد كلمة السر غير صحيحة' : 'Confirm password is required'"
                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
                         [outsideClick]="true"
-                         class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+                         class="btn-danger validation"
+                         triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
                       </div>
                     </div>
                     <button class="e-btn  w-100" [disabled]="registerForm.invalid"> <span>
