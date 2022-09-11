@@ -3,6 +3,7 @@ import {
   AfterViewChecked,
   Component,
   OnInit,
+  Renderer2,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -41,6 +42,7 @@ export class FacultyComponent implements OnInit {
   destinationImage: string = `${environment.imageUrl}destinations/`;
   currentLanguage: any;
   loading!: boolean;
+  alertStatus:boolean = true;
   constructor(
     private _StudyService: StudyService,
     private _ActivatedRoute: ActivatedRoute,
@@ -48,7 +50,8 @@ export class FacultyComponent implements OnInit {
     private _AuthenticationService: AuthenticationService,
     private _Title: Title,
     private _HomeService: HomeService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _Renderer2:Renderer2 
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +64,8 @@ export class FacultyComponent implements OnInit {
   }
   showUniversities() {
     this._ActivatedRoute.paramMap.subscribe((params: Params) => {
+      let body = document.querySelector('body');
+      this._Renderer2.setStyle(body, 'overflow' , 'hidden')
       this.loading = true;
       this._StudyService
         .getFacultyData(
@@ -68,9 +73,7 @@ export class FacultyComponent implements OnInit {
           params['params'].university_id
         )
         .subscribe((response) => {
-          console.log(response);
           this.specialId = response.facultyData.special_id;
-          console.log(this.specialId);
           this._StudyService.studyByFaculty(this.specialId).subscribe(
             (response) => {
               const otherFacultyContainer = response.faculty.filter((faculty: any) => {
@@ -82,7 +85,6 @@ export class FacultyComponent implements OnInit {
               }
               otherFacultyContainer.sort(func)
 
-              console.log(otherFacultyContainer);
               this.otherFacultiesSpecial = otherFacultyContainer;
             }
           )
@@ -100,25 +102,39 @@ export class FacultyComponent implements OnInit {
               `${environment.title}${this.facultyData?.ar_name}`
             );
           }
+          this._TranslateService.onLangChange.subscribe(
+            (language:any) => {
+              if (language.lang == 'en') {
+                this._Title.setTitle(
+                  `${environment.title}${this.facultyData?.en_name}`
+                );
+              } else if (language.lang == 'ar') {
+                this._Title.setTitle(
+                  `${environment.title}${this.facultyData?.ar_name}`
+                );
+              }
+            }
+          )
           // this.loading = false;
           this._HomeService.getHomeData().subscribe((response) => {
-            console.log(response);
             this.facultyUniversities = response.facultyUniversity;
-            const facultyContainer = response.faculty.filter((faculty: any) => {
-              return faculty.id != params['params'].faculty_id;
-            });
+            
             const destinationConatiner = response.destinations.filter(
               (destination: any) => {
-                return (destination.id = params['params'].university_id);
+                return destination.id == this.universityData.destination_id;
               }
             );
-            this.otherFaculties = facultyContainer;
+
             this.destinationDetail = destinationConatiner[0];
+            this._Renderer2.removeStyle(body, 'overflow')
             this.loading = false;
           });
         });
 
     });
+  }
+  closeAlert(id:number){
+    this.alertStatus = false
   }
   registerForm: FormGroup = new FormGroup({
     destination: new FormControl('', Validators.required),

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,7 +27,9 @@ export class StudyByFacultyComponent implements OnInit {
     private _StudyService:StudyService,
     private _ActivatedRoute: ActivatedRoute,
     private _TranslateService:TranslateService,
-    private _Title:Title
+    private _Title:Title,
+    private _Renderer2:Renderer2 
+
 
   ) { }
 
@@ -39,6 +41,8 @@ export class StudyByFacultyComponent implements OnInit {
 
     this._ActivatedRoute.paramMap.subscribe(
       (params:Params) => {
+        let body = document.querySelector('body');
+        this._Renderer2.setStyle(body, 'overflow' , 'hidden')
         this.loading = true
         this.specialId = params['params'].id;
         console.log(this.specialId);
@@ -46,7 +50,6 @@ export class StudyByFacultyComponent implements OnInit {
           (response) => {
             console.log(response.faculty);
             this.faculties = response.faculty
-            this.loading = false;
             console.log(response.faculty);
             if (this.currentLanguage == 'en') {
               this._Title.setTitle(`${environment.title}${this.university?.en_name}`)
@@ -54,6 +57,10 @@ export class StudyByFacultyComponent implements OnInit {
               this._Title.setTitle(`${environment.title} كليات`)
 
             }
+            this._Renderer2.removeStyle(body, 'overflow')
+
+            this.loading = false;
+
           })
         }
     )

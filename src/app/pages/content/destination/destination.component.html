@@ -39,7 +39,7 @@
           <div class="row">
             <ng-container *ngIf="(universities | searchUniversity: term) as universities">
 
-            <div class="col-lg-6 wow animate__animated animate__slideInUp" *ngFor="let university of universities.slice().reverse()">
+            <div class="col-lg-6 wow animate__animated animate__slideInUp" *ngFor="let university of universities">
               <div class="course__item white-bg mb-30 fix">
                 <div class="row gx-0 align-items-center">
                   <div class="col-3">

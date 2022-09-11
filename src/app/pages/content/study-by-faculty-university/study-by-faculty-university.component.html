@@ -8,14 +8,14 @@
         <div class="col-xxl-12">
           <div class="page__title-wrapper mt-110">
             <h3 class="page__title">
-              {{currentLanguage === 'ar' ?  faculty?.ar_name : faculty?.en_name}}
+              {{currentLanguage === 'ar' ?  university?.ar_name : university?.en_name}}
             </h3>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
                 <li  class="breadcrumb-item active" aria-current="page">
                   <a routerLink="/destinations">
-                    {{currentLanguage === 'ar' ?  faculty?.ar_name : faculty?.en_name}}
+                    {{currentLanguage === 'ar' ?  university?.ar_name : university?.en_name}}
                   </a>
                 </li>
 

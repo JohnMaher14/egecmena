@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,6 +19,7 @@ export class ContactUsComponent implements OnInit {
     private _TranslateService:TranslateService,
     private _Title:Title,
     private _HomeService:HomeService,
+    private _Renderer2:Renderer2 
 
   ) { }
 
@@ -27,9 +28,12 @@ export class ContactUsComponent implements OnInit {
     this.loader()
   }
   loader(){
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
+      this._Renderer2.removeStyle(body, 'overflow')
 
     }, 1500);
   }
@@ -86,7 +90,13 @@ export class ContactUsComponent implements OnInit {
 
     }
     this._TranslateService.onLangChange.subscribe(
-      () => {
+      (language:any) => {
+        if (language.lang == 'en') {
+          this._Title.setTitle(`${environment.title}Contact us`)
+        }else if(language.lang == 'ar'){
+          this._Title.setTitle(`${environment.title}تواصل معنا`)
+    
+        }
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

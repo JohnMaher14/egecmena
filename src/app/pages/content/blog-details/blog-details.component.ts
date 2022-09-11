@@ -22,13 +22,19 @@ export class BlogDetailsComponent implements OnInit {
     this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
     this._TranslateService.use(this.currentLanguage)
     if (this.currentLanguage== 'en') {
-      this._Title.setTitle(`${environment.title}About us`)
+      this._Title.setTitle(`${environment.title}Blogs details`)
     }else if(this.currentLanguage == 'ar'){
-      this._Title.setTitle(`${environment.title}من نحن`)
+      this._Title.setTitle(`${environment.title} تفاصيل المقالات`)
 
     }
     this._TranslateService.onLangChange.subscribe(
-      () => {
+      (language) => {
+        if (language.lang == 'en') {
+          this._Title.setTitle(`${environment.title}Blogs details`)
+        }else if(language.lang == 'ar'){
+          this._Title.setTitle(`${environment.title} تفاصيل المقالات`)
+    
+        }
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

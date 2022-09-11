@@ -43,20 +43,6 @@
 
                 <h5 class="page__title-3">{{ currentLanguage === 'ar' ? facultyData?.ar_name : facultyData?.en_name}}</h5>
             </div>
-            <!-- <div class="course__meta-2 d-sm-flex mb-30">
-                <div class="course__teacher-3 d-flex align-items-center">
-                  <div class="course__teacher-thumb-3" [ngClass]="currentLanguage === 'ar' ? 'ml-15' : 'mr-15' ">
-                      <img [src]="destinationImage+destinationDetail?.flag" alt="">
-                  </div>
-                  <div class="course__teacher-info-3">
-                      <h5>{{currentLanguage === 'ar' ? destinationDetail?.ar_name : destinationDetail?.en_name }}</h5>
-                  </div>
-                </div>
-
-            </div> -->
-            <!-- <div class="course__img w-img">
-                <img src="assets/theme/img/course/details/course-details-1.jpg" alt="">
-            </div> -->
             <div class="course__tab-2 mb-45 ">
 
                 <ul ngbNav #nav="ngbNav" class="nav nav-tabs row">
@@ -81,7 +67,7 @@
                       <div class="course__tab-2 p-relative">
 
                         <ul ngbNav #test="ngbNav" class="nav nav-tabs tabs-2 row justify-content-center">
-                          <div class="alert alert-primary " role="alert">
+                          <div class="alert alert-majors " role="alert" *ngIf="alertStatus">
                             <h4 class="text-center">{{ currentLanguage === 'ar' ? 'هل تريد الألتحاق بالكلية' : 'Do you want to go to college?' }}</h4>
                             <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
                               <div class="row justify-content-center">
@@ -102,7 +88,7 @@
                                       </button>
                                     </div>
                                     <div class="col-md-2 text-center">
-                                      <button type="button" class="btn btn-danger">
+                                      <button type="button" class="btn btn-danger" (click)="closeAlert(major.id)">
                                         {{currentLanguage === 'ar' ? 'لا' : 'No'}}
 
                                       </button>
@@ -288,29 +274,35 @@
 
 
 
-                    <ng-container *ngFor="let facultyUniversitySpecial of facultyUniversities">
                     <li *ngFor="let otherFaculty of otherFacultiesSpecial | slice:0:3">
-                        <span *ngIf="  otherFaculty.id === facultyUniversitySpecial.faculty_id">{{facultyUniversitySpecial.faculty_id}}{{  otherFaculty.id === facultyUniversitySpecial.faculty_id}} </span>
-                        <a *ngIf="facultyUniversitySpecial.faculty_id === otherFaculty.id" [routerLink]="['/faculty', otherFaculty.id , facultyUniversitySpecial.university_id]">
-
-                          <div class="course__sm d-flex align-items-center mb-30">
-                            <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
-                                <img [src]="facultyImage+facultyUniversitySpecial.logo" alt="">
+                        <ng-container *ngFor="let facultyUniversitySpecial of facultyUniversities">
+                          <a *ngIf="otherFaculty.id === facultyUniversitySpecial.faculty_id" [routerLink]="['/faculty', otherFaculty.id , facultyUniversitySpecial.university_id ]">
+  
+                            <div class="course__sm d-flex align-items-center mb-30">
+                              <div class="course__sm-thumb" [ngClass]="currentLanguage == 'ar' ? 'ml-20' : 'mr-20'">
+                                  <img [src]="facultyImage+facultyUniversitySpecial.logo" alt="">
+                              </div>
+                              <div class="course__sm-content">
+  
+                                <h5>{{currentLanguage === 'ar' ?  otherFaculty.ar_name : otherFaculty.en_name}}</h5>
+  
+                              </div>
                             </div>
-                            <div class="course__sm-content">
-
-                              <h5>{{currentLanguage === 'ar' ?  otherFaculty.ar_name : otherFaculty.en_name}}</h5>
-
-                            </div>
-                          </div>
-                        </a>
+                          </a>
+                        </ng-container>
                         <!-- {{faculties.id === otherFaculty.id}} -->
+                      </li>
+                      <li>
+                        <a [routerLink]="['/studyByFaculty/', specialId]">
+                          {{currentLanguage === 'ar' ?  'تصفح المزيد' : 'Explore more'}}
+                          <i class="fa mx-2" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'" aria-hidden="true"></i>
+                          </a>
                       </li>
                     </ng-container>
 
 
 
-                  </ng-container>
+                  <!-- </ng-container> -->
 
                   <ng-template #facultyEmpty>
                     <li>

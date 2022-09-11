@@ -228,7 +228,7 @@
                       </a>
                     </li>
                     <li>
-                      <a [routerLink]="['/destination/', university?.destination_id]">
+                      <a [routerLink]="['/destination/', university?.en_slug]">
 
                         {{currentLanguage === 'ar' ?  'تصفح المزيد' : 'Explore more'}}
                         <i class="fa mx-2" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'" aria-hidden="true"></i>

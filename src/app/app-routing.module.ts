@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'studyByFaculty/:id', component: StudyByFacultyComponent },
   { path: 'studyByFacultyUniversity/:special_id/:faculty_id', component: StudyByFacultyUniversityComponent },
   { path: 'destinations', component: DestinationsComponent },
-  { path: 'destination/:id', component: DestinationComponent },
+  { path: 'destination/:slug', component: DestinationComponent },
   { path: 'university/:id', component: UniversitiesComponent },
   { path: 'blog' , component: BlogDetailsComponent },
   { path: 'faculty/:faculty_id/:university_id', component: FacultyComponent },

@@ -14,7 +14,7 @@ export class StudyService {
   getDestinations():Observable<any>{
     return this._HttpClient.get(`${environment.apiKey}destinations`)
   }
-  getDestinationDetails(slug:string){
+  getDestinationDetails(slug:any): Observable<any>{
     return this._HttpClient.get(`${environment.apiKey}${slug}`)
 
   }

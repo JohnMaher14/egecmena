@@ -1,6 +1,8 @@
 {
   "dir": "rtl",
   "text-dir" : "text-right",
+  "back_to_home_title": "الصفحة غير موجودة!",
+  "back_to_home_button": "العودة إلى الصفحة الرئيسية",
   "navbar-button":"إنشاء حساب / تسجيل دخول",
   "navbar_home_text": "الرئيسية",
   "navbar_about_text": "من نحن ",

@@ -103,7 +103,6 @@ export class AdmissionFormComponent implements OnInit {
 
     this._Renderer2.removeClass(admissionCard ,'admission__card--opened')
     this._Renderer2.removeClass(bodyOverlay ,'opened');
-    this.admissionFormPage.reset();
   }
   showPersonalInformation() {
     if (localStorage.getItem('currentUserToken') !== null) {
@@ -173,16 +172,83 @@ export class AdmissionFormComponent implements OnInit {
       admissionFormPage.value
     ).subscribe(
       ( response) => {
+        console.log(response);
         this.actionLoading = true
-        if(this.currentLanguage === 'en'){
-          this._ToastrService.success(`${response.success}`,`success`)
+        if(response.success === 'You registered before and we will call you soon'){
+          if(this.currentLanguage === 'en'){
+            this._ToastrService.warning(`${response.success}`,`success` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
 
-          this.actionLoading = false;
-          this.closeAdmissionForm();
-        }else if(this.currentLanguage === 'ar'){
-          this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح`)
-          this.actionLoading = false;
-          this.closeAdmissionForm();
+            })
+  
+            this.actionLoading = false;
+            this.closeAdmissionForm();
+          }else if(this.currentLanguage === 'ar'){
+            this._ToastrService.warning(`${response.ar_success}`,`تسجيل صحيح` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
+            this.actionLoading = false;
+            this.closeAdmissionForm();
+          }
+          this._TranslateService.onLangChange.subscribe(
+            (language) => {
+              if(language.lang === 'en'){
+                this._ToastrService.warning(`${response.success}`,`success` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+                })
+      
+                this.actionLoading = false;
+                this.closeAdmissionForm();
+              }else if(language.lang === 'ar'){
+                this._ToastrService.warning(`${response.ar_success}`,`تسجيل صحيح` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+                })
+                this.actionLoading = false;
+                this.closeAdmissionForm();
+              }
+            }
+          )
+        }else{
+          if(this.currentLanguage === 'en'){
+            this._ToastrService.success(`${response.success}`,`success` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
+  
+            this.actionLoading = false;
+            this.closeAdmissionForm();
+          }else if(this.currentLanguage === 'ar'){
+            this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح` , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
+            this.actionLoading = false;
+            this.closeAdmissionForm();
+          }
+          this._TranslateService.onLangChange.subscribe(
+            (language) => {
+              if(language.lang === 'en'){
+                this._ToastrService.success(`${response.success}`,`success` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+                })
+      
+                this.actionLoading = false;
+                this.closeAdmissionForm();
+              }else if(language.lang === 'ar'){
+                this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+                })
+                this.actionLoading = false;
+                this.closeAdmissionForm();
+              }
+            }
+          )
+
         }
       }
     )

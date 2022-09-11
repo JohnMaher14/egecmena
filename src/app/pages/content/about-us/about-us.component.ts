@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -20,7 +20,8 @@ export class AboutUsComponent implements OnInit {
     private _AboutService:AboutService,
     private _TranslateService:TranslateService,
     private _Title:Title,
-    private _Meta:Meta
+    private _Meta:Meta,
+    private _Renderer2:Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -34,20 +35,27 @@ export class AboutUsComponent implements OnInit {
   }
   showPartners(){
     this.loading = true;
-
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
     this._AboutService.getPartners().subscribe(
       (response) => {
         this.clients =  response;
         this.loading = false
+        this._Renderer2.removeStyle(body, 'overflow')
       }
     )
   }
   showAboutus(){
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
     this.loading = true;
 
     this._AboutService.getAboutUs().subscribe(
       (response) => {
         this.aboutUs = response.about;
+        
+        this._Renderer2.removeStyle(body, 'overflow')
+
         this.loading = false
 
       }
@@ -63,7 +71,13 @@ export class AboutUsComponent implements OnInit {
 
     }
     this._TranslateService.onLangChange.subscribe(
-      () => {
+      (language: any) => {
+        if (language.lang == 'en') {
+          this._Title.setTitle(`${environment.title}About us`)
+        }else if(language.lang  == 'ar'){
+          this._Title.setTitle(`${environment.title}من نحن`)
+    
+        }
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

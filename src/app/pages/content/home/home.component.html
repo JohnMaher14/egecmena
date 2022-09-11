@@ -196,7 +196,7 @@
               <option value="">
                 {{ currentLanguage === 'ar' ? 'أختار بلد' :  'Choose Country' }}
               </option>
-              <option value="{{destination.id}}" *ngFor="let destination of destinations">
+              <option  value="{{destination.en_slug}}" *ngFor="let destination of destinations">
                 {{currentLanguage === 'ar' ? destination.ar_name : destination.en_name}}
               </option>
             </select>
@@ -416,7 +416,7 @@
             </div>
           </div>
           <div class="col-md-6 study_grid wow animate__animated "  [ngClass]="currentLanguage=== 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
-            <a routerLink="/destination/12">
+            <a routerLink="/destination/egypt">
               <div class="card card-hover">
                 <div class="card-body">
                   <img [src]="currentLanguage === 'ar' ? 'assets/theme/img/main_images/Egypt.png' : 'assets/theme/img/destination/english/Egypt.png'" alt="">
@@ -529,17 +529,16 @@
     <div class="col-xxl-12">
       <ng-container *ngIf="currentLanguage === 'en' ">
         <owl-carousel-o [options]="testimonials" class="testimonial-box" dir="ltr">
-          <ng-container>
+          <ng-container *ngFor="let review of userReviews">
             <ng-template carouselSlide>
 
               <div class="testimonial__area--item">
                 <div class="testimonial__area--img">
-                  <img src="assets/theme/img/blog/author/author-1.jpg" alt="Jhon Smith">
+                  <img [src]="reviewImage+review.user_image" alt="Jhon Smith">
                 </div>
                 <div class="testimonial__area--desc">
-                  <h4 class="testimonial__area--name">جون ماهر</h4>
-                  <p class="testimonial__area--p">
-                    لقد كنت أحلم بالدراسة في الجامعات المصرية وتحقق حلمي عندما عرفت إيجيك.. إنه حقًا رائع!
+                  <h4 class="testimonial__area--name">{{ review.name }}</h4>
+                  <p class="testimonial__area--p" [innerHtml]="review.message">
                   </p>
                 </div>
               </div>
@@ -569,34 +568,16 @@
 
       <ng-container *ngIf="currentLanguage === 'ar' ">
         <owl-carousel-o [options]="testimonialsAr" class="testimonial-box" dir="rtl">
-          <ng-container>
+          <ng-container *ngFor="let review of userReviews">
             <ng-template carouselSlide>
 
               <div class="testimonial__area--item">
                 <div class="testimonial__area--img">
-                  <img src="assets/theme/img/blog/author/author-1.jpg" alt="Jhon Smith">
+                  <img [src]="reviewImage+review.user_image" alt="Jhon Smith">
                 </div>
                 <div class="testimonial__area--desc">
-                  <h4 class="testimonial__area--name">جون ماهر</h4>
-                  <p class="testimonial__area--p">
-                    لقد كنت أحلم بالدراسة في الجامعات المصرية وتحقق حلمي عندما عرفت إيجيك.. إنه حقًا رائع!
-                  </p>
-                </div>
-              </div>
-            </ng-template>
-
-          </ng-container>
-          <ng-container>
-            <ng-template carouselSlide>
-
-              <div class="testimonial__area--item">
-                <div class="testimonial__area--img">
-                  <img src="assets/theme/img/blog/author/author-2.jpg" alt="Jhon Smith">
-                </div>
-                <div class="testimonial__area--desc">
-                  <h4 class="testimonial__area--name">حنين حمدي</h4>
-                  <p class="testimonial__area--p">
-                    لا يمكنني شكركم عن مدى الاحترام والمساعدة الذين وجدتهم في التعامل معكم.. أنا الآن أحمل شهادة الهندسة من جامعة روسيا.
+                  <h4 class="testimonial__area--name">{{ review.name }}</h4>
+                  <p class="testimonial__area--p" [innerHtml]="review.message">
                   </p>
                 </div>
               </div>

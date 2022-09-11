@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,8 +27,8 @@ export class UniversitiesComponent implements OnInit {
     private _HomeService:HomeService ,
     private _ActivatedRoute: ActivatedRoute,
     private _TranslateService:TranslateService,
-    private _Title:Title
-
+    private _Title:Title,
+    private _Renderer2:Renderer2 
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +39,8 @@ export class UniversitiesComponent implements OnInit {
 
     this._ActivatedRoute.paramMap.subscribe(
       (params:Params) => {
+        let body = document.querySelector('body');
+        this._Renderer2.setStyle(body, 'overflow' , 'hidden')
         this.loading = true;
 
         this._StudyService.getUniversityData(params['params'].id).subscribe(
@@ -67,18 +69,29 @@ export class UniversitiesComponent implements OnInit {
                   }
                 )
 
-                console.log(destinationConatiner);
                 this.destinationDetail = destinationConatiner[0];
+                this._Renderer2.removeStyle(body, 'overflow')
                 this.loading = false
 
               }
             )
+            this._TranslateService.onLangChange.subscribe(
+              (currentLanguage: any) => {
+                if(currentLanguage.lang === 'ar'){
+
+                  this._Title.setTitle(`${environment.title}${response.university?.ar_name}`)
+  
+                  }else if(currentLanguage.lang === 'en'){
+                    this._Title.setTitle(`${environment.title}${response.university?.en_name}`)
+                  }
+              }
+            )
               if(this.currentLanguage === 'ar'){
 
-                this._Title.setTitle(`${environment.title}${response.university.ar_name}`)
+                this._Title.setTitle(`${environment.title}${response.university?.ar_name}`)
 
                 }else if(this.currentLanguage === 'en'){
-                  this._Title.setTitle(`${environment.title}${response.university.en_name}`)
+                  this._Title.setTitle(`${environment.title}${response.university?.en_name}`)
                 }
             // this.loading = false;
 

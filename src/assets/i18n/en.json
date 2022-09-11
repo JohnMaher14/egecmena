@@ -1,6 +1,8 @@
 {
   "dir": "rtl",
   "text-dir" : "text-right",
+  "back_to_home_title" : "Page Not Found!",
+  "back_to_home_button" : "Back To Home",
   "navbar-button":"Login / Register",
   "navbar_home_text": "Home",
   "navbar_about_text": "About",
@@ -12,6 +14,7 @@
   "home_cover_title" : "Achieve your education dreams now!",
   "home_cover_text1" : "Join the university and college you want anywhere in the world",
   "home_cover_text2" : "We provide you with all educational services, from enrollment and follow-up during the study period to obtaining the certificate.",
+  
   "admission_steps" : "Admission Steps:",
 
   "caption_steps_1": "Connect with EGEC  ",

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -21,19 +21,31 @@ export class PersonalInformationComponent implements OnInit {
   isLogined!: boolean;
   actionLoading!:boolean;
   loading!:boolean;
+  redirectMessage!: boolean;
   constructor(
     private _TranslateService: TranslateService,
     private _Title: Title,
     private _Router: Router,
     private _AuthenticationService: AuthenticationService,
-    private _ToastrService:ToastrService
+    private _ToastrService:ToastrService,
+    
+    private _Renderer2:Renderer2 
   ) {}
+  loader(){
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+      this._Renderer2.removeStyle(body, 'overflow')
 
+    }, 1500);
+  }
   ngOnInit(): void {
     this.translateFunction();
     this.authenticationData();
     this.showPersonalInformation();
-
+    this.loader();
   }
   authenticationData() {
     this._AuthenticationService.currentUserData.subscribe(() => {
@@ -80,7 +92,27 @@ export class PersonalInformationComponent implements OnInit {
               timeOut: 4000 , positionClass: 'toast-bottom-left'
 
             })
+          
           }
+          this._TranslateService.onLangChange.subscribe(
+            (language) =>{
+              if (language.lang === 'ar') {
+
+                this._ToastrService.error(`${response.ar_error}`,`هناك شئ خاطئ، يرجى المحاولة فى وقت لاحق!` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+    
+                })
+    
+              } else if(language.lang === 'en') {
+    
+                this._ToastrService.error(`${response.error}`,`Something went wrong, please try again later!` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+    
+                })
+              
+              }
+            }
+          )
           this.actionLoading = false;
 
         }

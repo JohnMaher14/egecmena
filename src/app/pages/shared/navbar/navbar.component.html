@@ -74,7 +74,7 @@
                     <ul class="submenu">
                       <li *ngFor="let destination of destinations" (click)="onClickLi()">
                         <a
-                          [routerLink]="['/destination/', destination.id]">{{currentLanguage === 'ar' ? destination.ar_name  :  destination.en_name}}</a>
+                          [routerLink]="['/destination/', destination.en_slug]">{{currentLanguage === 'ar' ? destination.ar_name  :  destination.en_name}}</a>
                       </li>
 
                     </ul>
@@ -112,15 +112,19 @@
                     <li class="has-dropdown">
                       <a>{{userArray.name}}</a>
                       <ul class="submenu">
-                        <li><a
-                            routerLink="/personal-information">{{currentLanguage === 'ar' ? 'المعلومات الشخصية' : 'Personal Information'}}</a>
-                        </li>
-                        <li *ngIf="userPersonalInfo?.full_name != null"><a
-                            routerLink="/academic-information">{{currentLanguage === 'ar' ? 'المعلومات الأكاديمية' : 'Academic Information'}}</a>
-                        </li>
-                        <li *ngIf="paperStatus?.message != undefined"><a
-                            routerLink="/movement-information">{{currentLanguage === 'ar' ? 'حركة الملفات' : 'Movement Information'}}</a>
-                        </li>
+                        <ng-container *ngIf="userArray.role == 'user'">
+
+                          <li><a
+                              routerLink="/personal-information">{{currentLanguage === 'ar' ? 'المعلومات الشخصية' : 'Personal Information'}}</a>
+                          </li>
+                          <li><a
+                              routerLink="/academic-information">{{currentLanguage === 'ar' ? 'المعلومات الأكاديمية' : 'Academic Information'}}</a>
+                          </li>
+                          <li *ngIf="paperStatus?.message != undefined"><a
+                              routerLink="/movement-information">{{currentLanguage === 'ar' ? 'حركة الملفات' : 'Movement Information'}}</a>
+                          </li>
+                        </ng-container>
+                        
                         <li><a (click)="logout()">{{currentLanguage === 'ar' ?  'خروج' : 'Logout'}}</a></li>
                       </ul>
                     </li>

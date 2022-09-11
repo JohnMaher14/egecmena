@@ -26,15 +26,15 @@ $(document).ready(function(){
 
   $(document).scroll(function(){
 
-    var footerSelector = $('footer');
+    var footerSelector = $('#footer');
     var socialBarSelector = $('#sidebar');
 
     var bottomViewPort = $(window).scrollTop()+$(window).height();
     var footerTop = $(footerSelector).offset().top;
     if( bottomViewPort>=footerTop){
-      $(socialBarSelector).fadeOut();
+      $(socialBarSelector).addClass('d-none')
     }else{
-      $(socialBarSelector).fadeIn();
+      $(socialBarSelector).removeClass('d-none')
     }
   });
 

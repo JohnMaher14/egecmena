@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
     private _Title:Title,
     private _Router:Router,
     private _AuthenticationService:AuthenticationService,
-    private _ToastrService:ToastrService
+    private _ToastrService:ToastrService,
+    private _Renderer2:Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -32,9 +33,12 @@ export class LoginComponent implements OnInit {
     this.loader();
   }
   loader(){
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
+      this._Renderer2.removeStyle(body, 'overflow')
 
     }, 1500);
   }
@@ -62,9 +66,31 @@ export class LoginComponent implements OnInit {
       }, error => {
         console.log(error);
         if(error.status == 401){
-          this._ToastrService.error(`${error.error.ar_error}` , 'خطأ' , {
-            timeOut: 4000 , positionClass: 'toast-bottom-left'
-          })
+          if(this.currentLanguage === 'ar'){
+            this._ToastrService.error(`${error.error.ar_error}` , 'خطأ' , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+            })
+
+          }else{
+            this._ToastrService.error(`${error.error.en_error}` , 'Wrong' , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+            })
+          }
+          this._TranslateService.onLangChange.subscribe(
+            (language) => {
+              if(language.lang === 'ar'){
+                this._ToastrService.error(`${error.error.ar_error}` , 'خطأ' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+    
+              }else{
+                this._ToastrService.error(`${error.error.en_error}` , 'Wrong' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+              }
+            }
+          )
+
         }
         this.actionLoading = false;
 
@@ -81,8 +107,13 @@ export class LoginComponent implements OnInit {
 
     }
     this._TranslateService.onLangChange.subscribe(
-      () => {
-
+      (language:any) => {
+        if (language.lang == 'en') {
+          this._Title.setTitle(`${environment.title}Login`)
+        }else if(language.lang == 'ar'){
+          this._Title.setTitle(`${environment.title}تسجيل دخول`)
+    
+        }
         this.currentLanguage = this._TranslateService.currentLang
       }
     )

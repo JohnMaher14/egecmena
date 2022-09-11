@@ -144,9 +144,29 @@ export class MovementInformationComponent implements OnInit {
         console.log(response);
 
         if(response.success){
-          this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`,
-          {              timeOut: 4000 , positionClass: 'toast-bottom-left'
-        })
+          if(this.currentLanguage === 'ar'){
+            this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`,
+            { timeOut: 4000 , positionClass: 'toast-bottom-left'
+          })
+
+          }else{
+            this._ToastrService.success(`${response.success}` , `Succssefully sent`,
+            { timeOut: 4000 , positionClass: 'toast-bottom-left'
+          })
+          }
+          this._TranslateService.onLangChange.subscribe
+          ((language) => {
+            if(language.lang === 'ar'){
+              this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`,
+              { timeOut: 4000 , positionClass: 'toast-bottom-left'
+            })
+  
+            }else{
+              this._ToastrService.success(`${response.success}` , `Succssefully sent`,
+              { timeOut: 4000 , positionClass: 'toast-bottom-left'
+            })
+            }
+          })
         }
       }
     )
@@ -166,9 +186,29 @@ export class MovementInformationComponent implements OnInit {
       this.userArray.id
     ).subscribe(
       (response) => {
-        if(response.success){
-          this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`)
+        if(this.currentLanguage === 'ar'){
+          this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`,
+          { timeOut: 4000 , positionClass: 'toast-bottom-left'
+        })
+
+        }else{
+          this._ToastrService.success(`${response.success}` , `Succssefully sent`,
+          { timeOut: 4000 , positionClass: 'toast-bottom-left'
+        })
         }
+        this._TranslateService.onLangChange.subscribe
+        ((language) => {
+          if(language.lang === 'ar'){
+            this._ToastrService.success(`${response.ar_success}` , `ارسال صحيح`,
+            { timeOut: 4000 , positionClass: 'toast-bottom-left'
+          })
+
+          }else{
+            this._ToastrService.success(`${response.success}` , `Succssefully sent`,
+            { timeOut: 4000 , positionClass: 'toast-bottom-left'
+          })
+          }
+        })
       }
     )
     // console.log(firstPaper.value);
@@ -194,9 +234,7 @@ export class MovementInformationComponent implements OnInit {
         if(response.pending){
           this.paperPending = response;
         }
-        if( response.message=== 'First Paper Phase'){
 
-        }
       }
     )
   }
@@ -208,7 +246,12 @@ export class MovementInformationComponent implements OnInit {
     } else if (this.currentLanguage == 'ar') {
       this._Title.setTitle(`${environment.title} حركة الملفات`);
     }
-    this._TranslateService.onLangChange.subscribe(() => {
+    this._TranslateService.onLangChange.subscribe((language) => {
+      if (language.lang == 'en') {
+        this._Title.setTitle(`${environment.title}Paper movement`);
+      } else if (language.lang == 'ar') {
+        this._Title.setTitle(`${environment.title} حركة الملفات`);
+      }
       this.currentLanguage = this._TranslateService.currentLang;
     });
   }

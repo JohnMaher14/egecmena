@@ -21,6 +21,7 @@ export class AcademicInformationComponent implements OnInit {
   isLogined!: boolean;
   actionLoading!:boolean;
   loading!:boolean;
+  userPersonalInfo:any;
   constructor(
     private _TranslateService: TranslateService,
     private _Title: Title,
@@ -33,6 +34,7 @@ export class AcademicInformationComponent implements OnInit {
     this.translateFunction();
     this.authenticationData();
     this.showAcademicInformation();
+    this.showPersonalInformation()
   }
   authenticationData() {
     this._AuthenticationService.currentUserData.subscribe(() => {
@@ -75,20 +77,83 @@ export class AcademicInformationComponent implements OnInit {
 
             })
           }
+          this._TranslateService.onLangChange.subscribe(
+            (language) => {
+              if(language.lang === 'en'){
+                this._ToastrService.success(`${response.success}`,`success` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+    
+                })
+    
+              }else if(language.lang === 'ar'){
+                this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح` , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+    
+                })
+              }
+            }
+          )
         }
         this.actionLoading = false;
 
       });
   }
+  showPersonalInformation() {
+    this.loading = true;
+    if (localStorage.getItem('currentUserToken') !== null) {
+
+    this._AuthenticationService
+      .getPersonalInformation(this.userArray.id)
+      .subscribe((response) => {
+        console.log(response);
+        this.userPersonalInfo = response.userPersonalInfo;
+        if(response.userPersonalInfo?.full_name == null){
+          if(this.currentLanguage === 'ar'){
+            this._ToastrService.error('لابد من اكمال المعلومات الشخصية اولا' , 'معلومات غير مكتملة' , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
+          }else{
+            this._ToastrService.error('You must complete your personal information first' , 'Un complete data' , {
+              timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+            })
+          }
+          this._TranslateService.onLangChange.subscribe(
+            (language) => {
+              if(language.lang === 'ar'){
+                this._ToastrService.error('لابد من اكمال المعلومات الشخصية اولا' , 'معلومات غير مكتملة' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+    
+                })
+              }else{
+                this._ToastrService.error('You must complete your personal information first' , 'Un complete data' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+    
+                })
+              }
+              
+            }
+          )
+          setTimeout(() => {
+            this._Router.navigate(['/personal-information'])
+          }, 4000);
+        }
+        this.loading = false;
+      });
+    }
+  }
   showAcademicInformation() {
-    this.loading = true
+    this.loading = true;
+    if (localStorage.getItem('currentUserToken') !== null) {
+
     this._AuthenticationService
       .getAcademicInformation(this.userArray.id)
       .subscribe((response) => {
-        console.log(response);
         this.userAcademicInfo = response;
         this.loading = false;
       });
+    }
   }
   onChangeNumber(event:any){
     var char = String.fromCharCode(event.which);

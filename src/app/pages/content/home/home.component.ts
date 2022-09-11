@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -39,7 +39,8 @@ export class HomeComponent implements OnInit {
     private _Title: Title,
     private _HomeService: HomeService,
     private _StudyService:StudyService,
-    private _Router:Router
+    private _Router:Router,
+    private _Renderer2:Renderer2 
     ) {
 
      }
@@ -60,7 +61,13 @@ export class HomeComponent implements OnInit {
 
     }
     this._TranslateService.onLangChange.subscribe(
-      () => {
+      (language: any) => {
+        if (language.lang == 'en') {
+          this._Title.setTitle(`${environment.title}Egyptian Gulf For Educational Consultant`)
+        }else if(language.lang  == 'ar'){
+          this._Title.setTitle(`${environment.title}المصرية الخليجية للخدمات التعليمية`)
+    
+        }
         this.currentLanguage = this._TranslateService.currentLang
       }
     )
@@ -139,18 +146,25 @@ export class HomeComponent implements OnInit {
     });
   }
   showReviews() {
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
     this.loading = true;
 
     this._HomeService.getTestominals().subscribe((response) => {
       this.userReviews = response.reviews;
+      this._Renderer2.removeStyle(body, 'overflow')
       this.loading = false;
     });
   }
   showBlogs() {
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
     this.loading = true;
 
     this._HomeService.getBlogs().subscribe((response) => {
       this.blogs = response.blogs;
+      this._Renderer2.removeStyle(body, 'overflow')
+
       this.loading = false;
     });
   }
@@ -165,6 +179,7 @@ export class HomeComponent implements OnInit {
 
     if(this.admissionForm.value.university == '' && this.admissionForm.value.faculty == '' && this.admissionForm.value.major == '' && this.admissionForm.value.department == '' ){
       this._Router.navigateByUrl(`/destination/${this.admissionForm.value.destination}`)
+      
     }else if(this.admissionForm.value.faculty == '' && this.admissionForm.value.major == '' && this.admissionForm.value.department == '' ){
       this._Router.navigateByUrl(`/university/${this.admissionForm.value.university}`)
 
@@ -174,10 +189,12 @@ export class HomeComponent implements OnInit {
     }
   }
   onChangeDestination(event: any) {
-    const universitiesArray = this.universities.filter((universities: any) => {
-      return universities.destination_id == event.target.value;
-    });
-    this.changeUniversities = universitiesArray;
+    this._StudyService.getDestinationDetails(event.target.value).subscribe(
+      (response) => {
+        this.changeUniversities = response.universities;
+      }
+    )
+
     this.universityChoice = true;
   }
   onChangeUniversity(event: any) {

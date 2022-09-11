@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -29,16 +29,20 @@ export class RegisterComponent implements OnInit {
     private _Title:Title,
     private _AuthenticationService:AuthenticationService,
     private _Router:Router,
-    private _ToastrService:ToastrService
+    private _ToastrService:ToastrService,
+    private _Renderer2:Renderer2 
   ) {
     if (sessionStorage.getItem('currentUserToken') !== null) {
       this._Router.navigate(['/'])
     }
-   }
-   loader(){
+  }
+  loader(){
+    let body = document.querySelector('body');
+    this._Renderer2.setStyle(body, 'overflow' , 'hidden')
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
+      this._Renderer2.removeStyle(body, 'overflow')
 
     }, 1500);
   }
@@ -61,13 +65,7 @@ export class RegisterComponent implements OnInit {
   onRegister(
     registerForm: FormGroup
     ){
-    console.log(
 
-      registerForm.value.phone.number,
-      registerForm.value
-
-
-    );
     this._AuthenticationService.register(
       registerForm.value.name,
       registerForm.value.phone.number,
@@ -91,9 +89,22 @@ export class RegisterComponent implements OnInit {
               timeOut: 4000 , positionClass: 'toast-bottom-left'
             })
           }
-          setTimeout(() => {
-            this._Router.navigateByUrl('/login');
-          }, 4000);
+          this._TranslateService.onLangChange.subscribe(
+            (language:any) => {
+              if(language.lang === 'ar'){
+                this._ToastrService.success(`${response.ar_message}` , 'تسجيل صحيح' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+    
+              }
+              else{
+                this._ToastrService.success(`${response.message}` , 'You register successfully' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+              }
+            }
+
+          )
         }
       }, error => {
 
@@ -110,6 +121,23 @@ export class RegisterComponent implements OnInit {
                 timeOut: 4000 , positionClass: 'toast-bottom-left'
               })
             }
+            this._TranslateService.onLangChange.subscribe(
+            (language) => {
+              if(language.lang === 'ar'){
+
+                this._ToastrService.error(`البريد الإلكتروني تم أخذه.` , 'حاول مجددا' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+            }else{
+  
+  
+                this._ToastrService.error(`${error.error.errors.email[0]}` , 'Please try again' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+              }
+            } 
+
+            )
         }else if(error.error.errors.password){
           if(this.currentLanguage === 'ar'){
 
@@ -124,6 +152,24 @@ export class RegisterComponent implements OnInit {
                 timeOut: 4000 , positionClass: 'toast-bottom-left'
               })
             }
+            this._TranslateService.onLangChange.subscribe(
+            (language) => {
+              if(language.lang === 'ar'){
+
+                this._ToastrService.error(`كلمة السر لا تشبه تأكيد كلمة السر` , 'حاول مجددا' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+            }else{
+  
+  
+  
+                this._ToastrService.error(`${error.error.errors.password[0]}` , 'Please try again' , {
+                  timeOut: 4000 , positionClass: 'toast-bottom-left'
+                })
+              }
+            }
+
+            )
         }
       }
     )
@@ -131,6 +177,12 @@ export class RegisterComponent implements OnInit {
   translateFunction(){
     this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
     this._TranslateService.use(this.currentLanguage)
+    if (this.currentLanguage == 'en') {
+      this._Title.setTitle(`${environment.title}Register`)
+    }else if(this.currentLanguage == 'ar'){
+      this._Title.setTitle(`${environment.title}انشاء حساب`)
+
+    }
     this._TranslateService.onLangChange.subscribe(
       (language: any) => {
         if (language.lang == 'en') {
