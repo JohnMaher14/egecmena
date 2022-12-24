@@ -1,0 +1,582 @@
+<!-- <app-action-loader *ngIf="actionLoading">
+
+</app-action-loader>
+<button class="btn btn-primary admission__btn" (click)="openAdmissionForm()">
+  {{'admission_form' | translate}}
+</button>
+<div class="admission__card">
+  <div class="sidebar__wrapper">
+    <div class="admision-text text-center">
+      <h3>{{ currentLanguage === 'ar' ? 'سجل الان' : 'ٌRegister now' }}</h3>
+      <p> {{ currentLanguage === 'ar' ? 'سيتصل بك الموظف المسؤول ...' : 'The administrator will contact you...' }}</p>
+    </div>
+
+    <div class="sidebar__content">
+
+      <form [formGroup]="admissionFormPage" (ngSubmit)="onSubmitAdmissionForm(admissionFormPage)">
+        <div class="row">
+          <div class="sign__input-wrapper mb-20">
+            <h5>{{ currentLanguage === 'ar' ? 'الدولة' : 'Country' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select   (change)="onChangeDestination($event)"  class="form-control" name="">
+                  <option value="">
+                    {{ currentLanguage === 'ar' ? 'أختار بلد' :  'Choose Country' }}
+                  </option>
+                  <option  value="{{destination.en_slug}}" *ngFor="let destination of destinations">
+                    {{currentLanguage === 'ar' ? destination.ar_name : destination.en_name}}
+                    <input type="hidden" name="admission_destination_id" formControlName="admission_destination_id" [ngModel]="destination.id">
+                  </option>
+                </select>
+                <i class="fal fa-flag"></i>
+              </div>
+              <button
+              *ngIf="admissionFormPage.controls['admission_destination_id'].touched && admissionFormPage.controls['admission_destination_id'].errors != null"
+              type="button" [popover]="currentLanguage == 'ar' ? 'الدولة مطلوبة' : 'Destination is required'"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-20">
+            <h5>{{ currentLanguage === 'ar' ? 'الجامعة' : 'University' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select   (change)="onChangeUniversity($event)" class="form-control" name="">
+                  <option *ngIf="universityChoice" value="">
+
+                    {{ currentLanguage === 'ar' ? 'اختر الجامعة' :  'Choose university' }}
+
+                  </option>
+                  <ng-container *ngFor="let universitySlug of changeUniversities?.slug; let index = index">
+                    <ng-container *ngFor="let universityName of changeUniversities?.name; let i = index" >
+
+                    <option value="{{universitySlug}}" *ngIf="index  == i">
+                      {{  universityName }}
+                    </option>
+                    <input type="hidden" formControlName="admission_university_id" [ngModel]="universityOnchangeId">
+                  </ng-container>
+                  </ng-container>
+                 </select>
+                <i class="fal fa-university"></i>
+              </div>
+              <button
+              *ngIf="admissionFormPage.controls['admission_university_id'].touched && admissionFormPage.controls['admission_university_id'].errors != null"
+              type="button" [popover]="currentLanguage == 'ar' ? 'الجامعة مطلوبة' : 'university is required'"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-20">
+            <h5>{{ currentLanguage === 'ar' ? 'الكلية' : 'Faculty' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select  formControlName="admission_fac_uni_id" (change)="onChangeFaculty($event)" placeholder="اختر الكلية" class="form-control" name="">
+                  <option value="" *ngIf="facultyChoice">
+
+                    {{ currentLanguage === 'ar' ? 'اختر الكلية' :  'Choose faculty' }}
+
+                  </option>
+                  <ng-container  *ngFor="let changeFacultyslug of changeFaculty?.slug; let i = index" >
+                    <ng-container  *ngFor="let changeFacultyName of changeFaculty?.name; let index = index" >
+
+                      <option  value="{{changeFacultyslug}}"  *ngIf="i == index">{{changeFacultyName}}</option>
+                      <!-- <option value="{{faculty.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option> -->
+                    </ng-container>
+                    </ng-container>
+
+                </select>
+                <i class="far fa-users-class"></i>
+              </div>
+              <button
+              *ngIf="admissionFormPage.controls['admission_fac_uni_id'].touched && admissionFormPage.controls['admission_fac_uni_id'].errors != null"
+              type="button" [popover]="currentLanguage == 'ar' ? 'الكلية مطلوبة' : 'Faculty is required'"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-20">
+            <h5>{{ currentLanguage === 'ar' ? 'التخصص' : 'Major' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select (change)="onMajorSaerch($event)"   placeholder="اختر التخصص" class="form-control" name="">
+                  <option *ngIf="majorChoice">
+
+                    {{ currentLanguage === 'ar' ? 'اختر التخصص' :  'Choose Major' }}
+
+                  </option>
+                  <ng-container  *ngFor="let changeMajorId of changeMajor?.id; let i = index" >
+                    <ng-container  *ngFor="let changeMajorName of changeMajor?.name; let index = index" >
+
+                      <option value="{{changeMajorId}}"  *ngIf="i == index">{{changeMajorName}}</option>
+                      <!-- <option value="{{faculty.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option> -->
+                    </ng-container>
+                    </ng-container>                </select>
+                <i class="fal fa-cog"></i>
+              </div>
+              <button
+              *ngIf="admissionFormPage.controls['admission_fac_uni_major_id'].touched && admissionFormPage.controls['admission_fac_uni_major_id'].errors != null"
+              type="button" [popover]="currentLanguage == 'ar' ? 'التخصص مطلوبة' : 'Major is required'"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+            </div>
+          </div>
+          <input type="hidden" name="admission_fac_uni_major_id" formControlName="admission_fac_uni_major_id" [ngModel]="majorId">
+          <div class="sign__input-wrapper mb-20">
+            <h5>{{ currentLanguage === 'ar' ? 'القسم' : 'Department' }}</h5>
+            <div class="sign__input--container">
+              <div class="sign__input">
+                <select   formControlName="admission_department_id" placeholder="اختر القسم" class="form-control" name="">
+                  <option *ngIf="departmentChoice">
+                    {{ currentLanguage === 'ar' ? 'اختر القسم' :  'Choose Department' }}
+
+                  </option>
+                  <ng-container  *ngFor="let changeDepartmentId of changeDepartment?.id; let i = index" >
+                    <ng-container  *ngFor="let changeDepartmentName of changeDepartment?.name; let index = index" >
+
+                      <option value="{{changeDepartmentId}}"  *ngIf="i == index">{{changeDepartmentName}}</option>
+                      <!-- <option value="{{faculty.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option> -->
+                    </ng-container>
+                    </ng-container>                </select>
+                <i class="fal fa-user-cog"></i>
+              </div>
+              <!-- <input type="hidden" formControlName="user_id" [ngModel]="userArray.id"> -->
+
+              <button
+              *ngIf="admissionFormPage.controls['admission_department_id'].touched && admissionFormPage.controls['admission_department_id'].errors != null"
+              type="button" [popover]="currentLanguage == 'ar' ? 'القسم مطلوبة' : 'Department is required'"
+              [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+              class="btn-danger validation"><i class="fa fa-exclamation"></i></button>
+            </div>
+          </div>
+          <div class="sign__input-wrapper mb-20">
+            <ng-container *ngIf="academicCondition">
+
+              <button class="btn btn-success w-100">
+                {{currentLanguage === 'ar' ? 'التحاق' : 'Apply'}}
+              </button>
+
+              <input type="hidden" formControlName="user_id" [ngModel]="userArray?.id">
+              <!-- <input type="hidden"  value="ss"> -->
+
+            </ng-container>
+            <ng-container *ngIf="userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == 'No Academic Info Found' ">
+
+                <button type="button" (click)="navigateToAcademic()"   class="btn btn-success w-100" [disabled]="admissionFormPage.invalid">{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
+
+            </ng-container>
+            <ng-container *ngIf="userPersonalInfo?.full_name == null && userArray != undefined">
+
+                <button type="button" (click)="navigateToPersonal()" class="btn btn-success w-100" [disabled]="admissionFormPage.invalid">{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
+
+            </ng-container>
+            <ng-container *ngIf="userArray == undefined">
+                <button type="button" (click)="navigateToLogin()" class="btn btn-success w-100" [disabled]="admissionFormPage.invalid">{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
+            </ng-container>
+            <!-- <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
+              <ng-container *ngIf="userArray !=  null && userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo.degree_name != null">
+                <input type="hidden" formControlName="destination" [ngModel]="destinationDetail?.en_name">
+                <input type="hidden" formControlName="university" [ngModel]="universityData?.en_name">
+                <input type="hidden" formControlName="faculty" [ngModel]="facultyData?.en_name">
+                <input type="hidden" formControlName="user_id" [ngModel]="userArray.id">
+                <div class="registerDiv button">
+                  <button class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</button>
+                </div>
+
+              </ng-container>
+
+              <ng-container *ngIf="userPersonalInfo?.full_name != null && userAcademicInfo?.academicInfo == 'No Academic Info Found' ">
+
+                <div class="registerDiv academic">
+                  <a routerLink="/academic-information" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
+                </div>
+
+              </ng-container>
+              <ng-container *ngIf="userPersonalInfo?.full_name == null">
+
+                <div class="registerDiv personal">
+                  <a routerLink="/personal-information" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
+                </div>
+
+              </ng-container>
+              <ng-container *ngIf="userArray == undefined">
+                <div class="registerDiv link">
+                  <a routerLink="/login" class="registerButton" >{{ currentLanguage === 'ar' ? 'سجل الأن!' : 'Register Now' }}</a>
+                </div>
+              </ng-container>
+
+            </form> -->
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="sidebar__close">
+      <button class="btn sidebar__close-btn" (click)="closeAdmissionForm()" id="sidebar__close-btn">
+        {{currentLanguage === 'ar' ? 'أغلاق' : 'Close'}}
+        <!-- <span>{{currentLanguage === 'ar' ? 'أغلاق' : 'Close'}}</span> -->
+      </button>
+    </div>
+  </div>
+</div>
+<!-- ts -->
+<script>
+//   import { Component, OnInit, Renderer2 } from '@angular/core';
+// import { FormGroup, FormControl, Validators } from '@angular/forms';
+// import { Title } from '@angular/platform-browser';
+// import { ActivatedRoute, Params, Router } from '@angular/router';
+// import { TranslateService } from '@ngx-translate/core';
+// import { ToastrService } from 'ngx-toastr';
+// import { AuthenticationService } from 'src/app/services/authentication.service';
+// import { DependentFormService } from 'src/app/services/dependent-form.service';
+// import { HomeService } from 'src/app/services/home.service';
+// import { StudyService } from 'src/app/services/study.service';
+// import { environment } from 'src/environments/environment';
+
+// @Component({
+//   selector: 'app-admission-form',
+//   templateUrl: './admission-form.component.html',
+//   styleUrls: ['./admission-form.component.scss']
+// })
+// export class AdmissionFormComponent implements OnInit {
+//   faculties: any[] = [];
+//   facultyData: any;
+//   facultyUniversity: any;
+//   universityChoice:boolean =  false;
+//   facultyChoice:boolean =  false;
+//   majorChoice:boolean =  false;
+//   departmentChoice:boolean =  false;
+//   destinations : any[] = [];
+//   universities: any[] = [];
+//   majors: any[] = [];
+//   departments: any[] = [];
+//   changeUniversities: any;
+//   changeFaculty: any;
+//   changeMajor: any;
+//   changeDepartment: any;
+//   universityOnchangeId:any;
+//   facultyDatas: any[] = [];
+//   conditions: any[] = [];
+//   userArray: any;
+//   isLogined!:boolean;
+//   userPersonalInfo: any;
+//   userAcademicInfo: any;
+//   academicCondition!:boolean;
+//   universityImage:string = `${environment.imageUrl}universities/`;
+//   facultyImage:string = `${environment.imageUrl}faculties/`;
+//   destinationImage:string = `${environment.imageUrl}destinations/`;
+//   currentLanguage: any;
+//   majorId!:number;
+//   actionLoading!:boolean;
+//   constructor(
+//     private _StudyService:StudyService,
+//     private _HomeService:HomeService,
+//     private _DependentFormService:DependentFormService,
+//     private _Router: Router,
+//     private _TranslateService:TranslateService,
+//     private _AuthenticationService:AuthenticationService,
+//     private _ToastrService:ToastrService,
+//     private _Renderer2:Renderer2
+
+//   ) { }
+
+//   ngOnInit(): void {
+//     this.translateFunction();
+//     this.authenticationData()
+//     this.showPersonalInformation();
+//     this.showAcademicInformation();
+//     this.showDestination();
+//   }
+
+//   navigateToAcademic(){
+//     this._Router.navigate(['/academic-information'])
+//     let admissionCard = document.querySelector('.admission__card');
+//     let bodyOverlay = document.querySelector('.body-overlay');
+
+//     this._Renderer2.removeClass(admissionCard ,'admission__card--opened');
+//     this._Renderer2.removeClass(bodyOverlay ,'opened');
+
+
+//   }
+//   navigateToPersonal(){
+//     this._Router.navigate(['/personal-information'])
+//     let admissionCard = document.querySelector('.admission__card');
+//     let bodyOverlay = document.querySelector('.body-overlay');
+
+//     this._Renderer2.removeClass(admissionCard ,'admission__card--opened');
+//     this._Renderer2.removeClass(bodyOverlay ,'opened');
+
+
+//   }
+//   navigateToLogin(){
+//     this._Router.navigate(['/login'])
+//     let admissionCard = document.querySelector('.admission__card');
+//     let bodyOverlay = document.querySelector('.body-overlay');
+
+//     this._Renderer2.removeClass(admissionCard ,'admission__card--opened');
+//     this._Renderer2.removeClass(bodyOverlay ,'opened');
+
+
+//   }
+//   openAdmissionForm(){
+//     let admissionCard = document.querySelector('.admission__card');
+//     let bodyOverlay = document.querySelector('.body-overlay');
+//     this._Renderer2.addClass(admissionCard ,'admission__card--opened')
+//     this._Renderer2.addClass(bodyOverlay ,'opened')
+//   }
+//   closeAdmissionForm(){
+//     let admissionCard = document.querySelector('.admission__card');
+//     let bodyOverlay = document.querySelector('.body-overlay');
+
+//     this._Renderer2.removeClass(admissionCard ,'admission__card--opened')
+//     this._Renderer2.removeClass(bodyOverlay ,'opened');
+//   }
+//   showPersonalInformation() {
+//     if (localStorage.getItem('currentUserToken') !== null) {
+
+//     this._AuthenticationService
+//       .getPersonalInformation(this.userArray.id)
+//       .subscribe((response) => {
+//         console.log(response);
+//         this.userPersonalInfo = response.userPersonalInfo;
+//       });
+//     }
+//   }
+//   showAcademicInformation() {
+//     if (localStorage.getItem('currentUserToken') !== null) {
+
+//     this._AuthenticationService
+//       .getAcademicInformation(this.userArray.id)
+//       .subscribe((response) => {
+//         console.log(response);
+//         this.userAcademicInfo = response;
+//       });
+//     }
+//   }
+//   translateFunction(){
+//     this.currentLanguage = localStorage.getItem("currentLanguage") || 'ar'
+//     this._TranslateService.use(this.currentLanguage)
+//     this._TranslateService.onLangChange.subscribe(
+//       () => {
+
+//         this.currentLanguage = this._TranslateService.currentLang
+//       }
+//     )
+//   }
+//   authenticationData(){
+//     this._AuthenticationService.admissionRequestRight.subscribe(
+//       ()=> {
+//         if(this._AuthenticationService.admissionRequestRight != null){
+//           this.academicCondition =  true;
+//         }
+//       }
+//     )
+//       this._AuthenticationService.currentUserData.subscribe(() => {
+//         if (this._AuthenticationService.currentUserData.getValue() == null) {
+//           this.isLogined = false;
+
+//         } else {
+//           this.userArray = JSON.parse(
+//             localStorage.getItem('currentUserArray') || '{}'
+//           );
+
+//           this.isLogined = true;
+//         }
+//       });
+
+//   }
+//   showHomeData() {
+//     // this._HomeService.getHomeData().subscribe((response) => {
+//     //   this.destinations = response.destinations;
+//     //   this.universities = response.university;
+//     //   this.faculties = response.faculty;
+//     //   this.facultyUniversity = response.facultyUniversity;
+//     // });
+//   }
+//   admissionFormPage: FormGroup = new FormGroup({
+//     'admission_destination_id': new FormControl('', Validators.required),
+//     'admission_university_id': new FormControl('', Validators.required),
+//     'admission_fac_uni_id': new FormControl('', Validators.required),
+//     'admission_fac_uni_major_id': new FormControl(''),
+//     'admission_department_id': new FormControl('', Validators.required),
+//     'user_id': new FormControl(''),
+//     // 'universitySlug' : new FormControl('')
+//   })
+//   onSubmitAdmissionForm(admissionFormPage: FormGroup){
+//     console.log(admissionFormPage.value);
+//     // this.actionLoading = true
+//     // this._AuthenticationService.submitAdmissionInformation(
+//     //   admissionFormPage.value
+//     // ).subscribe(
+//     //   ( response) => {
+//     //     this.actionLoading = true
+//     //     if(response.success === 'You registered before and we will call you soon'){
+//     //       if(this.currentLanguage === 'en'){
+//     //         this._ToastrService.warning(`${response.success}`,`Attention` , {
+//     //           timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //         })
+
+//     //         this.actionLoading = false;
+//     //         this.closeAdmissionForm();
+//     //       }else if(this.currentLanguage === 'ar'){
+//     //         this._ToastrService.warning(`${response.ar_success}`,`تنبيه`, {
+//     //           timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //         })
+//     //         this.actionLoading = false;
+//     //         this.closeAdmissionForm();
+//     //       }
+//     //       this._TranslateService.onLangChange.subscribe(
+//     //         (language) => {
+//     //           if(language.lang === 'en'){
+//     //             this._ToastrService.warning(`${response.success}`,`success` , {
+//     //               timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //             })
+
+//     //             this.actionLoading = false;
+//     //             this.closeAdmissionForm();
+//     //           }else if(language.lang === 'ar'){
+//     //             this._ToastrService.warning(`${response.ar_success}`,`تسجيل صحيح` , {
+//     //               timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //             })
+//     //             this.actionLoading = false;
+//     //             this.closeAdmissionForm();
+//     //           }
+//     //         }
+//     //       )
+//     //     }else{
+//     //       if(this.currentLanguage === 'en'){
+//     //         this._ToastrService.success(`${response.success}`,`success` , {
+//     //           timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //         })
+
+//     //         this.actionLoading = false;
+//     //         this.closeAdmissionForm();
+//     //       }else if(this.currentLanguage === 'ar'){
+//     //         this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح` , {
+//     //           timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //         })
+//     //         this.actionLoading = false;
+//     //         this.closeAdmissionForm();
+//     //       }
+//     //       this._TranslateService.onLangChange.subscribe(
+//     //         (language) => {
+//     //           if(language.lang === 'en'){
+//     //             this._ToastrService.success(`${response.success}`,`success` , {
+//     //               timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //             })
+
+//     //             this.actionLoading = false;
+//     //             this.closeAdmissionForm();
+//     //           }else if(language.lang === 'ar'){
+//     //             this._ToastrService.success(`${response.ar_success}`,`تسجيل صحيح` , {
+//     //               timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //             })
+//     //             this.actionLoading = false;
+//     //             this.closeAdmissionForm();
+//     //           }
+//     //         }
+//     //       )
+
+//     //     }
+//     //   }, error => {
+//     //     if(error.status === 500) {
+//     //       if(this.currentLanguage === 'en'){
+
+//     //         this._ToastrService.error(`${error.error.error}`,`Wrong` , {
+//     //           timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //         })
+//     //       }else if(this.currentLanguage === 'ar'){
+//     //         this._ToastrService.error(`${error.error.ar_error}`,`خطأ` , {
+//     //           timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //         })
+//     //       }
+//     //       this._TranslateService.onLangChange.subscribe(
+//     //         (language) => {
+//     //           if(language.lang === 'en'){
+
+//     //             this._ToastrService.error(`${error.error.error}`,`Wrong` , {
+//     //               timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //             })
+//     //           }else if(language.lang === 'ar'){
+//     //             this._ToastrService.error(`${error.error.ar_error}`,`خطأ` , {
+//     //               timeOut: 4000 , positionClass: 'toast-bottom-left'
+
+//     //             })
+//     //           }
+//     //         }
+//     //       )
+
+//     //     }
+//     //     this.actionLoading = false
+
+//     //   }
+//     // )
+//   }
+//   showDestination() {
+//     this._StudyService.getDestinations().subscribe((response) => {
+//       this.destinations = response.destinations;
+//     });
+//   }
+//   onChangeDestination(event: any) {
+//     this.actionLoading = true;
+//     this._DependentFormService.getUniversities(event.target.value , 'en').subscribe(
+//       (response) => {
+//         this.changeUniversities = response.universities[0];
+//         this.actionLoading = false;
+//       }
+//     )
+//     // this.admissionFormPage.value.admission_destination_id =
+//     this.universityChoice = true;
+//   }
+//   onChangeUniversity(event: any) {
+//     console.log(event);
+//     this.actionLoading = true;
+
+//     this._DependentFormService.getFaculty(event.target.value, 'en').subscribe(
+//       (response) => {
+//         console.log(response);
+//         this.changeFaculty = response.faculties[0];
+//         this.actionLoading = false;
+
+//       }
+//     )
+//     this.universityOnchangeId = event.target.value
+//     this.facultyChoice = true;
+//   }
+//   onChangeFaculty(event: any) {
+
+//     this.actionLoading = true;
+//     this._DependentFormService.getMajors(this.admissionFormPage.value.universitySlug, event.target.value , 'en').subscribe(
+//       (response) => {
+//         this.changeMajor = response.majors[0]
+//         this.actionLoading = false;
+
+//       }
+//     )
+
+//     this.majorChoice = true;
+//   }
+//   onMajorSaerch(event: any){
+//     this.actionLoading = true;
+
+//     this._DependentFormService.getDepartments(event.target.value , 'en').subscribe(
+//       (response) => {
+//         this.changeDepartment = response.departments[0]
+//         this.actionLoading = false;
+//         this.departmentChoice = true;
+//       }
+
+//     )
+//   }
+// }
+
+</script> -->

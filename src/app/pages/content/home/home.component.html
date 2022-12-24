@@ -1,0 +1,862 @@
+
+  <app-home-loader *ngIf="loading"
+  ></app-home-loader>
+  <app-action-loader *ngIf="actionLoading"></app-action-loader>
+<!-- hero area start -->
+<section class="hero__area hero__height hero__height-2 d-flex align-items-center white-bg-3 fix">
+
+  <div class="container">
+    <div class="hero__content-wrapper mt-90">
+      <div class="row align-items-center">
+        <div class="col-lg-7 col-md-6 wow animate__slideInRight ">
+          <div class="hero__thumb-wrapper position-relative mb--120">
+            <div class="hero__thumb-2 scene">
+              <img class="hero-big" src="assets/theme/img/main_images/image_in_cover.png" alt="">
+              <!-- <img class="hero-shape-purple" src="assets/theme/img/hero/hero-2/hero-shape-purple.png" alt=""> -->
+
+              <div class="hero__promotion d-flex white-bg layer" data-depth="0.1">
+
+                <div class="hero__promotion-text">
+                  <h5>{{"cover_shape_1" | translate}}</h5>
+                </div>
+              </div>
+              <div class="hero__promotion education d-none d-lg-flex white-bg layer" data-depth="0.2">
+
+                <div class="hero__promotion-text">
+                  <h5>{{"cover_shape_2" | translate}}</h5>
+
+                </div>
+              </div>
+              <div class="hero__class d-none d-lg-flex layer" data-depth="0.3">
+
+                <div class="hero__class-text">
+                  <h5>{{"cover_shape_3" | translate}}</h5>
+                </div>
+              </div>
+              <div class="hero__mic">
+                  <img src="assets/theme/img/icon/x.png" alt="">
+              </div>
+              <div class="hero__mic-2">
+                  <img src="assets/theme/img/icon/spinner.png" alt="">
+              </div>
+              <div class="hero__mic-3">
+                  <img src="assets/theme/img/icon/circle.png" alt="">
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-6 wow animate__animated animate__slideInLeft p-relative ">
+          <div class="hero__content hero__content-2 z-index-1">
+            <h3 class="hero__title hero__title-2">
+              {{'home_cover_title' | translate}}
+
+            </h3>
+            <h4 class="hero__text-1">
+              {{'home_cover_text1' | translate}}
+
+            </h4>
+            <p class="hero__text-2">
+              {{'home_cover_text2' | translate}}
+
+            </p>
+            <div class="home__search input-group p-relative mb-3">
+
+              <div class="input__loader--container">
+                <input
+
+                [(ngModel)]="selectedValue"
+                [typeahead]="arrayOfAll"
+                [placeholder]="currentLanguage === 'ar' ? 'تبحث عن جامعة، كلية، أو أي شئ أخر؟' : 'Looking for a university, faculty, or anything else?'"
+                [typeaheadOptionField]="currentLanguage === 'ar' ?  'ar_name' : 'en_name'"
+                (typeaheadOnSelect)="onSelect($event)"
+                (keypress)="preventEnglish($event)"
+                (typeaheadOnPreview)="onPreview($event)"
+                class="form-control homeSearchInput">
+                <div class="input__loader" *ngIf="onReadySearchData">
+                  <div class="loader_spinner"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="hero__shape">
+            <img class="hero-1-circle" src="assets/theme/img/icon/book.png" alt="">
+            <img class="hero-1-circle-2" src="assets/theme/img/icon/pencil.png" alt="">
+            <img class="hero-1-dot-2" src="assets/theme/img/icon/cap.png" alt="">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- hero area end -->
+
+<!-- start section steps -->
+<section class="steps">
+
+  <div class="title">
+    <h5>{{ "admission_steps" | translate}}
+    </h5>
+
+  </div>
+  <div class="row no-gutters justify-content-center wow animate__animated animate__slideInUp">
+
+      <div class="card fix px-0" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission1.png)'">
+          <h5 class="card-title">{{'caption_steps_1' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix px-0" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission2.png)'">
+          <h5 class="card-title">{{'caption_steps_2' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix px-0" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission3.png)'">
+          <h5 class="card-title">{{'caption_steps_3' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix px-0" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission4.png)'">
+          <h5 class="card-title">{{'caption_steps_4' | translate}}
+          </h5>
+        </div>
+      </div>
+      <div class="card fix px-0" >
+        <div class="card-body" [style.background-image]="'url(assets/theme/img/main_images/admission5.png)'">
+          <h5 class="card-title">{{'caption_steps_5' | translate}}
+          </h5>
+        </div>
+      </div>
+  </div>
+</section>
+
+<section class="about_section pt-115 pb-115" style="background-image: url('assets/theme/img/main_images/about_cover.png');">
+  <div class="container about_section-animated-shape">
+    <div class="row g-3 align-items-center">
+      <div class="col-xl-6 col-lg-6 offset-xl-1  wow  animate__animated" [ngClass]="currentLanguage === 'ar' ? 'animate__slideInRight' : 'animate__fadeInLeft' ">
+        <div class="about_section__inner mt_md--40 mt_sm--20 ">
+          <div class="section-title">
+            <span class="pre-title">{{'about_us_span' | translate}}</span>
+            <h3 class="title">{{'about_us_title' | translate}}</h3>
+          </div>
+          <p class="description line-before mt--40 mb--40" >{{'about_us_text' | translate}}</p>
+          <div class="feature-list-wrapper sal-animate row">
+            <div class="feature-list col-md-6 mt-3 d-flex align-items-center"><i class="fas fa-check-circle"></i>
+              <p>
+                {{"about_us_list1" | translate}}
+
+              </p>
+            </div>
+            <div class="feature-list col-md-6 mt-3 d-flex align-items-center"><i class="fas fa-check-circle"></i>
+              <p>
+                {{"about_us_list2" | translate}}
+
+              </p>
+            </div>
+            <div class="feature-list col-md-6 mt-3 d-flex align-items-center"><i class="fas fa-check-circle"></i>
+              <p>
+                {{"about_us_list3" | translate}}
+
+              </p>
+            </div>
+            <div class="feature-list col-md-6 mt-3 d-flex align-items-center"><i class="fas fa-check-circle"></i>
+              <p>
+                {{"about_us_list4" | translate}}
+
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-xl-5 col-lg-6 p-relative">
+
+          <div class="about-image-gallery  wow  animate__animated" [ngClass]="currentLanguage === 'ar' ? 'animate__fadeInLeft' : 'animate__slideInRight' ">
+            <img class="image-1 w-100 "
+            src="assets/theme/img/main_images/image_in_about.png"
+            alt="About Images">
+
+          </div>
+          <img src="assets/theme/img/icon/plus.png" class="about_section_icon" alt="">
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- search area start -->
+
+
+<section class="search__area pt-90 pb-90">
+  <img class="search__area--img-1" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+  <img class="search__area--img-2" src="assets/theme/img/icon/striped_circle.png" alt="">
+  <div class="container">
+    <div class="section__title-wrapper text-center mb-25">
+      <h2 class="section__title">{{ 'search_area_title' | translate }}</h2>
+      <p>{{'search_area_text' | translate}}</p>
+      <img class="search__area--img-3" src="assets/theme/img/icon/circle_group_vertical.png" alt="">
+    </div>
+    <form [formGroup]="admissionForm" (ngSubmit)="onSubmitSearch(admissionForm)" >
+      <div class="row wow animate__slideInRight animate__animated justify-content-between align-items-end">
+        <div class="col-md-2">
+          <div class="form-group ">
+            <label for="" >
+              {{ currentLanguage === 'ar' ? 'بلد' :  'Country' }}
+              </label>
+              <div class="input__loader--container">
+                <select  formControlName="destination" (change)="onChangeDestination($event , currentLanguage === 'ar' ? 'ar' : 'en')"  class="form-control " name="">
+                  <option value="" disabled>
+                    {{ currentLanguage === 'ar' ? 'أختار بلد' :  'Choose Country' }}
+                  </option>
+                  <option  value="{{currentLanguage === 'ar' ? destination.ar_slug : destination.en_slug}}" *ngFor="let destination of destinations">
+                    {{currentLanguage === 'ar' ? destination.ar_name : destination.en_name}}
+                  </option>
+                </select>
+                <div class="input__loader" *ngIf="onChangeDestinationLoader">
+                  <div class="loader_spinner"></div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="">
+
+              {{ currentLanguage === 'ar' ? 'الجامعة' :  'University' }}
+
+            </label>
+            <div class="input__loader--container">
+
+              <select  formControlName="university" (change)="onChangeUniversity($event ,  currentLanguage === 'ar' ? 'ar' : 'en')" placeholder="اختر الجامعة" class="form-control" name="">
+                <option *ngIf="universityChoice" value="" disabled>
+
+                  {{ currentLanguage === 'ar' ? 'اختر الجامعة' :  'Choose university' }}
+
+                </option>
+                <ng-container *ngFor="let universitySlug of changeUniversities?.slug; let index = index">
+                  <ng-container *ngFor="let universityName of changeUniversities?.name; let i = index" >
+
+                  <option value="{{universitySlug}}" *ngIf="index  == i">
+                    {{  universityName }}
+                  </option>
+                  <input type="hidden" formControlName="universitySlug" [ngModel]="universityOnchangeId">
+                </ng-container>
+                </ng-container>
+
+              </select>
+              <div class="input__loader" *ngIf="onChangeUniversityLoader">
+                <div class="loader_spinner"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="">
+
+              {{ currentLanguage === 'ar' ? 'الكلية' :  'Faculty' }}
+
+            </label>
+            <div class="input__loader--container">
+
+              <select id="my-select" formControlName="faculty" (change)="onChangeFaculty($event , currentLanguage === 'ar' ? 'ar' : 'en')" placeholder="اختر الكلية" class="form-control" name="">
+                <option value="" *ngIf="facultyChoice">
+
+                  {{ currentLanguage === 'ar' ? 'اختر الكلية' :  'Choose faculty' }}
+
+                </option>
+                <ng-container  *ngFor="let changeFacultyslug of changeFaculty?.slug; let i = index" >
+                <ng-container  *ngFor="let changeFacultyName of changeFaculty?.name; let index = index" >
+
+                  <option  value="{{changeFacultyslug}}"  *ngIf="i == index">{{changeFacultyName}}</option>
+                  <!-- <option value="{{faculty.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option> -->
+                </ng-container>
+                </ng-container>
+
+              </select>
+              <div class="input__loader" *ngIf="onChangeFacultyLoader">
+                <div class="loader_spinner"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="">
+
+              {{ currentLanguage === 'ar' ? 'التخصص' :  'Major' }}
+
+            </label>
+            <div class="input__loader--container">
+
+            <select (change)="onMajorSaerch($event , currentLanguage === 'ar' ? 'ar' : 'en')" formControlName="major"  placeholder="اختر التخصص" class="form-control" name="">
+              <option *ngIf="majorChoice" value="">
+
+                {{ currentLanguage === 'ar' ? 'اختر التخصص' :  'Choose Major' }}
+
+              </option>
+              <ng-container  *ngFor="let changeMajorId of changeMajor?.id; let i = index" >
+                <ng-container  *ngFor="let changeMajorName of changeMajor?.name; let index = index" >
+
+                  <option value="{{changeMajorId}}"  *ngIf="i == index">{{changeMajorName}}</option>
+                  <!-- <option value="{{faculty.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option> -->
+                </ng-container>
+                </ng-container>
+              </select>
+              <div class="input__loader" *ngIf="onChangeMajorLoader">
+                <div class="loader_spinner"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="">
+              {{ currentLanguage === 'ar' ? 'القسم' :  'Department' }}
+
+            </label>
+            <select id="my-select"  formControlName="department" placeholder="اختر القسم" class="form-control" name="">
+              <option *ngIf="departmentChoice" value="">
+                {{ currentLanguage === 'ar' ? 'اختر القسم' :  'Choose Department' }}
+
+              </option>
+              <ng-container  *ngFor="let changeDepartmentId of changeDepartment?.id; let i = index" >
+                <ng-container  *ngFor="let changeDepartmentName of changeDepartment?.name; let index = index" >
+
+                  <option value="{{changeDepartmentId}}"  *ngIf="i == index">{{changeDepartmentName}}</option>
+                  <!-- <option value="{{faculty.id}}" *ngIf="faculty.faculty_id ===  facultyOrginal.id" >{{currentLanguage === 'ar' ? facultyOrginal.ar_name : facultyOrginal.en_name}}</option> -->
+                </ng-container>
+                </ng-container>
+
+            </select>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <button class="e-btn border_radius_100" [disabled]="admissionForm.invalid" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        </div>
+      </div>
+      <!-- <div class="row mt-3">
+        <div class="col-12 text-center">
+          <button class="e-btn" type="submit">{{'search_area_button' | translate}}</button>
+        </div>
+      </div> -->
+    </form>
+  </div>
+</section>
+<!-- search area end -->
+
+<!-- specialization area start -->
+<section class="specialization_area pt-90 pb-90">
+  <img class="specialization_area--img-1" src="assets/theme/img/icon/circle.png" alt="">
+  <img class="specialization_area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
+  <img class="specialization_area--img-3" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+  <img class="specialization_area--img-4" src="assets/theme/img/icon/full_circle.png" alt="">
+  <img class="specialization_area--img-5" src="assets/theme/img/icon/shadow.png" alt="">
+  <img class="specialization_area--img-6" src="assets/theme/img/icon/shadow.png" alt="">
+  <img class="specialization_area--img-7" src="assets/theme/img/icon/circle.png" alt="">
+
+  <div class="container">
+    <div class="section__title-wrapper text-center mb-25">
+      <h2 class="section__title">{{ 'specialization_area_title' | translate }}</h2>
+    </div>
+    <div class="row justify-content-between">
+      <div class="col-lg-2 col-md-4 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Computer_Science.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" routerLink="/studyByFaculty/3" tabindex="0"><i class="fa" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right' "></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{ "specialization_area_text_6" | translate }}</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/human_science.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" routerLink="/studyByFaculty/8" tabindex="0"><i class="fa" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{ "specialization_area_text_5" | translate }}</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Engineering.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" routerLink="/studyByFaculty/1" tabindex="0"><i class="fa" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{ "specialization_area_text_4" | translate }}</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Medical.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" routerLink="/studyByFaculty/2" tabindex="0"><i class="fa" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{ "specialization_area_text_3" | translate }}</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Law.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" routerLink="/studyByFaculty/7" tabindex="0"><i class="fa" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{ "specialization_area_text_2" | translate }}</h5>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-4 wow animate__animated animate__slideInLeft">
+        <div class="card card-hover">
+          <div class="icon">
+            <img src="assets/theme/img/icon/Business.png" alt="">
+            <div class="hover-action">
+              <a class="read-more-btn" routerLink="/studyByFaculty/4" tabindex="0"><i class="fa" [ngClass]="currentLanguage === 'ar' ? 'fa-arrow-left' : 'fa-arrow-right'"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">{{ "specialization_area_text_1" | translate }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- specialization area end -->
+
+<!-- about area start -->
+<section class="study_area pt-90 pb-90">
+  <img class="study_area--img-1" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+  <img class="study_area--img-2" src="assets/theme/img/icon/striped_circle.png" alt="">
+  <img class="study_area--img-3" src="assets/theme/img/icon/circle_group_horizental1.png" alt="">
+
+  <div class="container">
+    <div class="section__title-wrapper text-center mb-25">
+      <h2 class="section__title">{{ 'study_area_title' | translate }}</h2>
+
+      <p>{{'study_area_text' | translate}}</p>
+    </div>
+    <div class="row justify-content-center position-relative">
+      <img class="study_area--img-4" src="assets/theme/img/icon/circle_group_vertical.png" alt="">
+
+      <div class="col-md-7">
+        <div class="row no-gutters">
+          <div class="col-md-6 study_grid wow animate__animated "  [ngClass]="currentLanguage=== 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
+            <a routerLink="/destination/egypt">
+              <div class="card card-hover">
+                <div class="card-body">
+                  <img [src]="currentLanguage === 'ar' ? 'assets/theme/img/destination/arabic/Egypt.png' : 'assets/theme/img/destination/english/Egypt.png'" alt="">
+                </div>
+              </div>
+
+            </a>
+          </div>
+          <div class="col-md-6 study_grid wow animate__animated " [ngClass]="currentLanguage=== 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' " >
+            <div class="card card-hover">
+              <div class="card-body">
+                <img [src]="currentLanguage === 'ar' ? 'assets/theme/img/destination/arabic/USA.png' : 'assets/theme/img/destination/english/USA.png'" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 study_grid wow animate__animated " [ngClass]="currentLanguage=== 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' ">
+            <div class="card card-hover">
+              <div class="card-body">
+                <img [src]="currentLanguage === 'ar' ? 'assets/theme/img/destination/arabic/UAE.png' : 'assets/theme/img/destination/english/UAE.png'" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 study_grid wow animate__animated " [ngClass]="currentLanguage=== 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
+            <div class="card card-hover">
+              <div class="card-body">
+                <img [src]="currentLanguage === 'ar' ? 'assets/theme/img/destination/arabic/Russia.png' : 'assets/theme/img/destination/english/Russia.png'" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img class="study_area--img-5" src="assets/theme/img/icon/circle_group_vertical.png" alt="">
+
+    </div>
+  </div>
+</section>
+<!-- about area end -->
+
+
+
+<!-- counter area start -->
+<section class="counter__area ">
+  <img class="counter__area--img-1" src="assets/theme/img/icon/circle.png" alt="">
+  <img class="counter__area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
+
+  <div class="container pt-145 pb-100 position-relative">
+    <div class="row justify-content-center ">
+      <div class="col-xl-6 ">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'counter_area_title' | translate}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row position-relative">
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' ">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover user mb-15">
+            <img src="assets/theme/img/icon/universityCopy.png" alt="">
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter" [countUp]="2485" [reanimateOnClick]="false" [options]="{ duration: 5  , enableScrollSpy: f}"></span></h4>
+            <p class="">{{'counter__area--text1' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' ">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover book mb-15">
+            <img src="assets/theme/img/icon/student.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter"  [reanimateOnClick]="false" [countUp]="345421" [options]="{ duration: 5  , enableScrollSpy: true}"></span></h4>
+            <p class="">{{'counter__area--text2' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
+        <div class="counter__item counter__pl-34 mb-30">
+          <div class="counter__icon card-hover graduate mb-15">
+            <img src="assets/theme/img/icon/hokomeya.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter"  [reanimateOnClick]="false" [countUp]="24085" [options]="{ duration: 5  , enableScrollSpy: true}"></span></h4>
+            <p class="">{{'counter__area--text3' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover globe mb-15">
+
+            <img src="assets/theme/img/icon/Emplyee.png"  alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter"  [reanimateOnClick]="false" [countUp]="1000" [options]="{ duration: 5  , enableScrollSpy: true}"></span></h4>
+            <p class="">{{'counter__area--text4' | translate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="counter__area--img-3" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-4" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-5" src="assets/theme/img/icon/circle.png" alt="">
+    <img class="counter__area--img-6" src="assets/theme/img/icon/shadow.png" alt="">
+
+  </div>
+</section>
+<!-- counter area end -->
+
+<!-- testimonial area start -->
+<section class="testimonial__area pt-90 pb-90"
+  style="background-image: url(' assets/theme/img/main_images/testominals_cover.png');">
+  <div class="container">
+    <div class="col-xxl-12">
+      <ng-container *ngIf="currentLanguage === 'en' ">
+        <owl-carousel-o [options]="testimonials" class="testimonial-box" dir="ltr">
+          <ng-container *ngFor="let review of userReviews">
+            <ng-template carouselSlide>
+
+              <div class="testimonial__area--item" >
+                <div class="testimonial__area--img">
+                  <img [src]="reviewImage+review.user_image" [alt]="review.name">
+                </div>
+                <div class="testimonial__area--desc">
+                  <h4 class="testimonial__area--name">{{ review.name }}</h4>
+                  <p class="testimonial__area--p" [innerHtml]="review.message | sanitizeHtml">
+                  </p>
+                </div>
+              </div>
+            </ng-template>
+
+          </ng-container>
+          <ng-container>
+            <ng-template carouselSlide>
+
+              <div class="testimonial__area--item">
+                <div class="testimonial__area--img">
+                  <img src="assets/theme/img/blog/author/author-2.jpg" alt="Jhon Smith">
+                </div>
+                <div class="testimonial__area--desc">
+                  <h4 class="testimonial__area--name">حنين حمدي</h4>
+                  <p class="testimonial__area--p">
+                    لا يمكنني شكركم عن مدى الاحترام والمساعدة الذين وجدتهم في التعامل معكم.. أنا الآن أحمل شهادة الهندسة من جامعة روسيا.
+                  </p>
+                </div>
+              </div>
+            </ng-template>
+
+          </ng-container>
+
+        </owl-carousel-o>
+      </ng-container>
+
+      <ng-container *ngIf="currentLanguage === 'ar' ">
+        <owl-carousel-o [options]="testimonialsAr" class="testimonial-box" dir="rtl">
+          <ng-container *ngFor="let review of userReviews">
+            <ng-template carouselSlide>
+
+              <div class="testimonial__area--item">
+                <div class="testimonial__area--img">
+                  <img [src]="reviewImage+review.user_image" alt="Jhon Smith">
+                </div>
+                <div class="testimonial__area--desc">
+                  <h4 class="testimonial__area--name">{{ review.name }}</h4>
+                  <p class="testimonial__area--p" [innerHtml]="review.message | sanitizeHtml">
+                  </p>
+                </div>
+              </div>
+            </ng-template>
+
+          </ng-container>
+        </owl-carousel-o>
+
+      </ng-container>
+
+    </div>
+  </div>
+</section>
+<!-- testimonial area end -->
+
+<!-- blog area start -->
+<section class="blog__area pt-115 pb-130 mb--120" style="background-image: url(' assets/theme/img/main_images/blogs_cover.png');">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{"latest_blogs" | translate}}
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-30">
+      <div class="col-xl-6 col-lg-6 mb-4 wow animate__animated"
+        [ngClass]="currentLanguage === 'ar' ? 'animate__fadeInRight' : 'animate__fadeInLeft' ">
+        <div class="blog__item blog__large white-bg mb-30 transition-3 fix">
+          <div class="blog__thumb w-img fix">
+            <a routerLink="/blog/1">
+              <img src="assets/theme/img/main_images/main_blog.png" class="w-100" alt="">
+              <div class="blog__thumb--layer"></div>
+            </a>
+          </div>
+          <div class="blog__content blog__large--content">
+
+            <h3 class="blog__title"
+              [title]="currentLanguage === 'ar' ? 'مصر تحتل الصدارة في استقبال الطلاب الوافدين من الدول العربية' : 'Egypt takes the lead in receiving international students from Arab countries'">
+              <a routerLink="/blog/1">
+                {{currentLanguage === 'ar' ? 'مصر تحتل الصدارة في استقبال الطلاب الوافدين من الدول العربية' : 'Egypt takes the lead in receiving international students from Arab countries'}}
+              </a></h3>
+
+            <div class="blog__meta d-flex align-items-center">
+              <div class="blog__author d-flex align-items-center">
+
+                <div class="blog__author-info">
+                  <i class="fas fa-eye"></i>
+                  <span> {{100}} </span>
+                </div>
+              </div>
+              <div class="blog__date d-flex align-items-center"
+                [ngStyle]="{ 'margin' :currentLanguage === 'ar' ?  '0 7px 0 0' : '0 0 0 7px '}">
+                <i class="fal ml-2 fa-clock"></i>
+                <span
+                  *ngIf="currentLanguage === 'ar'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'ar'}}</span>
+                <span
+                  *ngIf="currentLanguage === 'en'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'en'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 mb-4 wow  animate__animated"
+        [ngClass]="currentLanguage === 'ar' ? 'animate__fadeInLeft' : 'animate__fadeInRight' ">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="blog__item white-bg mb-30 transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a>
+                  <img src="assets/theme/img/main_images/blog1.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"><a routerLink="/blog/2"
+                    [title]="currentLanguage === 'ar' ? '4 أسباب تجعلك تبدأ رحلتك الدراسية بالخارج' : '4 reasons to start your studying abroad journey'">
+                    {{currentLanguage === 'ar' ? '4 أسباب تجعلك تبدأ رحلتك الدراسية بالخارج' : '4 reasons to start your studying abroad journey'}}
+                  </a>
+                </h3>
+
+                <div class="blog__meta">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas fa-eye" [ngClass]="currentLanguage === 'ar' ? 'ml-2' : 'mr-2' "></i>
+                      <span> {{1000}} </span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span
+                      *ngIf="currentLanguage === 'ar'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'ar'}}</span>
+                    <span
+                      *ngIf="currentLanguage === 'en'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'en'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="blog__item white-bg mb-30 transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a>
+                  <img src="assets/theme/img/main_images/blog2.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"
+                  [title]="currentLanguage === 'ar' ? 'كيف تحصل على شهادة جامعة بإجراءات بسيطة' : 'How to get a university degree with simple procedures'">
+                  <a routerLink="/blog/3">
+                    {{currentLanguage === 'ar' ? 'كيف تحصل على شهادة جامعة بإجراءات بسيطة' : 'How to get a university degree with simple procedures'}}
+                  </a>
+                </h3>
+
+                <div class="blog__meta">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas  fa-eye" [ngClass]="currentLanguage === 'ar' ? 'ml-2' : 'mr-2' "></i>
+                      <span> 10 </span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span
+                      *ngIf="currentLanguage === 'ar'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'ar'}}</span>
+                    <span
+                      *ngIf="currentLanguage === 'en'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'en'}}</span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="blog__item white-bg transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a>
+                  <img src="assets/theme/img/main_images/blog3.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"
+                  [title]="currentLanguage === 'ar' ? 'تعرف على أحدث تصنيف الجامعات عالميًا ' : 'Find out the latest university rankings in the world '">
+                  <a routerLink="/blog/4">
+                    {{currentLanguage === 'ar' ? 'تعرف على أحدث تصنيف الجامعات عالميًا ' : 'Find out the latest university rankings in the world '}}
+                  </a>
+                </h3>
+
+                <div class="blog__meta">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas  fa-eye" [ngClass]="currentLanguage === 'ar' ? 'ml-2' : 'mr-2' "></i>
+                      <span> 10 </span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span
+                      *ngIf="currentLanguage === 'ar'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'ar'}}</span>
+                    <span
+                      *ngIf="currentLanguage === 'en'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'en'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="blog__item white-bg transition-3 fix">
+              <div class="blog__thumb w-img fix">
+                <a>
+                  <img src="assets/theme/img/main_images/blog4.png" class="w-100" alt="">
+                </a>
+              </div>
+              <div class="blog__content">
+
+                <h3 class="blog__title"
+                  [title]="currentLanguage === 'ar' ? 'إجراءات الالتحاق بالجامعات في السودان تشهد تسهيلات غير مسبوقة' : 'Sudanese universities are witnessing unprecedented facilitation'">
+                  <a routerLink="/blog/5">
+                    {{currentLanguage === 'ar' ? 'إجراءات الالتحاق بالجامعات في السودان تشهد تسهيلات غير مسبوقة' : 'Sudanese universities are witnessing unprecedented facilitation'}}
+                  </a>
+                </h3>
+
+                <div class="blog__meta">
+                  <div class="blog__author mr-3 d-flex align-items-center">
+
+                    <div class="blog__author-info">
+                      <i class="fas  fa-eye" [ngClass]="currentLanguage === 'ar' ? 'ml-2' : 'mr-2' "></i>
+                      <span> {{100}} </span>
+                    </div>
+                  </div>
+                  <div class="blog__date d-flex align-items-center">
+                    <i class="fal ml-2 fa-clock"></i>
+                    <span
+                      *ngIf="currentLanguage === 'ar'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'ar'}}</span>
+                    <span
+                      *ngIf="currentLanguage === 'en'">{{'2021-05-05 12:33:31'| date:'EEEE  d MMMM  y, h:mm a':undefined:'en'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- blog area end -->
+
+
+

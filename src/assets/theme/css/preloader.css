@@ -1,0 +1,11 @@
+#loading{
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  position: fixed;
+  z-index: 999999;
+  margin-top: 0px;
+  top: 0px;
+  background-position: center center;
+}
+

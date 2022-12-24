@@ -1,0 +1,305 @@
+
+
+  <!-- page title area start -->
+  <section class="loader_sekelton page__title-area page__title-height" *ngIf="loading">
+    <div class="row first_section align-items-center">
+      <div class="col-xxl-12">
+        <div class="container">
+          <div class="page__title-wrapper description mt-110">
+            <h3 class="page__title line">
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item line"><a></a></li>
+                <li class="breadcrumb-item line active" aria-current="page">
+                  <a >
+                  </a>
+                </li>
+
+              </ol>
+            </nav>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row second_section py-4">
+      <section class="skeleton course__area pt-120 pb-120">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="course__wrapper">
+                <div class="page__title-content mb-25">
+
+                    <h5 class="page__title-3 line" style="height: 30px; width: 75%;"></h5>
+                </div>
+                <div class="course__tab-2 mb-45 ">
+
+                    <ul  class=" row">
+                      <li  class="col-12">
+                        <a  class=" university__page--navlink">
+                          <span class="line" style="height: 200px;"></span>
+                        </a>
+
+                      </li>
+
+                    </ul>
+
+                </div>
+                <div class="course__tab-content mb-95">
+                    <!-- <div [ngbNavOutlet]="nav" class="mt-2"></div> -->
+                </div>
+
+
+              </div>
+          </div>
+          <div class="col-lg-4">
+              <div class="course__sidebar p-relative">
+                <div class="course__shape">
+                    <img class="course-dot" src="assets/theme/img/course/course-dot.png" alt="">
+                </div>
+                <div class="course__sidebar-widget-2 mb-20">
+                    <div class="course__logo">
+                      <div class="course__logo-thumb university__page--img w-img mb-25">
+                          <div class="square" style="height: 200px;"></div>
+
+                      </div>
+
+
+
+                    </div>
+                </div>
+
+              </div>
+          </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </section>
+  <!-- page title area end -->
+
+<!-- page title area start -->
+  <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/about/Header.jpg');">
+    <div class="container">
+       <div class="row">
+          <div class="col-xxl-12">
+             <div class="page__title-wrapper mt-110">
+                <h3 class="page__title">{{currentLanguage === 'ar' ? 'من نحن' : 'About us' }}</h3>
+                <nav aria-label="breadcrumb">
+                   <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a routerLink="/">{{"breadcrumb_home" | translate}}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{currentLanguage === 'ar' ? 'من نحن' : 'About us' }}</li>
+                   </ol>
+                </nav>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- page title area end -->
+
+ <!-- about area start -->
+ <section class="about__area pt-120 pb-150">
+    <div class="container">
+       <div class="row justify-content-around">
+          <div class=" col-xl-4 col-lg-6">
+             <div class="about__thumb-wrapper">
+
+
+                <div class="about__thumb">
+                   <img src="assets/theme/img/about/about.jpg" class="w-100" alt="">
+                </div>
+                <div class="about__banner mt--210">
+                   <img src="assets/theme/img/about/about-banner.jpg" class="w-100" alt="">
+                </div>
+
+             </div>
+          </div>
+          <div class=" col-xl-8 col-lg-6">
+             <div class="about__content pl-70 pr-60 pt-25">
+                <div class="section__title-wrapper mb-25">
+                   <h2 class="section__title">{{"our_story_title" | translate }} </h2>
+                   <p >
+                    {{currentLanguage === 'ar' ? aboutUs?.ar_story : aboutUs?.en_story}}
+                   </p>
+
+                </div>
+
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!-- about area end -->
+ <!-- banner area start -->
+ <section class="about__page banner__area pb-110">
+  <div class="container-fluid">
+     <div class="row">
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+          <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-1.jpg')">
+            <div class="row no-gutters align-items-center">
+              <div class="col-md-7">
+                <div class="banner__content">
+                   <span class="orange">{{ "mission" | translate}}</span>
+                   <h3 class="banner__title">
+                       <a >
+                        {{"mission_text" | translate }}
+                       </a>
+                    </h3>
+                 </div>
+
+              </div>
+              <div class="col-md-5">
+                <div class="about__page--banner banner__thumb">
+                   <img src="assets/theme/img/banner/banner-img-1.png" class="w-100"  alt="">
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+          <div class="banner__item p-relative mb-40" style="background-image: url('assets/theme/img/banner/banner-bg-2.jpg')">
+
+            <div class="row align-items-center">
+              <div class="col-md-8">
+                <div class="banner__content">
+                  <span class="orange">{{ "vision" | translate}}</span>
+                  <h3 class="banner__title">
+                     <a >
+                      {{"vision_text" | translate}}
+                     </a>
+                  </h3>
+               </div>
+              </div>
+              <div class="col-md-4">
+                <div class="about__page--banner banner__thumb banner__thumb-2 ">
+                  <img src="assets/theme/img/banner/banner-img-2.png"  class="w-100" alt="">
+               </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+     </div>
+  </div>
+</section>
+<!-- banner area end -->
+ <!-- brand area start -->
+ <!-- brand area start -->
+ <section class="brand__area pb-110">
+  <div class="container">
+    <div class="row justify-content-center ">
+      <div class="col-xl-6 ">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'brand_area_title' | translate}}</h2>
+          <p class="">{{'brand_area_text' | translate}}</p>
+
+        </div>
+      </div>
+    </div>
+     <div class="row">
+        <div class="col-xxl-12">
+           <div class="brand__slider swiper-container">
+              <owl-carousel-o [options]="clientsSlider" class="swiper-wrapper">
+                <ng-container *ngFor="let client of clients">
+
+
+                  <ng-template carouselSlide class="swiper-slide">
+                    <div class="brand__item text-center">
+                      <img [src]="clientImage+client.logo" alt="">
+                    </div>
+                  </ng-template>
+                </ng-container>
+
+              </owl-carousel-o>
+              </div>
+        </div>
+     </div>
+
+  </div>
+</section>
+<!-- brand area end -->
+ <!-- brand area end -->
+
+
+
+<!-- counter area start -->
+<section class="counter__area ">
+  <img class="counter__area--img-1" src="assets/theme/img/icon/circle.png" alt="">
+  <img class="counter__area--img-2" src="assets/theme/img/icon/full_circle.png" alt="">
+
+  <div class="container pt-145 pb-100 position-relative">
+    <div class="row justify-content-center ">
+      <div class="col-xl-6 ">
+        <div class="section__title-wrapper text-center mb-60">
+          <h2 class="section__title">{{'counter_area_title' | translate}}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row position-relative">
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' ">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover user mb-15">
+            <img src="assets/theme/img/icon/universityCopy.png" alt="">
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter" [countUp]="2485" [reanimateOnClick]="false" [options]="{ duration: 5  , enableScrollSpy: true}"></span></h4>
+            <p class="">{{'counter__area--text1' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInRight' : 'animate__slideInLeft' ">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover book mb-15">
+            <img src="assets/theme/img/icon/student.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter"  [reanimateOnClick]="false" [countUp]="345421" [options]="{ duration: 5  , enableScrollSpy: true}"></span></h4>
+            <p class="">{{'counter__area--text2' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
+        <div class="counter__item counter__pl-34 mb-30">
+          <div class="counter__icon card-hover graduate mb-15">
+            <img src="assets/theme/img/icon/hokomeya.png" alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter"  [reanimateOnClick]="false" [countUp]="24085" [options]="{ duration: 5  , enableScrollSpy: true}"></span></h4>
+            <p class="">{{'counter__area--text3' | translate}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 wow animate__animated " [ngClass]=" currentLanguage === 'ar' ? 'animate__slideInLeft' : 'animate__slideInRight' ">
+        <div class="counter__item mb-30">
+          <div class="counter__icon card-hover globe mb-15">
+
+            <img src="assets/theme/img/icon/Emplyee.png"  alt="">
+
+          </div>
+          <div class="counter__content">
+            <h4>+<span class="counter"  [reanimateOnClick]="false" [countUp]="1000" [options]="{ duration: 5  , enableScrollSpy: true}"></span></h4>
+            <p class="">{{'counter__area--text4' | translate}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img class="counter__area--img-3" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-4" src="assets/theme/img/icon/plus.png" alt="">
+    <img class="counter__area--img-5" src="assets/theme/img/icon/circle.png" alt="">
+    <img class="counter__area--img-6" src="assets/theme/img/icon/shadow.png" alt="">
+
+  </div>
+</section>
+<!-- counter area end -->
+
+
+
+

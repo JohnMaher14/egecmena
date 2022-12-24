@@ -1,0 +1,206 @@
+<app-action-loader *ngIf="actionLoading"></app-action-loader>
+<app-auth-loader *ngIf="loading"></app-auth-loader>
+
+
+<!-- page title area start -->
+<section class="page__title-area page__title-height page__title-overlay d-flex align-items-center"
+  style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-xxl-12">
+        <div class="page__title-wrapper mt-110">
+          <h3 class="page__title">
+            {{ currentLanguage === 'ar' ? 'حركة الملفات' : 'Paper movement' }}
+          </h3>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                {{ currentLanguage === 'ar' ? 'حركة الملفات' : 'Paper movement' }}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- page title area end -->
+<!-- sign up area start -->
+<section class="signup__area po-rel-z1 pt-100 pb-145">
+  <div class="sign__shape">
+    <img class="man-1" src="assets/theme/img/icon/sign/man-1.png" alt="">
+    <img class="man-2" src="assets/theme/img/icon/sign/man-2.png" alt="">
+    <img class="circle" src="assets/theme/img/icon/sign/circle.png" alt="">
+    <img class="zigzag" src="assets/theme/img/icon/sign/zigzag.png" alt="">
+    <img class="dot" src="assets/theme/img/icon/sign/dot.png" alt="">
+    <img class="bg" src="assets/theme/img/icon/sign/sign-up.png" alt="">
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xxl-8 col-xl-8 ">
+        <div class="section__title-wrapper text-center mb-55">
+          <h2 class="section__title">
+            <h2 class="section__title">{{ currentLanguage === 'ar' ? 'أكمل حركة الملفات' : 'Compelete your pape movement' }}</h2>
+          </h2>
+
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-xxl-6 col-xl-6 col-lg-8">
+
+        <div class="sign__wrapper white-bg">
+          <div *ngIf="paperPending?.pending != null" class="alert alert-warning" role="alert">
+            <strong>{{paperPending?.pending}}</strong>
+          </div>
+          <div class="sign__form" >
+            <ng-container *ngIf="paperMessage == 'First Paper Phase' && paperPending?.pending != 'Academic Guide still not assigned to you... please wait'">
+              <form [formGroup]="firstPaper" (ngSubmit)="onSubmitFirstPaper(firstPaper)">
+                <div class="row clearfix">
+
+
+                  <div class="sign__input-wrapper mb-10">
+                    <h5>{{ currentLanguage === 'ar' ? 'جواز السفر' : 'Full name' }}</h5>
+                    <div class="sign__input--container">
+                      <div class="sign__input">
+                        <input (change)="onChangePassport($event)"
+                          type="file">
+                        <i class="fal fa-file"></i>
+                      </div>
+                      <button
+                      *ngIf="firstPaper.controls['passport'].touched && firstPaper.controls['passport'].errors != null"
+                      type="button" popover="Passport is required"
+                      [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                      class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="sign__input-wrapper mb-10">
+                    <h5>{{ currentLanguage === 'ar' ? 'شهادة الثانوية العامة' : 'Full name' }}</h5>
+                    <div class="sign__input--container">
+                      <div class="sign__input">
+                        <input (change)="onChangeSecondaryCertificate($event)"  name="secondary_certificate"
+                          type="file">
+                        <i class="fal fa-file"></i>
+                      </div>
+                      <button
+                      *ngIf="firstPaper.controls['secondary_certificate'].touched && firstPaper.controls['secondary_certificate'].errors != null"
+                      type="button" popover="Secondary certificate is required"
+                      [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                      class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
+                    </div>
+                  </div>
+                  <div class="sign__input-wrapper mb-10">
+                    <h5>{{ currentLanguage === 'ar' ? 'شهادة الميلاد' : 'Full name' }}</h5>
+                    <div class="sign__input--container">
+                      <div class="sign__input">
+                        <input (change)="onChangeBirthCertificate($event)"  name="birth_certificate"
+                          type="file">
+                        <i class="fal fa-file"></i>
+                      </div>
+                      <button
+                      *ngIf="firstPaper.controls['birth_certificate'].touched && firstPaper.controls['birth_certificate'].errors != null"
+                      type="button" popover="Birth certificate is required"
+                      [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                      class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
+                    </div>
+                  </div>
+
+
+                  <!-- <input type="hidden" formControlName="user_id" [ngModel]="userArray?.id"> -->
+
+
+                </div>
+                <button class="e-btn w-100" [disabled]="firstPaper.invalid ||  firstPaper.pristine"> <span>
+                    {{currentLanguage === 'ar' ? ' أكمل' : 'Continue' }}
+                  </span> </button>
+
+              </form>
+            </ng-container>
+            <ng-container *ngIf="paperMessage == 'Second Paper Phase' && paperPending?.pending != 'Academic Guide still not assigned to you... please wait'">
+
+            <form [formGroup]="secondPaper" (ngSubmit)="onSubmitSecondPaper(secondPaper)">
+              <div class="row clearfix">
+
+
+                <div class="sign__input-wrapper mb-10">
+                  <h5>{{ currentLanguage === 'ar' ? 'دبلومة' : 'Full name' }}</h5>
+                  <div class="sign__input--container">
+                    <div class="sign__input">
+                      <input (change)="onChangeDiploma($event)"
+                        type="file">
+                      <i class="fal fa-file"></i>
+                    </div>
+                    <button
+                    *ngIf="secondPaper.controls['diploma'].touched && secondPaper.controls['diploma'].errors != null"
+                    type="button" popover="diploma is required"
+                    [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
+                  </div>
+                </div>
+
+                <div class="sign__input-wrapper mb-10">
+                  <h5>{{ currentLanguage === 'ar' ? 'استمارة التفويض' : 'Full name' }}</h5>
+                  <div class="sign__input--container">
+                    <div class="sign__input">
+                      <input (change)="onChangeAuthorization($event)"  name="authorization"
+                        type="file">
+                      <i class="fal fa-file"></i>
+                    </div>
+                    <button
+                    *ngIf="secondPaper.controls['authorization'].touched && secondPaper.controls['authorization'].errors != null"
+                    type="button" popover="authorization certificate is required"
+                    [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
+                  </div>
+                </div>
+                <div class="sign__input-wrapper mb-10">
+                  <h5>{{ currentLanguage === 'ar' ? 'صورة شخصية' : 'Full name' }}</h5>
+                  <div class="sign__input--container">
+                    <div class="sign__input">
+                      <input (change)="onChangeImage($event)"  name="image"
+                        type="file">
+                      <i class="fal fa-file"></i>
+                    </div>
+                    <button
+                    *ngIf="secondPaper.controls['image'].touched && secondPaper.controls['image'].errors != null"
+                    type="button" popover="Image is required"
+                    [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
+                  </div>
+                </div>
+                <div class="sign__input-wrapper mb-10">
+                  <h5>{{ currentLanguage === 'ar' ? 'اخر مستند' : 'Full name' }}</h5>
+                  <div class="sign__input--container">
+                    <div class="sign__input">
+                      <input (change)="onChangeLastDocument($event)"  name="image"
+                        type="file">
+                      <i class="fal fa-file"></i>
+                    </div>
+                    <button
+                    *ngIf="secondPaper.controls['last_document'].touched && secondPaper.controls['last_document'].errors != null"
+                    type="button" popover="Last document is required"
+                    [placement]="currentLanguage === 'ar' ? 'left' : 'right'" [outsideClick]="true"
+                    class="btn-danger validation"   triggers="mouseenter:mouseleave"><i class="fa fa-exclamation"></i></button>
+                  </div>
+                </div>
+
+
+                <!-- <input type="hidden" formControlName="user_id" [ngModel]="userArray?.id"> -->
+
+
+              </div>
+              <button class="e-btn w-100" [disabled]="secondPaper.invalid  ||  secondPaper.pristine"> <span>
+                  {{currentLanguage === 'ar' ? ' أكمل' : 'Continue' }}
+                </span> </button>
+
+            </form>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- sign up area end -->

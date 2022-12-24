@@ -1,0 +1,274 @@
+   <app-auth-loader *ngIf="loading"></app-auth-loader>
+   <app-action-loader *ngIf="actionLoading"></app-action-loader>
+   <!-- page title area start -->
+   <section class="page__title-area page__title-height page__title-overlay d-flex align-items-center" style="background-image: url('assets/theme/img/page-title/page-title-2.jpg');">    <div class="container">
+    <div class="row">
+       <div class="col-xxl-12">
+          <div class="page__title-wrapper mt-110">
+             <h3 class="page__title">
+               {{ "register" | translate }}
+             </h3>
+             <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a routerLink="/">{{'breadcrumb_home' | translate}}</a></li>
+                  <li class="breadcrumb-item active"  aria-current="page">{{"register" | translate }}</li>
+                </ol>
+             </nav>
+          </div>
+       </div>
+    </div>
+ </div>
+</section>
+<!-- page title area end -->
+<!-- sign up area start -->
+<section class="signup__area p-relative po-rel-z1 pt-100 pb-145">
+  <div class="sign__shape">
+     <img class="man-1" src="assets/theme/img/icon/sign/man-1.png" alt="">
+     <img class="man-2" src="assets/theme/img/icon/sign/man-2.png" alt="">
+     <img class="circle" src="assets/theme/img/icon/sign/circle.png" alt="">
+     <img class="zigzag" src="assets/theme/img/icon/sign/zigzag.png" alt="">
+     <img class="dot" src="assets/theme/img/icon/sign/dot.png" alt="">
+     <img class="bg" src="assets/theme/img/icon/sign/sign-up.png" alt="">
+  </div>
+  <div class="container">
+     <div class="row justify-content-center">
+        <div class="col-xxl-8 col-xl-8 ">
+           <div class="section__title-wrapper text-center mb-55">
+              <h2 class="section__title">{{"register_title" | translate}}</h2>
+              <p>{{"register_text" | translate}} <a routerLink="/login" class="text_main boldness_font">{{ "register_button" | translate}}</a></p>
+           </div>
+        </div>
+     </div>
+     <div class="row justify-content-center">
+        <div class="col-xxl-6 col-xl-6 col-lg-8">
+           <div class="sign__wrapper white-bg">
+
+              <div class="sign__form">
+                 <form [formGroup]="registerForm" (ngSubmit)="onRegister(registerForm)">
+                    <div class="sign__input-wrapper mb-25">
+                       <h5>{{"form_first_name" | translate}}</h5>
+                       <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="first_name" name="first_name" type="text"
+                            [placeholder]="currentLanguage === 'ar' ? 'ادخل  اسمك الاول' : 'Enter your first name'"
+
+                            >
+                            <i class="fal fa-user"></i>
+                        </div>
+                        <ng-container *ngIf="registerForm.controls['first_name'].touched && registerForm.controls['first_name'].errors != null">
+
+                          <button *ngIf="registerForm.controls['first_name'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'الأسم مطلوب' :'Name is required'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"
+                        triggers="mouseenter:mouseleave"
+
+                        ><i class="fa fa-exclamation"></i></button>
+                        <button *ngIf="registerForm.controls['first_name'].errors['minlength']" type="button"
+                        [popover]="currentLanguage === 'ar' ? 'يجب أن يتكون الاسم من 3 أحرف علي الأقل' : 'Name must be at least 3 charachters'"
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'" class="btn-danger validation" triggers="mouseenter:mouseleave"><i
+                            class="fa fa-exclamation" ></i></button>
+                        <button *ngIf="registerForm.controls['first_name'].errors['pattern']" type="button"
+                        [popover]="currentLanguage === 'ar' ? 'يجب أن يتكون الاسم من أحرف فقط' : 'Name must be charachters only'"
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'" class="btn-danger validation" triggers="mouseenter:mouseleave"><i
+                            class="fa fa-exclamation" ></i></button>
+
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>{{"form_last_name" | translate}}</h5>
+                      <div class="sign__input--container">
+                       <div class="sign__input">
+                           <input formControlName="last_name" name="last_name" type="text"
+                           [placeholder]="currentLanguage === 'ar' ? 'ادخل  اسم العائلة' : 'Enter your last name'"
+
+                           >
+                           <i class="fal fa-user"></i>
+                       </div>
+                       <ng-container *ngIf="registerForm.controls['last_name'].touched && registerForm.controls['last_name'].errors != null">
+
+                         <button *ngIf="registerForm.controls['last_name'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'الأسم مطلوب' :'Name is required'"
+                       [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                       class="btn-danger validation"
+                       triggers="mouseenter:mouseleave"
+
+                       ><i class="fa fa-exclamation"></i></button>
+                       <button *ngIf="registerForm.controls['last_name'].errors['minlength']" type="button"
+                       [popover]="currentLanguage === 'ar' ? 'يجب أن يتكون الاسم من 3 أحرف علي الأقل' : 'Name must be at least 3 charachters'"
+                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'" class="btn-danger validation" triggers="mouseenter:mouseleave"><i
+                           class="fa fa-exclamation" ></i></button>
+                       <button *ngIf="registerForm.controls['last_name'].errors['pattern']" type="button"
+                       [popover]="currentLanguage === 'ar' ? 'يجب أن يتكون الاسم من أحرف فقط' : 'Name must be charachters only'"
+                         [placement]="currentLanguage === 'ar' ? 'left' : 'right'" class="btn-danger validation" triggers="mouseenter:mouseleave"><i
+                           class="fa fa-exclamation" ></i></button>
+
+                       </ng-container>
+                     </div>
+                   </div>
+                    <div class="sign__input-wrapper mb-25">
+                       <h5>{{"form_phone" | translate}}</h5>
+                       <div class="sign__input--container">
+                        <div class="sign__input">
+                            <!-- <input formControlName="phone" name="phone" type="number" >
+                            <i class="fa fa-user"></i> -->
+                            <ngx-intl-tel-input
+                              [cssClass]="'custom'"
+                              [preferredCountries]="[CountryISO.UnitedArabEmirates, CountryISO.Qatar , CountryISO.Jordan ,CountryISO.Kuwait , CountryISO.SaudiArabia ]"
+                              [enableAutoCountrySelect]="false"
+                              [enablePlaceholder]="true"
+                              [searchCountryPlaceholder]="'search_key_phone' | translate"
+                              [searchCountryFlag]="true"
+                              [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                              [selectFirstCountry]="false"
+                              [selectedCountryISO]="CountryISO.Egypt"
+                              [maxlength]="15"
+                              [phoneValidation]="true"
+                              name="phone"
+                              formControlName="phone"
+                              >
+                            </ngx-intl-tel-input>
+                        </div>
+                        <ng-container *ngIf="registerForm.controls['phone'].touched && registerForm.controls['phone'].errors != null">
+
+                           <button *ngIf="registerForm.controls['phone'].invalid" type="button" [popover]="currentLanguage === 'ar' ? 'رقم الهاتف غير صحيح' : 'Phone is invalid'"
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
+                          <button *ngIf="registerForm.controls['phone'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'رقم الهاتف مطلوب' : 'Phone is required'"
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                          class="btn-danger validation"
+                        triggers="mouseenter:mouseleave"
+
+                        ><i class="fa fa-exclamation"></i></button>
+
+
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                       <h5>{{"form_email" | translate}}</h5>
+                       <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="email" name="email" type="text"
+                            [placeholder]="currentLanguage === 'ar' ? 'أدخل بريدك الألكتروني' : 'Enter your email'"
+
+                            >
+                            <i class="fal fa-envelope"></i>
+                        </div>
+                        <ng-container *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].errors != null">
+
+                          <button *ngIf="registerForm.controls['email'].errors['required']" type="button"[popover]="currentLanguage === 'ar' ? 'البريد الألكتروني مطلوب' : 'Email is required'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        class="btn-danger validation"
+                        triggers="mouseenter:mouseleave"
+
+                        ><i class="fa fa-exclamation"></i></button>
+                          <button *ngIf="registerForm.controls['email'].errors['email']" type="button" [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني غير صحيح' : 'Email is invalid'"
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                          ><i class="fa fa-exclamation"></i></button>
+                          <button *ngIf="registerForm.controls['email'].errors['pattern']" type="button" [popover]="currentLanguage === 'ar' ? 'البريد الألكتروني غير صحيح' : 'Email is invalid'"
+                          [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                          ><i class="fa fa-exclamation"></i></button>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>{{"form_password" | translate}}</h5>
+                      <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="password" name="password" type="password"
+                            [placeholder]="currentLanguage === 'ar' ? 'ادخل كلمة السر' : 'Enter your password'"
+
+                            >
+                            <i class="fal fa-lock"></i>
+                        </div>
+                        <ng-container *ngIf="registerForm.controls['password'].touched && registerForm.controls['password'].errors != null">
+
+                        <button *ngIf="registerForm.controls['password'].errors['required']" type="button" [popover]="currentLanguage === 'ar' ? 'كلمة السر غير صحيحة' : 'password is required'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        [outsideClick]="true"
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
+                        <button *ngIf="registerForm.controls['password'].errors['minlength']" type="button" [popover]="currentLanguage === 'ar'  ? 'كلمة السر يجب ان تكون 6 حروف علي الأقل' : 'Password minimum length is 6'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        [outsideClick]="true"
+                          class="btn-danger validation"
+                          triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
+                         </ng-container>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>{{"form_confirmation_password" | translate}}</h5>
+                      <div class="sign__input--container">
+                        <div class="sign__input">
+                            <input formControlName="password_confirmation" name="password_confirmation" type="password"
+                            [placeholder]="currentLanguage === 'ar' ? 'ادخل تأكيد كلمة السر' : 'Enter your confirm password'"
+
+                            >
+                            <i class="fal fa-lock"></i>
+                        </div>
+                        <button *ngIf="registerForm.controls['password_confirmation'].touched && registerForm.controls['password_confirmation'].errors != null" type="button" [popover]="currentLanguage === 'ar' ? 'تأكيد كلمة السر غير صحيحة' : 'Confirm password is required'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        [outsideClick]="true"
+                         class="btn-danger validation"
+                         triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
+                      </div>
+                    </div>
+                    <div class="sign__input-wrapper mb-25">
+                      <h5>{{ currentLanguage === 'en' ? 'Degree needed' : 'الدرجة العلمية' }}</h5>
+                      <div class="sign__input--container">
+                        <div class="sign__input">
+                            <select formControlName="degree_needed" name="degree_needed">
+                              <ng-container *ngIf="currentLanguage === 'ar'">
+                                <option value=""> أختر درجة العلمية</option>
+
+                                <option value="Bachelor" selected="">بكالوريوس</option>
+                                <option value="Master">الماجستير</option>
+                                <option value="PhD">الدكتوراه</option>
+                              </ng-container>
+                              <ng-container *ngIf="currentLanguage === 'en'">
+                                <option value="" >Choose degree</option>
+                                <option value="Bachelor">Bachelor</option>
+                                <option value="Master">Master</option>
+                                <option value="PhD">PhD</option>
+                              </ng-container>
+                            </select>
+                            <i class="fal fa-lock"></i>
+                        </div>
+                        <button *ngIf="registerForm.controls['degree_needed'].touched && registerForm.controls['degree_needed'].errors != null" type="button" [popover]="currentLanguage === 'ar' ? 'الدرجة العلمية مطلوية' : 'Degree needed is required'"
+                        [placement]="currentLanguage === 'ar' ? 'left' : 'right'"
+                        [outsideClick]="true"
+                         class="btn-danger validation"
+                         triggers="mouseenter:mouseleave"
+
+                         ><i class="fa fa-exclamation"></i></button>
+                      </div>
+                    </div>
+                    <button class="e-btn  w-100" [disabled]="registerForm.invalid"> <span>
+                      {{ "register" | translate }}
+                    </span> </button>
+                    <div class="sign__new text-center mt-20">
+                       <p>{{"register_text"  | translate}} <a routerLink="/login" class="text_main boldness_font">{{"register_button" | translate }}</a></p>
+                    </div>
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</section>
+<!-- sign up area end -->
